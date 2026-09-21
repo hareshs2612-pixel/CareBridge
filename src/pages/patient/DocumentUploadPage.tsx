@@ -17,8 +17,17 @@ import {
 
 export const DocumentUploadPage: React.FC = () => {
   const navigate = useNavigate();
-  const currentUser = dataStore.getCurrentUser();
-  const patient = dataStore.getPatientById(currentUser.uid);
+  const [currentUser, setCurrentUser] = useState(dataStore.getCurrentUser());
+  const [patient, setPatient] = useState(dataStore.getPatientById(currentUser.uid));
+
+  React.useEffect(() => {
+    const sync = () => {
+      const u = dataStore.getCurrentUser();
+      setCurrentUser(u);
+      setPatient(dataStore.getPatientById(u.uid));
+    };
+    return dataStore.subscribe(sync);
+  }, []);
 
   const [file, setFile] = useState<File | null>(null);
   const [category, setCategory] = useState<RecordCategory>('lab_report');
@@ -93,17 +102,17 @@ export const DocumentUploadPage: React.FC = () => {
 
   if (!patient) {
     return (
-      <div className="max-w-xl mx-auto my-12 p-6 text-center bg-white rounded-2xl border border-slate-200 shadow-sm space-y-4">
-        <h3 className="font-bold text-slate-900 text-base">You are currently viewing as {currentUser.fullName} ({currentUser.role.toUpperCase()})</h3>
+      <div className="max-w-xl mx-auto my-12 p-6 text-center bg-white rounded-2xl border border-slate-200 shadow-xs space-y-4">
+        <h3 className="font-bold text-cb-navy text-base">You are currently logged in as {currentUser.fullName} ({currentUser.role.toUpperCase()})</h3>
         <p className="text-xs text-slate-500">
-          Switch to a patient persona to upload and archive personal medical documents.
+          Medical document archiving requires an active patient profile.
         </p>
         <div className="flex items-center justify-center gap-3 pt-2">
           <button
             onClick={() => dataStore.setCurrentUser('pat-ramesh')}
-            className="bg-teal-600 hover:bg-teal-700 text-white font-bold px-4 py-2 rounded-xl text-xs transition shadow-sm"
+            className="bg-cb-blue hover:bg-blue-700 text-white font-bold px-4 py-2 rounded-xl text-xs transition shadow-xs"
           >
-            Switch to Ramesh Kumar (Farmer)
+            Switch to Patient Account (Ramesh Kumar)
           </button>
         </div>
       </div>

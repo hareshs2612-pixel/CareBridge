@@ -42,17 +42,33 @@ export const AdminAuditPage: React.FC = () => {
       case 'TRIGGER_EMERGENCY_ACCESS':
         return <span className="bg-rose-600 text-white text-[10px] font-black px-2 py-0.5 rounded">EMERGENCY OVERRIDE</span>;
       case 'GRANT_CONSENT':
-        return <span className="bg-emerald-100 text-emerald-800 text-[10px] font-bold px-2 py-0.5 rounded">CONSENT GRANTED</span>;
+      case 'APPROVE_ACCESS':
+        return <span className="bg-emerald-600 text-white text-[10px] font-bold px-2 py-0.5 rounded">ACCESS APPROVED (OTP)</span>;
+      case 'REQUEST_ACCESS':
+        return <span className="bg-amber-500 text-slate-950 text-[10px] font-bold px-2 py-0.5 rounded">ACCESS REQUESTED</span>;
+      case 'DENY_ACCESS':
+        return <span className="bg-rose-100 text-rose-800 text-[10px] font-bold px-2 py-0.5 rounded">ACCESS DENIED</span>;
       case 'REVOKE_CONSENT':
-        return <span className="bg-rose-100 text-rose-800 text-[10px] font-bold px-2 py-0.5 rounded">CONSENT REVOKED</span>;
+      case 'REVOKE_ACCESS':
+        return <span className="bg-rose-700 text-white text-[10px] font-bold px-2 py-0.5 rounded">ACCESS REVOKED</span>;
+      case 'UNAUTHORIZED_ATTEMPT':
+        return <span className="bg-rose-900 text-white text-[10px] font-black px-2 py-0.5 rounded animate-pulse">403 BLOCKED</span>;
       case 'LOGIN':
         return <span className="bg-blue-100 text-blue-800 text-[10px] font-bold px-2 py-0.5 rounded">AUTH SESSION</span>;
+      case 'ACCOUNT_CREATED':
+        return <span className="bg-teal-600 text-white text-[10px] font-bold px-2 py-0.5 rounded">USER REGISTERED</span>;
+      case 'OTP_REQUESTED':
+        return <span className="bg-sky-100 text-sky-800 text-[10px] font-bold px-2 py-0.5 rounded">OTP DISPATCHED</span>;
+      case 'OTP_FAILED':
+        return <span className="bg-amber-100 text-amber-800 text-[10px] font-bold px-2 py-0.5 rounded">OTP FAILED</span>;
       case 'UPLOAD_DOCUMENT':
         return <span className="bg-purple-100 text-purple-800 text-[10px] font-bold px-2 py-0.5 rounded">DOC UPLOAD</span>;
       case 'CREATE_RECORD':
         return <span className="bg-teal-100 text-teal-800 text-[10px] font-bold px-2 py-0.5 rounded">CLINICAL NOTE</span>;
       case 'AI_DOCTOR_VERIFIED':
         return <span className="bg-indigo-100 text-indigo-800 text-[10px] font-bold px-2 py-0.5 rounded">AI VERIFIED</span>;
+      case 'VIEW_RECORD':
+        return <span className="bg-emerald-50 text-emerald-700 text-[10px] font-bold px-2 py-0.5 rounded border border-emerald-200">RECORD ACCESSED</span>;
       default:
         return <span className="bg-slate-100 text-slate-700 text-[10px] font-bold px-2 py-0.5 rounded">{action}</span>;
     }

@@ -111,7 +111,42 @@ export const AddClinicalNotePage: React.FC = () => {
     };
 
     dataStore.addRecord(newRecord);
-    alert('Clinical Encounter Note & Prescription officially verified and archived!');
+
+    // Also issue official Digital Prescription if medicines exist
+    const validPrescriptions = prescriptions.filter(p => p.medicineName.trim() !== '');
+    if (validPrescriptions.length > 0) {
+      const patientUser = allUsers.find(u => u.uid === patientId);
+      dataStore.addPrescription({
+        patientId,
+        patientName: patientUser?.fullName || 'Patient',
+        doctorId: currentUser.uid,
+        doctorName: currentUser.fullName,
+        doctorRegistration: doctor?.registrationNumber || 'NMC-VERIFIED',
+        doctorSpecialty: doctor?.specialization || 'Clinical Medicine',
+        hospitalName: doctor?.hospitalAffiliation || 'CareBridge Super-Specialty Hospital',
+        date: new Date().toISOString().split('T')[0],
+        diagnosis: diagnosisInput.split(',').map(d => d.trim()).filter(Boolean),
+        vitals: {
+          bloodPressure: `${bpSystolic}/${bpDiastolic} mmHg`,
+          pulseBpm: Number(pulse) || undefined,
+          spo2: Number(spo2) || undefined,
+          temperatureF: Number(temp) || undefined
+        },
+        medicines: validPrescriptions.map(p => ({
+          id: p.id || `p-${Date.now()}`,
+          medicineName: p.medicineName,
+          name: p.medicineName,
+          dosage: p.dosage,
+          frequency: p.frequency,
+          duration: p.duration,
+          instructions: p.instructions
+        })),
+        advice: `${clinicalSummary ? clinicalSummary + '. ' : ''}${treatmentPlan}`.trim(),
+        doctorSignatureStamp: `SHA256-NMC-${doctor?.registrationNumber || 'DOC'}-${Date.now().toString(16).toUpperCase()}`
+      });
+    }
+
+    alert('Clinical Encounter Note & Official Digital Prescription verified and archived!');
     navigate('/doctor');
   };
 
@@ -121,13 +156,13 @@ export const AddClinicalNotePage: React.FC = () => {
     <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-6 space-y-6">
       {/* Header */}
       <div className="flex items-center gap-3 pb-4 border-b border-slate-200">
-        <div className="p-3 bg-teal-600 text-white rounded-2xl shadow-sm">
+        <div className="p-3 bg-cb-blue text-white rounded-2xl shadow-xs">
           <Stethoscope className="w-6 h-6" />
         </div>
         <div>
-          <h1 className="text-xl sm:text-2xl font-black text-slate-900">New Clinical Encounter Note</h1>
+          <h1 className="text-xl sm:text-2xl font-black text-cb-navy">New Clinical Encounter & Prescription</h1>
           <p className="text-xs text-slate-500">
-            Recorded as <strong>Doctor Verified</strong> in the patient's permanent longitudinal health record.
+            Recorded as <strong>Doctor Verified</strong> in the patient's permanent longitudinal health record and issued as an official signed prescription.
           </p>
         </div>
       </div>

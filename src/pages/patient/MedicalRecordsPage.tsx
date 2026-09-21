@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import { dataStore } from '../../services/dataStore';
 import { HealthRecord, PatientProfile, UserProfile } from '../../types';
 import { LongitudinalTimeline } from '../../components/records/LongitudinalTimeline';
@@ -83,17 +84,17 @@ export const MedicalRecordsPage: React.FC = () => {
 
   if (!patient) {
     return (
-      <div className="max-w-xl mx-auto my-12 p-6 text-center bg-white rounded-2xl border border-slate-200 shadow-sm space-y-4">
-        <h3 className="font-bold text-slate-900 text-base">You are currently viewing as {currentUser.fullName} ({currentUser.role.toUpperCase()})</h3>
+      <div className="max-w-xl mx-auto my-12 p-6 text-center bg-white rounded-2xl border border-slate-200 shadow-xs space-y-4">
+        <h3 className="font-bold text-cb-navy text-base">You are currently logged in as {currentUser.fullName} ({currentUser.role.toUpperCase()})</h3>
         <p className="text-xs text-slate-500">
-          Switch to a patient persona to view and manage longitudinal records.
+          Medical history records require an active patient profile.
         </p>
         <div className="flex items-center justify-center gap-3 pt-2">
           <button
             onClick={() => dataStore.setCurrentUser('pat-ramesh')}
-            className="bg-teal-600 hover:bg-teal-700 text-white font-bold px-4 py-2 rounded-xl text-xs transition shadow-sm"
+            className="bg-cb-blue hover:bg-blue-700 text-white font-bold px-4 py-2 rounded-xl text-xs transition shadow-xs"
           >
-            Switch to Ramesh Kumar (Farmer)
+            Switch to Patient Profile (Ramesh Kumar)
           </button>
         </div>
       </div>
@@ -106,8 +107,8 @@ export const MedicalRecordsPage: React.FC = () => {
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-slate-200">
         <div>
           <div className="flex items-center gap-2">
-            <h1 className="text-xl sm:text-2xl font-black text-slate-900">Longitudinal Medical History</h1>
-            <span className="text-xs bg-teal-100 text-teal-800 font-bold px-2 py-0.5 rounded-full">
+            <h1 className="text-xl sm:text-2xl font-black text-cb-navy">Longitudinal Medical History</h1>
+            <span className="text-xs bg-blue-50 text-cb-blue font-bold px-2.5 py-0.5 rounded-full border border-blue-200">
               {records.length} Entries
             </span>
           </div>
@@ -116,13 +117,23 @@ export const MedicalRecordsPage: React.FC = () => {
           </p>
         </div>
 
-        <button
-          onClick={() => setIsModalOpen(true)}
-          className="bg-teal-600 hover:bg-teal-700 text-white font-bold px-4 py-2.5 rounded-xl text-xs flex items-center gap-1.5 transition shadow-sm self-start sm:self-center"
-        >
-          <PlusCircle className="w-4 h-4" />
-          Log Manual Health Note
-        </button>
+        <div className="flex items-center gap-2">
+          <Link
+            to="/prescriptions"
+            className="bg-white hover:bg-slate-50 border border-slate-200 text-slate-700 font-bold px-4 py-2.5 rounded-xl text-xs flex items-center gap-1.5 transition shadow-xs"
+          >
+            <FileText className="w-4 h-4 text-cb-blue" />
+            <span>Digital Prescriptions</span>
+          </Link>
+
+          <button
+            onClick={() => setIsModalOpen(true)}
+            className="bg-cb-blue hover:bg-blue-700 text-white font-bold px-4 py-2.5 rounded-xl text-xs flex items-center gap-1.5 transition shadow-xs"
+          >
+            <PlusCircle className="w-4 h-4" />
+            <span>Log Health Note</span>
+          </button>
+        </div>
       </div>
 
       {/* Notice on provenance & safety */}

@@ -1,0 +1,4939 @@
+{
+  "users": [
+    {
+      "uid": "pat-ramesh",
+      "role": "patient",
+      "fullName": "Ramesh Kumar",
+      "email": "ramesh.farmer@ruralcare.in",
+      "phone": "+919415012345",
+      "abhaId": "91-8724-1029-4412",
+      "createdAt": "2025-01-15T09:00:00Z"
+    },
+    {
+      "uid": "pat-sunita",
+      "role": "patient",
+      "fullName": "Sunita Devi",
+      "email": "sunita.devi@ruralcare.in",
+      "phone": "+919415067890",
+      "abhaId": "91-6542-8819-3301",
+      "createdAt": "2025-02-10T11:30:00Z"
+    },
+    {
+      "uid": "doc-sharma",
+      "role": "doctor",
+      "fullName": "Dr. Anita Sharma",
+      "email": "anita.sharma@chc-rampur.gov.in",
+      "phone": "+919839011223",
+      "createdAt": "2024-11-01T08:00:00Z"
+    },
+    {
+      "uid": "doc-verma",
+      "role": "doctor",
+      "fullName": "Dr. Rajesh Verma",
+      "email": "rajesh.verma@dist-hospital.gov.in",
+      "phone": "+919839044556",
+      "createdAt": "2024-10-15T10:00:00Z"
+    },
+    {
+      "uid": "admin-sunil",
+      "role": "admin",
+      "fullName": "Sunil Mathur",
+      "email": "admin.sitapur@nhm.gov.in",
+      "phone": "+919415099887",
+      "createdAt": "2024-09-01T08:00:00Z"
+    },
+    {
+      "uid": "asha-rekha",
+      "role": "frontline_worker",
+      "fullName": "Rekha Devi (ASHA)",
+      "email": "rekha.devi@asha-sitapur.gov.in",
+      "phone": "+919415055432",
+      "createdAt": "2024-08-10T09:00:00Z"
+    },
+    {
+      "uid": "pat-226899",
+      "role": "patient",
+      "fullName": "Vikram Singh",
+      "email": "pat-226899@carebridge.in",
+      "phone": "+919988771101",
+      "abhaId": "91-2390-4229-6331",
+      "createdAt": "2026-09-16T08:10:26.899Z"
+    },
+    {
+      "uid": "pat-327103",
+      "role": "patient",
+      "fullName": "Vikram Singh",
+      "email": "pat-327103@carebridge.in",
+      "phone": "+919146324978",
+      "abhaId": "91-2614-4354-7122",
+      "createdAt": "2026-09-16T08:12:07.103Z"
+    },
+    {
+      "uid": "doc-327421",
+      "role": "doctor",
+      "fullName": "Dr. Priya Mehta",
+      "email": "doc-327421@carebridge.in",
+      "phone": "+919246324978",
+      "createdAt": "2026-09-16T08:12:07.421Z"
+    },
+    {
+      "uid": "pat-367417",
+      "role": "patient",
+      "fullName": "Vikram Singh",
+      "email": "pat-367417@carebridge.in",
+      "phone": "+919146366470",
+      "abhaId": "91-5275-9779-7445",
+      "createdAt": "2026-09-16T08:12:47.417Z"
+    },
+    {
+      "uid": "doc-369646",
+      "role": "doctor",
+      "fullName": "Dr. Priya Mehta",
+      "email": "doc-369646@carebridge.in",
+      "phone": "+919246366470",
+      "createdAt": "2026-09-16T08:12:49.646Z"
+    },
+    {
+      "uid": "pat-460103",
+      "role": "patient",
+      "fullName": "Vikram Singh",
+      "email": "pat-460103@carebridge.in",
+      "phone": "+919146456077",
+      "abhaId": "91-5427-9762-3201",
+      "createdAt": "2026-09-16T08:14:20.103Z"
+    },
+    {
+      "uid": "doc-462270",
+      "role": "doctor",
+      "fullName": "Dr. Priya Mehta",
+      "email": "doc-462270@carebridge.in",
+      "phone": "+919246456077",
+      "createdAt": "2026-09-16T08:14:22.270Z"
+    },
+    {
+      "uid": "pat-032818",
+      "role": "patient",
+      "fullName": "Ramesh Test",
+      "email": "pat-032818@carebridge.in",
+      "phone": "+919360890186",
+      "abhaId": "91-5218-2984-1780",
+      "createdAt": "2026-09-16T15:53:52.819Z"
+    },
+    {
+      "uid": "pat-777346",
+      "role": "patient",
+      "fullName": "Priya Sundaram",
+      "email": "priya.sundaram@example.com",
+      "phone": "+919820268584",
+      "abhaId": "91-4391-2260-1080",
+      "createdAt": "2026-09-20T16:12:57.346Z"
+    },
+    {
+      "uid": "pat-395998",
+      "role": "patient",
+      "fullName": "Ananya Deshmukh",
+      "email": "pat-395998@carebridge.in",
+      "phone": "+919804782558",
+      "abhaId": "91-6124-4428-8227",
+      "createdAt": "2026-09-21T14:36:35.999Z"
+    },
+    {
+      "uid": "pat-465451",
+      "role": "patient",
+      "fullName": "Ananya Deshmukh",
+      "email": "pat-465451@carebridge.in",
+      "phone": "+919801440662",
+      "abhaId": "91-9975-6939-5445",
+      "createdAt": "2026-09-21T14:37:45.451Z"
+    },
+    {
+      "uid": "pat-524972",
+      "role": "patient",
+      "fullName": "Ananya Deshmukh",
+      "email": "pat-524972@carebridge.in",
+      "phone": "+919154667809",
+      "abhaId": "91-5966-7578-1755",
+      "createdAt": "2026-09-21T14:38:44.972Z"
+    },
+    {
+      "uid": "pat-623859",
+      "role": "patient",
+      "fullName": "Ananya Deshmukh",
+      "email": "pat-623859@carebridge.in",
+      "phone": "+919586708207",
+      "abhaId": "91-6481-7157-9617",
+      "createdAt": "2026-09-21T14:40:23.859Z"
+    },
+    {
+      "uid": "pat-700138",
+      "role": "patient",
+      "fullName": "Ananya Deshmukh",
+      "email": "pat-700138@carebridge.in",
+      "phone": "+919341015084",
+      "abhaId": "91-4030-9282-1941",
+      "createdAt": "2026-09-21T14:41:40.138Z"
+    },
+    {
+      "uid": "pat-776464",
+      "role": "patient",
+      "fullName": "Ananya Deshmukh",
+      "email": "pat-776464@carebridge.in",
+      "phone": "+919801320818",
+      "abhaId": "91-1059-6923-3399",
+      "createdAt": "2026-09-21T14:42:56.464Z"
+    },
+    {
+      "uid": "pat-856237",
+      "role": "patient",
+      "fullName": "Ananya Deshmukh",
+      "email": "pat-856237@carebridge.in",
+      "phone": "+919966047323",
+      "abhaId": "91-4366-8309-3251",
+      "createdAt": "2026-09-21T14:44:16.237Z"
+    }
+  ],
+  "patients": {
+    "pat-ramesh": {
+      "id": "pat-ramesh",
+      "dob": "1973-08-14",
+      "gender": "male",
+      "bloodGroup": "B+",
+      "occupation": "Farmer / Agricultural Worker",
+      "address": {
+        "villageOrTown": "Rampur Village",
+        "block": "Rampur",
+        "district": "Sitapur",
+        "state": "Uttar Pradesh",
+        "pincode": "261201"
+      },
+      "emergencyContacts": [
+        {
+          "id": "ec-1",
+          "name": "Suresh Kumar",
+          "relation": "Brother",
+          "phone": "+919876543210",
+          "priority": 1
+        }
+      ],
+      "chronicConditions": [
+        {
+          "id": "cond-1",
+          "name": "Type 2 Diabetes Mellitus",
+          "diagnosedYear": "2021",
+          "status": "managed",
+          "source": "doctor_verified",
+          "notes": "Monitored at CHC Rampur."
+        },
+        {
+          "id": "cond-2",
+          "name": "Essential Hypertension",
+          "diagnosedYear": "2022",
+          "status": "active",
+          "source": "doctor_verified",
+          "notes": "Telmisartan 40mg prescribed."
+        }
+      ],
+      "allergies": [
+        {
+          "id": "alg-1",
+          "allergen": "Penicillin (and Amoxicillin derivatives)",
+          "severity": "life_threatening",
+          "reaction": "Severe anaphylaxis, facial angioedema",
+          "verified": true,
+          "source": "doctor_verified"
+        }
+      ],
+      "emergencyMinimumDataset": {
+        "bloodGroup": "B+",
+        "criticalAllergies": [
+          "Penicillin / Amoxicillin (LIFE-THREATENING ANAPHYLAXIS)"
+        ],
+        "criticalConditions": [
+          "Type 2 Diabetes Mellitus",
+          "Essential Hypertension"
+        ],
+        "criticalMedications": [
+          "Metformin 500mg",
+          "Telmisartan 40mg"
+        ],
+        "resuscitationPreference": "Full Code",
+        "emergencyContactsSummary": [
+          "Suresh Kumar (Brother): +91 98765 43210"
+        ]
+      }
+    },
+    "pat-sunita": {
+      "id": "pat-sunita",
+      "dob": "1998-04-22",
+      "gender": "female",
+      "bloodGroup": "O+",
+      "occupation": "Handicraft Artisan",
+      "address": {
+        "villageOrTown": "Mohanpur Village",
+        "block": "Rampur",
+        "district": "Sitapur",
+        "state": "Uttar Pradesh",
+        "pincode": "261202"
+      },
+      "emergencyContacts": [
+        {
+          "id": "ec-3",
+          "name": "Ram Prakash",
+          "relation": "Husband",
+          "phone": "+919876599881",
+          "priority": 1
+        }
+      ],
+      "chronicConditions": [
+        {
+          "id": "cond-3",
+          "name": "Pregnancy - Second Trimester (24 Weeks)",
+          "diagnosedYear": "2025",
+          "status": "active",
+          "source": "doctor_verified",
+          "notes": "Under ANC protocol."
+        }
+      ],
+      "allergies": [
+        {
+          "id": "alg-3",
+          "allergen": "Sulfa Drugs",
+          "severity": "moderate",
+          "reaction": "Skin rash, pruritus",
+          "verified": true,
+          "source": "doctor_verified"
+        }
+      ],
+      "emergencyMinimumDataset": {
+        "bloodGroup": "O+",
+        "criticalAllergies": [
+          "Sulfa Drugs (Moderate allergic dermatitis)"
+        ],
+        "criticalConditions": [
+          "Second Trimester Antenatal Care (24 weeks)"
+        ],
+        "criticalMedications": [
+          "Iron and Folic Acid (IFA) Tablets",
+          "Calcium Carbonate 500mg"
+        ],
+        "resuscitationPreference": "Full Code",
+        "emergencyContactsSummary": [
+          "Ram Prakash (Husband): +91 98765 99881"
+        ]
+      }
+    },
+    "pat-226899": {
+      "id": "pat-226899",
+      "dob": "1995-01-01",
+      "gender": "Male",
+      "bloodGroup": "B+",
+      "occupation": "Rural Resident",
+      "address": {
+        "villageOrTown": "Sitapur Village",
+        "block": "Sitapur",
+        "district": "Sitapur",
+        "state": "Uttar Pradesh",
+        "pincode": "261001"
+      },
+      "emergencyContacts": [],
+      "chronicConditions": [],
+      "allergies": [],
+      "emergencyMinimumDataset": {
+        "bloodGroup": "B+",
+        "criticalAllergies": [],
+        "criticalConditions": [],
+        "criticalMedications": [],
+        "resuscitationPreference": "Full Code",
+        "emergencyContactsSummary": []
+      }
+    },
+    "pat-327103": {
+      "id": "pat-327103",
+      "dob": "1995-01-01",
+      "gender": "Male",
+      "bloodGroup": "B+",
+      "occupation": "Rural Resident",
+      "address": {
+        "villageOrTown": "Sitapur Village",
+        "block": "Sitapur",
+        "district": "Sitapur",
+        "state": "Uttar Pradesh",
+        "pincode": "261001"
+      },
+      "emergencyContacts": [],
+      "chronicConditions": [],
+      "allergies": [],
+      "emergencyMinimumDataset": {
+        "bloodGroup": "B+",
+        "criticalAllergies": [],
+        "criticalConditions": [],
+        "criticalMedications": [],
+        "resuscitationPreference": "Full Code",
+        "emergencyContactsSummary": []
+      }
+    },
+    "pat-367417": {
+      "id": "pat-367417",
+      "dob": "1995-01-01",
+      "gender": "Male",
+      "bloodGroup": "B+",
+      "occupation": "Rural Resident",
+      "address": {
+        "villageOrTown": "Sitapur Village",
+        "block": "Sitapur",
+        "district": "Sitapur",
+        "state": "Uttar Pradesh",
+        "pincode": "261001"
+      },
+      "emergencyContacts": [],
+      "chronicConditions": [],
+      "allergies": [],
+      "emergencyMinimumDataset": {
+        "bloodGroup": "B+",
+        "criticalAllergies": [],
+        "criticalConditions": [],
+        "criticalMedications": [],
+        "resuscitationPreference": "Full Code",
+        "emergencyContactsSummary": []
+      }
+    },
+    "pat-460103": {
+      "id": "pat-460103",
+      "dob": "1995-01-01",
+      "gender": "Male",
+      "bloodGroup": "B+",
+      "occupation": "Rural Resident",
+      "address": {
+        "villageOrTown": "Sitapur Village",
+        "block": "Sitapur",
+        "district": "Sitapur",
+        "state": "Uttar Pradesh",
+        "pincode": "261001"
+      },
+      "emergencyContacts": [],
+      "chronicConditions": [],
+      "allergies": [],
+      "emergencyMinimumDataset": {
+        "bloodGroup": "B+",
+        "criticalAllergies": [],
+        "criticalConditions": [],
+        "criticalMedications": [],
+        "resuscitationPreference": "Full Code",
+        "emergencyContactsSummary": []
+      }
+    },
+    "pat-032818": {
+      "id": "pat-032818",
+      "dob": "1995-01-01",
+      "gender": "male",
+      "bloodGroup": "B+",
+      "occupation": "Rural Resident",
+      "address": {
+        "villageOrTown": "Sitapur Village",
+        "block": "Sitapur",
+        "district": "Sitapur",
+        "state": "Uttar Pradesh",
+        "pincode": "261001"
+      },
+      "emergencyContacts": [],
+      "chronicConditions": [],
+      "allergies": [],
+      "emergencyMinimumDataset": {
+        "bloodGroup": "B+",
+        "criticalAllergies": [],
+        "criticalConditions": [],
+        "criticalMedications": [],
+        "resuscitationPreference": "Full Code",
+        "emergencyContactsSummary": []
+      }
+    },
+    "pat-777346": {
+      "id": "pat-777346",
+      "dob": "1992-06-15",
+      "gender": "female",
+      "bloodGroup": "O+",
+      "occupation": "Rural Resident",
+      "address": {
+        "villageOrTown": "Sitapur Village",
+        "block": "Sitapur",
+        "district": "Bengaluru Urban",
+        "state": "Uttar Pradesh",
+        "pincode": "261001"
+      },
+      "emergencyContacts": [],
+      "chronicConditions": [],
+      "allergies": [],
+      "emergencyMinimumDataset": {
+        "bloodGroup": "O+",
+        "criticalAllergies": [],
+        "criticalConditions": [],
+        "criticalMedications": [],
+        "resuscitationPreference": "Full Code",
+        "emergencyContactsSummary": []
+      }
+    },
+    "pat-395998": {
+      "id": "pat-395998",
+      "dob": "1990-01-01",
+      "gender": "male",
+      "bloodGroup": "B+",
+      "occupation": "Rural Resident",
+      "address": {
+        "villageOrTown": "Sitapur Rural",
+        "block": "Sitapur",
+        "district": "Sitapur",
+        "state": "Uttar Pradesh",
+        "pincode": "261001"
+      },
+      "emergencyContacts": [],
+      "chronicConditions": [],
+      "allergies": [],
+      "emergencyMinimumDataset": {
+        "bloodGroup": "B+",
+        "criticalAllergies": [],
+        "criticalConditions": [],
+        "criticalMedications": [],
+        "resuscitationPreference": "Full Code",
+        "emergencyContactsSummary": []
+      }
+    },
+    "pat-465451": {
+      "id": "pat-465451",
+      "dob": "1990-01-01",
+      "gender": "male",
+      "bloodGroup": "B+",
+      "occupation": "Rural Resident",
+      "address": {
+        "villageOrTown": "Sitapur Rural",
+        "block": "Sitapur",
+        "district": "Sitapur",
+        "state": "Uttar Pradesh",
+        "pincode": "261001"
+      },
+      "emergencyContacts": [],
+      "chronicConditions": [],
+      "allergies": [],
+      "emergencyMinimumDataset": {
+        "bloodGroup": "B+",
+        "criticalAllergies": [],
+        "criticalConditions": [],
+        "criticalMedications": [],
+        "resuscitationPreference": "Full Code",
+        "emergencyContactsSummary": []
+      }
+    },
+    "pat-524972": {
+      "id": "pat-524972",
+      "dob": "1990-01-01",
+      "gender": "male",
+      "bloodGroup": "B+",
+      "occupation": "Rural Resident",
+      "address": {
+        "villageOrTown": "Sitapur Rural",
+        "block": "Sitapur",
+        "district": "Sitapur",
+        "state": "Uttar Pradesh",
+        "pincode": "261001"
+      },
+      "emergencyContacts": [],
+      "chronicConditions": [],
+      "allergies": [],
+      "emergencyMinimumDataset": {
+        "bloodGroup": "B+",
+        "criticalAllergies": [],
+        "criticalConditions": [],
+        "criticalMedications": [],
+        "resuscitationPreference": "Full Code",
+        "emergencyContactsSummary": []
+      }
+    },
+    "pat-623859": {
+      "id": "pat-623859",
+      "dob": "1990-01-01",
+      "gender": "male",
+      "bloodGroup": "B+",
+      "occupation": "Rural Resident",
+      "address": {
+        "villageOrTown": "Sitapur Rural",
+        "block": "Sitapur",
+        "district": "Sitapur",
+        "state": "Uttar Pradesh",
+        "pincode": "261001"
+      },
+      "emergencyContacts": [],
+      "chronicConditions": [],
+      "allergies": [],
+      "emergencyMinimumDataset": {
+        "bloodGroup": "B+",
+        "criticalAllergies": [],
+        "criticalConditions": [],
+        "criticalMedications": [],
+        "resuscitationPreference": "Full Code",
+        "emergencyContactsSummary": []
+      }
+    },
+    "pat-700138": {
+      "id": "pat-700138",
+      "dob": "1990-01-01",
+      "gender": "male",
+      "bloodGroup": "B+",
+      "occupation": "Rural Resident",
+      "address": {
+        "villageOrTown": "Sitapur Rural",
+        "block": "Sitapur",
+        "district": "Sitapur",
+        "state": "Uttar Pradesh",
+        "pincode": "261001"
+      },
+      "emergencyContacts": [],
+      "chronicConditions": [],
+      "allergies": [],
+      "emergencyMinimumDataset": {
+        "bloodGroup": "B+",
+        "criticalAllergies": [],
+        "criticalConditions": [],
+        "criticalMedications": [],
+        "resuscitationPreference": "Full Code",
+        "emergencyContactsSummary": []
+      }
+    },
+    "pat-776464": {
+      "id": "pat-776464",
+      "dob": "1990-01-01",
+      "gender": "male",
+      "bloodGroup": "B+",
+      "occupation": "Rural Resident",
+      "address": {
+        "villageOrTown": "Sitapur Rural",
+        "block": "Sitapur",
+        "district": "Sitapur",
+        "state": "Uttar Pradesh",
+        "pincode": "261001"
+      },
+      "emergencyContacts": [],
+      "chronicConditions": [],
+      "allergies": [],
+      "emergencyMinimumDataset": {
+        "bloodGroup": "B+",
+        "criticalAllergies": [],
+        "criticalConditions": [],
+        "criticalMedications": [],
+        "resuscitationPreference": "Full Code",
+        "emergencyContactsSummary": []
+      }
+    },
+    "pat-856237": {
+      "id": "pat-856237",
+      "dob": "1990-01-01",
+      "gender": "male",
+      "bloodGroup": "B+",
+      "occupation": "Rural Resident",
+      "address": {
+        "villageOrTown": "Sitapur Rural",
+        "block": "Sitapur",
+        "district": "Sitapur",
+        "state": "Uttar Pradesh",
+        "pincode": "261001"
+      },
+      "emergencyContacts": [],
+      "chronicConditions": [],
+      "allergies": [],
+      "emergencyMinimumDataset": {
+        "bloodGroup": "B+",
+        "criticalAllergies": [],
+        "criticalConditions": [],
+        "criticalMedications": [],
+        "resuscitationPreference": "Full Code",
+        "emergencyContactsSummary": []
+      }
+    }
+  },
+  "doctors": {
+    "doc-sharma": {
+      "id": "doc-sharma",
+      "registrationNumber": "MCI/UP/2012/048821",
+      "councilName": "Uttar Pradesh Medical Council",
+      "specialization": "General Medicine & Rural Health",
+      "qualification": "MBBS, MD (Medicine)",
+      "hospitalAffiliation": "Community Health Centre (CHC) Rampur",
+      "verifiedByAdmin": true,
+      "contactNumber": "+919839011223",
+      "experienceYears": 13
+    },
+    "doc-verma": {
+      "id": "doc-verma",
+      "registrationNumber": "NMC/2016/091244",
+      "councilName": "National Medical Commission (NMC)",
+      "specialization": "Emergency Medicine & Trauma Care",
+      "qualification": "MBBS, MS (General Surgery)",
+      "hospitalAffiliation": "Sitapur District Hospital & Trauma Centre",
+      "verifiedByAdmin": true,
+      "contactNumber": "+919839044556",
+      "experienceYears": 9
+    },
+    "doc-327421": {
+      "id": "doc-327421",
+      "registrationNumber": "NMC/2026/506213",
+      "councilName": "Delhi Medical Council",
+      "specialization": "Internal Medicine",
+      "qualification": "MBBS, MD",
+      "hospitalAffiliation": "Sitapur District Hospital",
+      "verifiedByAdmin": true,
+      "contactNumber": "+919246324978",
+      "experienceYears": 5
+    },
+    "doc-369646": {
+      "id": "doc-369646",
+      "registrationNumber": "NMC/2026/257027",
+      "councilName": "Delhi Medical Council",
+      "specialization": "Internal Medicine",
+      "qualification": "MBBS, MD",
+      "hospitalAffiliation": "Sitapur District Hospital",
+      "verifiedByAdmin": true,
+      "contactNumber": "+919246366470",
+      "experienceYears": 5
+    },
+    "doc-462270": {
+      "id": "doc-462270",
+      "registrationNumber": "NMC/2026/521619",
+      "councilName": "Delhi Medical Council",
+      "specialization": "Internal Medicine",
+      "qualification": "MBBS, MD",
+      "hospitalAffiliation": "Sitapur District Hospital",
+      "verifiedByAdmin": true,
+      "contactNumber": "+919246456077",
+      "experienceYears": 5
+    }
+  },
+  "records": [
+    {
+      "id": "rec_f39e70a05ec1",
+      "patientId": "pat-ramesh",
+      "title": "OPD Follow-up Note (16/9/2026)",
+      "category": "clinical_note",
+      "recordDate": "2026-09-16",
+      "createdAt": "2026-09-16T16:18:22.736Z",
+      "authorId": "doc-sharma",
+      "authorName": "Dr. Anita Sharma",
+      "authorRole": "doctor",
+      "facilityName": "Community Health Centre (CHC) Rampur",
+      "source": "doctor_verified",
+      "clinicalSummary": "Quarterly review: Fasting blood glucose is well-maintained on Metformin 500mg.",
+      "diagnosis": [
+        "Type 2 Diabetes Mellitus - Controlled"
+      ],
+      "treatmentPlan": "Continue current oral hypoglycemic regimen and 30-minute daily walking.",
+      "prescriptions": [
+        {
+          "medicineName": "Metformin Hydrochloride",
+          "genericName": "Metformin 500mg",
+          "dosage": "500 mg",
+          "frequency": "1-0-1",
+          "duration": "30 Days"
+        }
+      ],
+      "vitals": {
+        "isDeviceRecorded": false,
+        "isUnavailable": false,
+        "bloodPressureSystolic": 126,
+        "bloodPressureDiastolic": 80,
+        "pulseBpm": 72
+      },
+      "isSensitive": false
+    },
+    {
+      "id": "rec_c4206c441f60",
+      "patientId": "pat-460103",
+      "title": "Initial General Consultation",
+      "category": "clinical_note",
+      "recordDate": "2025-02-15",
+      "createdAt": "2026-09-16T08:14:25.772Z",
+      "authorId": "doc-462270",
+      "authorName": "Dr. Priya Mehta",
+      "authorRole": "doctor",
+      "facilityName": "Sitapur District Hospital",
+      "source": "doctor_verified",
+      "clinicalSummary": "Patient presented for routine checkup. Normal vitals.",
+      "diagnosis": [
+        "Routine Examination"
+      ],
+      "treatmentPlan": "",
+      "prescriptions": [
+        {
+          "id": "rx-test-1",
+          "medicineName": "Multivitamin",
+          "genericName": "Multivitamin Tabs",
+          "dosage": "1 Tab",
+          "frequency": "1-0-0",
+          "duration": "15 Days",
+          "instructions": "After breakfast"
+        }
+      ],
+      "vitals": {
+        "isDeviceRecorded": false,
+        "isUnavailable": true,
+        "source": "unavailable"
+      },
+      "isSensitive": false
+    },
+    {
+      "id": "rec-001",
+      "patientId": "pat-ramesh",
+      "title": "CHC Rampur General OPD Consultation: Follow-up for Glycemic Control",
+      "category": "clinical_note",
+      "recordDate": "2025-01-20",
+      "createdAt": "2025-01-20T10:30:00Z",
+      "authorId": "doc-sharma",
+      "authorName": "Dr. Anita Sharma",
+      "authorRole": "doctor",
+      "facilityName": "Community Health Centre (CHC) Rampur",
+      "source": "doctor_verified",
+      "clinicalSummary": "Patient presented for routine monthly diabetic follow-up. Reports occasional dizziness when skipping mid-day meal during farm harvesting. Fasting blood glucose is moderately elevated.",
+      "diagnosis": [
+        "Type 2 Diabetes Mellitus - Inadequate Control",
+        "Stage 1 Essential Hypertension"
+      ],
+      "treatmentPlan": "Emphasized regular carbohydrate timing with field work. Advised 20-minute post-meal walk. Reinforced absolute avoidance of penicillin derivatives.",
+      "prescriptions": [
+        {
+          "id": "rx-1",
+          "medicineName": "Metformin Hydrochloride",
+          "genericName": "Metformin 500mg (Jan Aushadhi)",
+          "dosage": "500 mg",
+          "frequency": "1-0-1 (After Food)",
+          "duration": "30 Days",
+          "instructions": "Take with or immediately after meals."
+        },
+        {
+          "id": "rx-2",
+          "medicineName": "Telmisartan Tablets",
+          "genericName": "Telmisartan 40mg",
+          "dosage": "40 mg",
+          "frequency": "1-0-0 (Morning)",
+          "duration": "30 Days",
+          "instructions": "Take at 8 AM with plain water."
+        }
+      ],
+      "vitals": {
+        "isDeviceRecorded": false,
+        "isUnavailable": false,
+        "bloodPressureSystolic": 138,
+        "bloodPressureDiastolic": 86,
+        "pulseBpm": 76,
+        "temperatureFahrenheit": 98.4,
+        "spo2Percentage": 97,
+        "source": "doctor_measured",
+        "notes": "Measured with calibrated aneroid sphygmomanometer at CHC OPD."
+      },
+      "isSensitive": false
+    },
+    {
+      "id": "rec-002",
+      "patientId": "pat-ramesh",
+      "title": "Diagnostic Lab Report: Fasting Blood Sugar & Lipid Profile",
+      "category": "lab_report",
+      "recordDate": "2025-01-18",
+      "createdAt": "2025-01-18T14:15:00Z",
+      "authorId": "pat-ramesh",
+      "authorName": "Ramesh Kumar",
+      "authorRole": "patient",
+      "source": "uploaded_document",
+      "facilityName": "Sitapur District Public Diagnostic Lab",
+      "clinicalSummary": "Routine biochemical investigations carried out prior to physician review.",
+      "vitals": {
+        "isDeviceRecorded": false,
+        "isUnavailable": true,
+        "source": "unavailable"
+      },
+      "isSensitive": false
+    }
+  ],
+  "authorizations": [
+    {
+      "id": "auth-001",
+      "patientId": "pat-ramesh",
+      "doctorId": "doc-sharma",
+      "doctorName": "Dr. Anita Sharma",
+      "doctorSpecialization": "General Medicine & Rural Health",
+      "doctorHospital": "Community Health Centre (CHC) Rampur",
+      "status": "active",
+      "scope": "full_longitudinal",
+      "requestedAt": "2025-01-20T08:00:00Z",
+      "grantedAt": "2025-01-20T09:15:00Z"
+    },
+    {
+      "id": "auth_71cf11611854",
+      "patientId": "pat-460103",
+      "doctorId": "doc-462270",
+      "doctorName": "Dr. Priya Mehta",
+      "doctorSpecialization": "Internal Medicine",
+      "doctorHospital": "Sitapur District Hospital",
+      "status": "revoked",
+      "scope": "full_longitudinal",
+      "requestedAt": "2026-09-16T08:14:24.932Z",
+      "grantedAt": "2026-09-16T08:14:25.743Z",
+      "requestId": "req_92dd625f039d",
+      "revokedAt": "2026-09-16T08:14:25.787Z",
+      "revocationReason": "Revoked by patient"
+    },
+    {
+      "id": "auth_c68c6f35696c",
+      "patientId": "pat-sunita",
+      "doctorId": "doc-sharma",
+      "doctorName": "Dr. Anita Sharma",
+      "doctorSpecialization": "General Medicine & Rural Health",
+      "doctorHospital": "Community Health Centre (CHC) Rampur",
+      "status": "active",
+      "scope": "full_longitudinal",
+      "requestedCategories": [
+        "diagnoses",
+        "prescriptions",
+        "clinical_notes"
+      ],
+      "approvedCategories": [
+        "diagnoses",
+        "prescriptions"
+      ],
+      "requestedAt": "2026-09-16T16:18:22.752Z",
+      "grantedAt": "2026-09-16T16:18:23.100Z",
+      "requestId": "req_ca73df21ffc1"
+    },
+    {
+      "id": "auth_052285dafb00",
+      "patientId": "pat-ramesh",
+      "doctorId": "doc-verma",
+      "doctorName": "Dr. Rajesh Verma",
+      "doctorSpecialization": "Emergency Medicine & Trauma Care",
+      "doctorHospital": "Sitapur District Hospital & Trauma Centre",
+      "status": "active",
+      "scope": "full_longitudinal",
+      "requestedCategories": [
+        "diagnoses",
+        "prescriptions",
+        "lab_reports",
+        "imaging",
+        "clinical_notes",
+        "uploaded_documents",
+        "self_reported_symptoms"
+      ],
+      "approvedCategories": [
+        "diagnoses",
+        "prescriptions",
+        "lab_reports",
+        "imaging",
+        "clinical_notes",
+        "uploaded_documents",
+        "self_reported_symptoms"
+      ],
+      "requestedAt": "2026-09-16T16:50:18.122Z",
+      "grantedAt": "2026-09-16T16:50:42.787Z",
+      "requestId": "req_b6f1397e4244"
+    }
+  ],
+  "accessRequests": [
+    {
+      "id": "req_b93ff8b6b601",
+      "doctorId": "doc-369646",
+      "doctorName": "Dr. Priya Mehta",
+      "doctorSpecialization": "Internal Medicine",
+      "doctorHospital": "Sitapur District Hospital",
+      "patientId": "pat-367417",
+      "patientName": "Vikram Singh",
+      "patientPhone": "+919146366470",
+      "scope": "full_longitudinal",
+      "status": "pending",
+      "requestedAt": "2026-09-16T08:12:51.208Z"
+    },
+    {
+      "id": "req_92dd625f039d",
+      "doctorId": "doc-462270",
+      "doctorName": "Dr. Priya Mehta",
+      "doctorSpecialization": "Internal Medicine",
+      "doctorHospital": "Sitapur District Hospital",
+      "patientId": "pat-460103",
+      "patientName": "Vikram Singh",
+      "patientPhone": "+919146456077",
+      "scope": "full_longitudinal",
+      "status": "authorized",
+      "requestedAt": "2026-09-16T08:14:24.932Z",
+      "decidedAt": "2026-09-16T08:14:25.743Z"
+    },
+    {
+      "id": "req_ca73df21ffc1",
+      "doctorId": "doc-sharma",
+      "doctorName": "Dr. Anita Sharma",
+      "doctorSpecialization": "General Medicine & Rural Health",
+      "doctorHospital": "Community Health Centre (CHC) Rampur",
+      "patientId": "pat-sunita",
+      "patientName": "Sunita Devi",
+      "patientPhone": "+919415067890",
+      "scope": "full_longitudinal",
+      "requestedCategories": [
+        "diagnoses",
+        "prescriptions",
+        "clinical_notes"
+      ],
+      "approvedCategories": [
+        "diagnoses",
+        "prescriptions"
+      ],
+      "status": "authorized",
+      "requestedAt": "2026-09-16T16:18:22.752Z",
+      "decidedAt": "2026-09-16T16:18:23.099Z"
+    },
+    {
+      "id": "req_bcb12b0b6152",
+      "doctorId": "doc-verma",
+      "doctorName": "Dr. Rajesh Verma",
+      "doctorSpecialization": "Emergency Medicine & Trauma Care",
+      "doctorHospital": "Sitapur District Hospital & Trauma Centre",
+      "patientId": "pat-032818",
+      "patientName": "Ramesh Test",
+      "patientPhone": "+919360890186",
+      "scope": "full_longitudinal",
+      "requestedCategories": [
+        "diagnoses",
+        "prescriptions",
+        "lab_reports",
+        "imaging",
+        "clinical_notes",
+        "uploaded_documents",
+        "self_reported_symptoms"
+      ],
+      "approvedCategories": [],
+      "status": "pending",
+      "requestedAt": "2026-09-16T16:49:35.645Z"
+    },
+    {
+      "id": "req_b6f1397e4244",
+      "doctorId": "doc-verma",
+      "doctorName": "Dr. Rajesh Verma",
+      "doctorSpecialization": "Emergency Medicine & Trauma Care",
+      "doctorHospital": "Sitapur District Hospital & Trauma Centre",
+      "patientId": "pat-ramesh",
+      "patientName": "Ramesh Kumar",
+      "patientPhone": "+919415012345",
+      "scope": "full_longitudinal",
+      "requestedCategories": [
+        "diagnoses",
+        "prescriptions",
+        "lab_reports",
+        "imaging",
+        "clinical_notes",
+        "uploaded_documents",
+        "self_reported_symptoms"
+      ],
+      "approvedCategories": [
+        "diagnoses",
+        "prescriptions",
+        "lab_reports",
+        "imaging",
+        "clinical_notes",
+        "uploaded_documents",
+        "self_reported_symptoms"
+      ],
+      "status": "authorized",
+      "requestedAt": "2026-09-16T16:50:18.122Z",
+      "decidedAt": "2026-09-16T16:50:42.787Z"
+    }
+  ],
+  "otpChallenges": [
+    {
+      "id": "otp_req_51198e1b22c4",
+      "phone": "+919146366470",
+      "codeHash": "ca3a75fb152847832a2eec6d3da68e3de202dcc4255b8b337757259f2a9626c9",
+      "expiresAt": 1789546671208,
+      "attempts": 0,
+      "maxAttempts": 3,
+      "purpose": "doctor_access_authorization",
+      "requestId": "req_b93ff8b6b601",
+      "createdAt": "2026-09-16T08:12:51.208Z"
+    },
+    {
+      "id": "otp_req_996acf2c13a0",
+      "phone": "+919360890186",
+      "codeHash": "769b3023331992ffc299082e71a5f0fdf4b275e8e64b8649d1d645c58a2df97b",
+      "expiresAt": 1789577675645,
+      "attempts": 0,
+      "maxAttempts": 3,
+      "purpose": "doctor_access_authorization",
+      "requestId": "req_bcb12b0b6152",
+      "createdAt": "2026-09-16T16:49:35.645Z"
+    },
+    {
+      "id": "otp_6cc3af15e276",
+      "phone": "+919360890186",
+      "codeHash": "a4d64e3e5c86ab85c277cd772829838dbb1708acaa5f6c191c408cb6458bcf6d",
+      "expiresAt": 1790001678281,
+      "attempts": 0,
+      "maxAttempts": 3,
+      "purpose": "login",
+      "metadata": {
+        "userId": "pat-032818",
+        "role": "patient"
+      },
+      "createdAt": "2026-09-21T14:36:18.281Z"
+    }
+  ],
+  "sessions": [
+    {
+      "token": "token-pat-sunita",
+      "userId": "pat-sunita",
+      "role": "patient",
+      "expiresAt": 1792138222859
+    },
+    {
+      "token": "token-doc-sharma",
+      "userId": "doc-sharma",
+      "role": "doctor",
+      "expiresAt": 1792138222859
+    },
+    {
+      "token": "token-doc-verma",
+      "userId": "doc-verma",
+      "role": "doctor",
+      "expiresAt": 1792138222859
+    },
+    {
+      "token": "token-asha-rekha",
+      "userId": "asha-rekha",
+      "role": "frontline_worker",
+      "expiresAt": 1792138222859
+    },
+    {
+      "token": "token-admin-sunil",
+      "userId": "admin-sunil",
+      "role": "admin",
+      "expiresAt": 1792138222859
+    },
+    {
+      "token": "96c49ac0c736b57797a1e4dfe772eabd86576332128e0d3e2e57118c94ad1a49",
+      "userId": "pat-226899",
+      "role": "patient",
+      "expiresAt": 1792138226900
+    },
+    {
+      "token": "2481d5cb05000d15dabab6a9364eedecbf1577cdd89c83791eadaeedc1586204",
+      "userId": "pat-327103",
+      "role": "patient",
+      "expiresAt": 1792138327103
+    },
+    {
+      "token": "d14f536c5b8930f327d6df42ee7a1660756259c998477d8a2ba9b18322e53717",
+      "userId": "doc-327421",
+      "role": "doctor",
+      "expiresAt": 1792138327421
+    },
+    {
+      "token": "8be126b8ac0d70333d4fecbf4ddadadc43255266dd4b1af3a759bfb4bd39bbe9",
+      "userId": "doc-327421",
+      "role": "doctor",
+      "expiresAt": 1792138331589
+    },
+    {
+      "token": "3cc0f8edd71574735df908e926860d84702453f7709c8be4cd7f388d1e0fd61b",
+      "userId": "pat-367417",
+      "role": "patient",
+      "expiresAt": 1792138367417
+    },
+    {
+      "token": "e302949655487de191355ec269f1ee0db38ac09ef73bb56406f0f2d5e255440e",
+      "userId": "doc-369646",
+      "role": "doctor",
+      "expiresAt": 1792138369646
+    },
+    {
+      "token": "70205a7b6a10015b53cc6e1808d63b978b73fa13aaae59341887cf486c2bcb2c",
+      "userId": "doc-369646",
+      "role": "doctor",
+      "expiresAt": 1792138371167
+    },
+    {
+      "token": "8c58f5c03465de4b32cc309d99b66357a7093d49a75c2894bdad5cb93e483505",
+      "userId": "pat-460103",
+      "role": "patient",
+      "expiresAt": 1792138460103
+    },
+    {
+      "token": "f3201f4a5d0ef6bb6d4e84bbebe9fd50abf8c7a264b08004a146b06bbf18296f",
+      "userId": "doc-462270",
+      "role": "doctor",
+      "expiresAt": 1792138462270
+    },
+    {
+      "token": "cfef4c2fdc5cfc6951cc0463f7e4696cf5194c07bbd4a9711be286c752ac1609",
+      "userId": "doc-462270",
+      "role": "doctor",
+      "expiresAt": 1792138464890
+    },
+    {
+      "token": "06962ce11c687cc5fa4853a1920199fa817970ace09d15048f920f7847dfe4e7",
+      "userId": "pat-032818",
+      "role": "patient",
+      "expiresAt": 1792166032819
+    },
+    {
+      "token": "1c2092ea08c20bb844587633bf5f849bfdb75fe23f7daeecd07f83aab84f2b96",
+      "userId": "pat-ramesh",
+      "role": "patient",
+      "expiresAt": 1792167502107
+    },
+    {
+      "token": "7fcb10bb223a56189b8cb9f4f578ac0bb9128b4bdfa0511da980cf7cc8ce9839",
+      "userId": "doc-sharma",
+      "role": "doctor",
+      "expiresAt": 1792167502486
+    },
+    {
+      "token": "0573a8c0f68d09a3a8b1bc63f603e01d5ef199d30869f28655dbdb0fccfa645e",
+      "userId": "pat-032818",
+      "role": "patient",
+      "expiresAt": 1792169297353
+    },
+    {
+      "token": "0a5a935e5bc81bd62d83572f56a5585f70c18eff72b2cee31fd0ca1b3c2081f2",
+      "userId": "pat-032818",
+      "role": "patient",
+      "expiresAt": 1792210410199
+    },
+    {
+      "token": "617484aa1a64a88cf059c4f1b537c59d16783f7f914a37a6f2ca59c85968fd00",
+      "userId": "pat-777346",
+      "role": "patient",
+      "expiresAt": 1792512777347
+    },
+    {
+      "token": "feff25463c5ee199486bd236612a26d8785b85811d10a016d1fb9ca924539cf7",
+      "userId": "pat-777346",
+      "role": "patient",
+      "expiresAt": 1792512777607
+    },
+    {
+      "token": "dcc5346ed23e18bba369db3a9c513205c0e8e3d1505796a50c685b689911f82a",
+      "userId": "pat-395998",
+      "role": "patient",
+      "expiresAt": 1792593395999
+    },
+    {
+      "token": "ba9971dc8f8ab8be098e0086329571117badadf87fb91a686eac7d0bcd410536",
+      "userId": "pat-ramesh",
+      "role": "patient",
+      "expiresAt": 1792593398965
+    },
+    {
+      "token": "319ce156e6567abdd869d9d71e88204ce2533864a455ebdb8d36c4d9a337f07b",
+      "userId": "doc-sharma",
+      "role": "doctor",
+      "expiresAt": 1792593416218
+    },
+    {
+      "token": "97c6d90f547bda584dc879aea790398925de9398cf5323f8ee42ce29f109560e",
+      "userId": "pat-ramesh",
+      "role": "patient",
+      "expiresAt": 1792593420281
+    },
+    {
+      "token": "c866693019e01104a85082655dfd1837ba5a3afb5f9c4a7a550b7df15421a893",
+      "userId": "pat-465451",
+      "role": "patient",
+      "expiresAt": 1792593465451
+    },
+    {
+      "token": "e397165d11e69703d181c0b8ee04aa8513006b0a495326f83427ddc2907f7738",
+      "userId": "pat-ramesh",
+      "role": "patient",
+      "expiresAt": 1792593468286
+    },
+    {
+      "token": "d9bed0b5b6331d67f6d2ea97630118d5ca448375ff804413d5d56105ebafdad0",
+      "userId": "doc-sharma",
+      "role": "doctor",
+      "expiresAt": 1792593490221
+    },
+    {
+      "token": "aabc664ae2e21b850a518312be8f84cfaa4b34fae1d99b67a40f093eeecf24dd",
+      "userId": "pat-524972",
+      "role": "patient",
+      "expiresAt": 1792593524972
+    },
+    {
+      "token": "dae1ffe4cd1c9c8184d3b63423442732696b1360963d5a815e05070dfbd0975b",
+      "userId": "pat-ramesh",
+      "role": "patient",
+      "expiresAt": 1792593527936
+    },
+    {
+      "token": "1ce0a2bfef307d2291351ea1a40e22c2e2394dbbd26a1d0286291b169512e2d7",
+      "userId": "doc-sharma",
+      "role": "doctor",
+      "expiresAt": 1792593548712
+    },
+    {
+      "token": "29865f7747813b4ce1f905ab8a624c23864abfecb899663ae935f65cea10507e",
+      "userId": "pat-623859",
+      "role": "patient",
+      "expiresAt": 1792593623859
+    },
+    {
+      "token": "2d28d9d8e975ce3574cd44546cc2bce3cca3b2bf6cbb1b558e751c3f9509dc06",
+      "userId": "doc-sharma",
+      "role": "doctor",
+      "expiresAt": 1792593656430
+    },
+    {
+      "token": "222d40ea76875e37171dd256eb3a50acd98974ae4a49fc1425455620de26803d",
+      "userId": "pat-700138",
+      "role": "patient",
+      "expiresAt": 1792593700138
+    },
+    {
+      "token": "b1788d1115acd977e5b9a42800af7ab1d321c3aa4f66e5a94db1f371d5aaf04e",
+      "userId": "pat-700138",
+      "role": "patient",
+      "expiresAt": 1792593703122
+    },
+    {
+      "token": "06f058bc2165a0ce321e1de20691c2d62f1d00d33aecd2ad647139692b7d7b0f",
+      "userId": "doc-sharma",
+      "role": "doctor",
+      "expiresAt": 1792593724499
+    },
+    {
+      "token": "f6cd4e766b02fef37610cf566d8062da2b489e84b2f2f718c43af4d338765a7b",
+      "userId": "pat-776464",
+      "role": "patient",
+      "expiresAt": 1792593776465
+    },
+    {
+      "token": "467529f5e07bbe9f48b6b882dee683bfbe89f0d0722530e50658b9b0de629aa6",
+      "userId": "pat-776464",
+      "role": "patient",
+      "expiresAt": 1792593779819
+    },
+    {
+      "token": "02f27192a5d41d2eafee3d5ca7bcc0b4a3abd43779ec7912999ef8a4283bdf28",
+      "userId": "pat-856237",
+      "role": "patient",
+      "expiresAt": 1792593856237
+    },
+    {
+      "token": "c3c20eb1064399fed44e3316425ef4e95bbe0e7990cbc106d30d38a20cfcaa9e",
+      "userId": "pat-856237",
+      "role": "patient",
+      "expiresAt": 1792593859445
+    },
+    {
+      "token": "8f5a1072987f73d39e27d69dabec1adaff2383a587bf154e1f5430f7e6e2d9d3",
+      "userId": "doc-verma",
+      "role": "doctor",
+      "expiresAt": 1792593880446
+    }
+  ],
+  "auditEvents": [
+    {
+      "id": "audit_init_1",
+      "actorId": "pat-ramesh",
+      "actorName": "Ramesh Kumar",
+      "actorRole": "patient",
+      "action": "GRANT_CONSENT",
+      "patientId": "pat-ramesh",
+      "doctorId": "doc-sharma",
+      "details": "Active physician consent granted to Dr. Anita Sharma (CHC Rampur)",
+      "timestamp": "2025-01-20T09:15:00Z"
+    },
+    {
+      "id": "audit_033e33c65448",
+      "actorId": "unauthenticated",
+      "actorName": "System",
+      "actorRole": "system",
+      "action": "OTP_REQUESTED",
+      "patientId": null,
+      "doctorId": null,
+      "details": "Registration OTP generated for +919****01",
+      "timestamp": "2026-09-16T08:10:23.185Z"
+    },
+    {
+      "id": "audit_fd5b77b7a913",
+      "actorId": "system",
+      "actorName": "System",
+      "actorRole": "system",
+      "action": "OTP_FAILED",
+      "patientId": null,
+      "doctorId": null,
+      "details": "Incorrect OTP attempt for registration on +919988771101",
+      "timestamp": "2026-09-16T08:10:23.201Z"
+    },
+    {
+      "id": "audit_b06f259b0bf5",
+      "actorId": "pat-226899",
+      "actorName": "Vikram Singh",
+      "actorRole": "patient",
+      "action": "ACCOUNT_CREATED",
+      "patientId": null,
+      "doctorId": null,
+      "details": "New PATIENT account created for Vikram Singh (+919988771101)",
+      "timestamp": "2026-09-16T08:10:26.903Z"
+    },
+    {
+      "id": "audit_6d4d5ab782ea",
+      "actorId": "pat-226899",
+      "actorName": "Vikram Singh",
+      "actorRole": "patient",
+      "action": "LOGIN",
+      "patientId": null,
+      "doctorId": null,
+      "details": "First login via registration for Vikram Singh",
+      "timestamp": "2026-09-16T08:10:26.907Z"
+    },
+    {
+      "id": "audit_2a2e0ec4e315",
+      "actorId": "unauthenticated",
+      "actorName": "System",
+      "actorRole": "system",
+      "action": "OTP_REQUESTED",
+      "patientId": null,
+      "doctorId": null,
+      "details": "Registration OTP generated for +919****78",
+      "timestamp": "2026-09-16T08:12:05.039Z"
+    },
+    {
+      "id": "audit_45136f263d83",
+      "actorId": "system",
+      "actorName": "System",
+      "actorRole": "system",
+      "action": "OTP_FAILED",
+      "patientId": null,
+      "doctorId": null,
+      "details": "Incorrect OTP attempt for registration on +919146324978",
+      "timestamp": "2026-09-16T08:12:05.054Z"
+    },
+    {
+      "id": "audit_f06aeb55bf91",
+      "actorId": "pat-327103",
+      "actorName": "Vikram Singh",
+      "actorRole": "patient",
+      "action": "ACCOUNT_CREATED",
+      "patientId": null,
+      "doctorId": null,
+      "details": "New PATIENT account created for Vikram Singh (+919146324978)",
+      "timestamp": "2026-09-16T08:12:07.107Z"
+    },
+    {
+      "id": "audit_55d0d4c89b0c",
+      "actorId": "pat-327103",
+      "actorName": "Vikram Singh",
+      "actorRole": "patient",
+      "action": "LOGIN",
+      "patientId": null,
+      "doctorId": null,
+      "details": "First login via registration for Vikram Singh",
+      "timestamp": "2026-09-16T08:12:07.112Z"
+    },
+    {
+      "id": "audit_303e73e580bb",
+      "actorId": "unauthenticated",
+      "actorName": "System",
+      "actorRole": "system",
+      "action": "OTP_REQUESTED",
+      "patientId": null,
+      "doctorId": null,
+      "details": "Registration OTP generated for +919****78",
+      "timestamp": "2026-09-16T08:12:07.143Z"
+    },
+    {
+      "id": "audit_76d417285cbf",
+      "actorId": "doc-327421",
+      "actorName": "Dr. Priya Mehta",
+      "actorRole": "doctor",
+      "action": "ACCOUNT_CREATED",
+      "patientId": null,
+      "doctorId": null,
+      "details": "New DOCTOR account created for Dr. Priya Mehta (+919246324978)",
+      "timestamp": "2026-09-16T08:12:07.426Z"
+    },
+    {
+      "id": "audit_40f3809f0471",
+      "actorId": "doc-327421",
+      "actorName": "Dr. Priya Mehta",
+      "actorRole": "doctor",
+      "action": "LOGIN",
+      "patientId": null,
+      "doctorId": null,
+      "details": "First login via registration for Dr. Priya Mehta",
+      "timestamp": "2026-09-16T08:12:07.431Z"
+    },
+    {
+      "id": "audit_2872de2eb6c5",
+      "actorId": "doc-327421",
+      "actorName": "Dr. Priya Mehta",
+      "actorRole": "doctor",
+      "action": "OTP_REQUESTED",
+      "patientId": null,
+      "doctorId": null,
+      "details": "Login OTP requested for Dr. Priya Mehta (doctor)",
+      "timestamp": "2026-09-16T08:12:07.460Z"
+    },
+    {
+      "id": "audit_107b1665ca6b",
+      "actorId": "doc-327421",
+      "actorName": "Dr. Priya Mehta",
+      "actorRole": "doctor",
+      "action": "LOGIN",
+      "patientId": null,
+      "doctorId": null,
+      "details": "Successful OTP login for Dr. Priya Mehta (DOCTOR)",
+      "timestamp": "2026-09-16T08:12:11.595Z"
+    },
+    {
+      "id": "audit_461bee6e5e2f",
+      "actorId": "unauthenticated",
+      "actorName": "System",
+      "actorRole": "system",
+      "action": "OTP_REQUESTED",
+      "patientId": null,
+      "doctorId": null,
+      "details": "Registration OTP generated for +919****70",
+      "timestamp": "2026-09-16T08:12:46.500Z"
+    },
+    {
+      "id": "audit_8b09aab7054f",
+      "actorId": "system",
+      "actorName": "System",
+      "actorRole": "system",
+      "action": "OTP_FAILED",
+      "patientId": null,
+      "doctorId": null,
+      "details": "Incorrect OTP attempt for registration on +919146366470",
+      "timestamp": "2026-09-16T08:12:46.519Z"
+    },
+    {
+      "id": "audit_31b55793e66c",
+      "actorId": "pat-367417",
+      "actorName": "Vikram Singh",
+      "actorRole": "patient",
+      "action": "ACCOUNT_CREATED",
+      "patientId": null,
+      "doctorId": null,
+      "details": "New PATIENT account created for Vikram Singh (+919146366470)",
+      "timestamp": "2026-09-16T08:12:47.422Z"
+    },
+    {
+      "id": "audit_dfc51af39a66",
+      "actorId": "pat-367417",
+      "actorName": "Vikram Singh",
+      "actorRole": "patient",
+      "action": "LOGIN",
+      "patientId": null,
+      "doctorId": null,
+      "details": "First login via registration for Vikram Singh",
+      "timestamp": "2026-09-16T08:12:47.429Z"
+    },
+    {
+      "id": "audit_2c08e5b5a566",
+      "actorId": "unauthenticated",
+      "actorName": "System",
+      "actorRole": "system",
+      "action": "OTP_REQUESTED",
+      "patientId": null,
+      "doctorId": null,
+      "details": "Registration OTP generated for +919****70",
+      "timestamp": "2026-09-16T08:12:47.455Z"
+    },
+    {
+      "id": "audit_a0d38f5b2bfa",
+      "actorId": "doc-369646",
+      "actorName": "Dr. Priya Mehta",
+      "actorRole": "doctor",
+      "action": "ACCOUNT_CREATED",
+      "patientId": null,
+      "doctorId": null,
+      "details": "New DOCTOR account created for Dr. Priya Mehta (+919246366470)",
+      "timestamp": "2026-09-16T08:12:49.650Z"
+    },
+    {
+      "id": "audit_25d98039c713",
+      "actorId": "doc-369646",
+      "actorName": "Dr. Priya Mehta",
+      "actorRole": "doctor",
+      "action": "LOGIN",
+      "patientId": null,
+      "doctorId": null,
+      "details": "First login via registration for Dr. Priya Mehta",
+      "timestamp": "2026-09-16T08:12:49.654Z"
+    },
+    {
+      "id": "audit_98d53445e197",
+      "actorId": "doc-369646",
+      "actorName": "Dr. Priya Mehta",
+      "actorRole": "doctor",
+      "action": "OTP_REQUESTED",
+      "patientId": null,
+      "doctorId": null,
+      "details": "Login OTP requested for Dr. Priya Mehta (doctor)",
+      "timestamp": "2026-09-16T08:12:49.686Z"
+    },
+    {
+      "id": "audit_6265e58004f5",
+      "actorId": "doc-369646",
+      "actorName": "Dr. Priya Mehta",
+      "actorRole": "doctor",
+      "action": "LOGIN",
+      "patientId": null,
+      "doctorId": null,
+      "details": "Successful OTP login for Dr. Priya Mehta (DOCTOR)",
+      "timestamp": "2026-09-16T08:12:51.172Z"
+    },
+    {
+      "id": "audit_30db2ec281b7",
+      "actorId": "doc-369646",
+      "actorName": "Dr. Priya Mehta",
+      "actorRole": "doctor",
+      "action": "UNAUTHORIZED_ATTEMPT",
+      "patientId": "pat-367417",
+      "doctorId": "doc-369646",
+      "details": "BLOCKED: Dr. Dr. Priya Mehta attempted to access records of non-consenting patient Vikram Singh",
+      "timestamp": "2026-09-16T08:12:51.199Z"
+    },
+    {
+      "id": "audit_852104790d3a",
+      "actorId": "doc-369646",
+      "actorName": "Dr. Priya Mehta",
+      "actorRole": "doctor",
+      "action": "REQUEST_ACCESS",
+      "patientId": "pat-367417",
+      "doctorId": "doc-369646",
+      "details": "Dr. Dr. Priya Mehta requested medical record access for patient Vikram Singh",
+      "timestamp": "2026-09-16T08:12:51.212Z"
+    },
+    {
+      "id": "audit_e4fc5e4f427f",
+      "actorId": "unauthenticated",
+      "actorName": "System",
+      "actorRole": "system",
+      "action": "OTP_REQUESTED",
+      "patientId": null,
+      "doctorId": null,
+      "details": "Registration OTP generated for +919****77",
+      "timestamp": "2026-09-16T08:14:16.177Z"
+    },
+    {
+      "id": "audit_9378fbcda820",
+      "actorId": "system",
+      "actorName": "System",
+      "actorRole": "system",
+      "action": "OTP_FAILED",
+      "patientId": null,
+      "doctorId": null,
+      "details": "Incorrect OTP attempt for registration on +919146456077",
+      "timestamp": "2026-09-16T08:14:16.197Z"
+    },
+    {
+      "id": "audit_088d6fc3483d",
+      "actorId": "pat-460103",
+      "actorName": "Vikram Singh",
+      "actorRole": "patient",
+      "action": "ACCOUNT_CREATED",
+      "patientId": null,
+      "doctorId": null,
+      "details": "New PATIENT account created for Vikram Singh (+919146456077)",
+      "timestamp": "2026-09-16T08:14:20.109Z"
+    },
+    {
+      "id": "audit_7b632fed1e83",
+      "actorId": "pat-460103",
+      "actorName": "Vikram Singh",
+      "actorRole": "patient",
+      "action": "LOGIN",
+      "patientId": null,
+      "doctorId": null,
+      "details": "First login via registration for Vikram Singh",
+      "timestamp": "2026-09-16T08:14:20.114Z"
+    },
+    {
+      "id": "audit_6b2809b99f05",
+      "actorId": "unauthenticated",
+      "actorName": "System",
+      "actorRole": "system",
+      "action": "OTP_REQUESTED",
+      "patientId": null,
+      "doctorId": null,
+      "details": "Registration OTP generated for +919****77",
+      "timestamp": "2026-09-16T08:14:20.169Z"
+    },
+    {
+      "id": "audit_743c301ebc0c",
+      "actorId": "doc-462270",
+      "actorName": "Dr. Priya Mehta",
+      "actorRole": "doctor",
+      "action": "ACCOUNT_CREATED",
+      "patientId": null,
+      "doctorId": null,
+      "details": "New DOCTOR account created for Dr. Priya Mehta (+919246456077)",
+      "timestamp": "2026-09-16T08:14:22.275Z"
+    },
+    {
+      "id": "audit_da88a1d6db2c",
+      "actorId": "doc-462270",
+      "actorName": "Dr. Priya Mehta",
+      "actorRole": "doctor",
+      "action": "LOGIN",
+      "patientId": null,
+      "doctorId": null,
+      "details": "First login via registration for Dr. Priya Mehta",
+      "timestamp": "2026-09-16T08:14:22.280Z"
+    },
+    {
+      "id": "audit_f1e1f86ee0bd",
+      "actorId": "doc-462270",
+      "actorName": "Dr. Priya Mehta",
+      "actorRole": "doctor",
+      "action": "OTP_REQUESTED",
+      "patientId": null,
+      "doctorId": null,
+      "details": "Login OTP requested for Dr. Priya Mehta (doctor)",
+      "timestamp": "2026-09-16T08:14:22.337Z"
+    },
+    {
+      "id": "audit_3e4e3df1ad4b",
+      "actorId": "doc-462270",
+      "actorName": "Dr. Priya Mehta",
+      "actorRole": "doctor",
+      "action": "LOGIN",
+      "patientId": null,
+      "doctorId": null,
+      "details": "Successful OTP login for Dr. Priya Mehta (DOCTOR)",
+      "timestamp": "2026-09-16T08:14:24.895Z"
+    },
+    {
+      "id": "audit_52dfdb9025e6",
+      "actorId": "doc-462270",
+      "actorName": "Dr. Priya Mehta",
+      "actorRole": "doctor",
+      "action": "UNAUTHORIZED_ATTEMPT",
+      "patientId": "pat-460103",
+      "doctorId": "doc-462270",
+      "details": "BLOCKED: Dr. Dr. Priya Mehta attempted to access records of non-consenting patient Vikram Singh",
+      "timestamp": "2026-09-16T08:14:24.920Z"
+    },
+    {
+      "id": "audit_1391762f720d",
+      "actorId": "doc-462270",
+      "actorName": "Dr. Priya Mehta",
+      "actorRole": "doctor",
+      "action": "REQUEST_ACCESS",
+      "patientId": "pat-460103",
+      "doctorId": "doc-462270",
+      "details": "Dr. Dr. Priya Mehta requested medical record access for patient Vikram Singh",
+      "timestamp": "2026-09-16T08:14:24.939Z"
+    },
+    {
+      "id": "audit_2e01e66cdf56",
+      "actorId": "pat-460103",
+      "actorName": "Vikram Singh",
+      "actorRole": "patient",
+      "action": "APPROVE_ACCESS",
+      "patientId": "pat-460103",
+      "doctorId": "doc-462270",
+      "details": "Patient Vikram Singh approved medical record access for Dr. Dr. Priya Mehta (Sitapur District Hospital) via verified OTP",
+      "timestamp": "2026-09-16T08:14:25.750Z"
+    },
+    {
+      "id": "audit_c2b1e0c8dfb7",
+      "actorId": "doc-462270",
+      "actorName": "Dr. Priya Mehta",
+      "actorRole": "doctor",
+      "action": "VIEW_RECORD",
+      "patientId": "pat-460103",
+      "doctorId": "doc-462270",
+      "details": "Dr. Dr. Priya Mehta viewed authorized longitudinal record for patient Vikram Singh",
+      "timestamp": "2026-09-16T08:14:25.762Z"
+    },
+    {
+      "id": "audit_087a6c89917d",
+      "actorId": "doc-462270",
+      "actorName": "Dr. Priya Mehta",
+      "actorRole": "doctor",
+      "action": "CREATE_RECORD",
+      "patientId": "pat-460103",
+      "doctorId": "doc-462270",
+      "details": "Dr. Dr. Priya Mehta created clinical encounter note: \"Initial General Consultation\"",
+      "timestamp": "2026-09-16T08:14:25.779Z"
+    },
+    {
+      "id": "audit_5beace64a3bd",
+      "actorId": "pat-460103",
+      "actorName": "Vikram Singh",
+      "actorRole": "patient",
+      "action": "REVOKE_ACCESS",
+      "patientId": "pat-460103",
+      "doctorId": "doc-462270",
+      "details": "Patient Vikram Singh revoked access for Dr. Dr. Priya Mehta",
+      "timestamp": "2026-09-16T08:14:25.793Z"
+    },
+    {
+      "id": "audit_68f37c1027f9",
+      "actorId": "doc-462270",
+      "actorName": "Dr. Priya Mehta",
+      "actorRole": "doctor",
+      "action": "UNAUTHORIZED_ATTEMPT",
+      "patientId": "pat-460103",
+      "doctorId": "doc-462270",
+      "details": "BLOCKED: Dr. Dr. Priya Mehta attempted to access records of non-consenting patient Vikram Singh",
+      "timestamp": "2026-09-16T08:14:25.806Z"
+    },
+    {
+      "id": "audit_e0562b1e8fc6",
+      "actorId": "unauthenticated",
+      "actorName": "System",
+      "actorRole": "system",
+      "action": "OTP_REQUESTED",
+      "patientId": null,
+      "doctorId": null,
+      "details": "Registration OTP generated for +919****86",
+      "timestamp": "2026-09-16T08:40:46.904Z"
+    },
+    {
+      "id": "audit_651da196a3fa",
+      "actorId": "system",
+      "actorName": "System",
+      "actorRole": "system",
+      "action": "OTP_FAILED",
+      "patientId": null,
+      "doctorId": null,
+      "details": "Incorrect OTP attempt for registration on +919360890186",
+      "timestamp": "2026-09-16T08:41:14.786Z"
+    },
+    {
+      "id": "audit_b528899295ae",
+      "actorId": "unauthenticated",
+      "actorName": "System",
+      "actorRole": "system",
+      "action": "OTP_REQUESTED",
+      "patientId": null,
+      "doctorId": null,
+      "details": "Registration OTP generated for +919****86",
+      "timestamp": "2026-09-16T08:41:28.988Z"
+    },
+    {
+      "id": "audit_283daf59b64e",
+      "actorId": "unauthenticated",
+      "actorName": "System",
+      "actorRole": "system",
+      "action": "OTP_REQUESTED",
+      "patientId": null,
+      "doctorId": null,
+      "details": "Registration OTP generated for +919****86",
+      "timestamp": "2026-09-16T08:47:55.081Z"
+    },
+    {
+      "id": "audit_c7da1ac4b422",
+      "actorId": "unauthenticated",
+      "actorName": "System",
+      "actorRole": "system",
+      "action": "OTP_REQUESTED",
+      "patientId": null,
+      "doctorId": null,
+      "details": "Registration OTP generated for +919****86",
+      "timestamp": "2026-09-16T08:50:24.442Z"
+    },
+    {
+      "id": "audit_dd7c176372fa",
+      "actorId": "unauthenticated",
+      "actorName": "System",
+      "actorRole": "system",
+      "action": "OTP_REQUESTED",
+      "patientId": null,
+      "doctorId": null,
+      "details": "Registration OTP generated for +919****86",
+      "timestamp": "2026-09-16T08:55:59.512Z"
+    },
+    {
+      "id": "audit_237f1d66bb42",
+      "actorId": "system",
+      "actorName": "System",
+      "actorRole": "system",
+      "action": "OTP_FAILED",
+      "patientId": null,
+      "doctorId": null,
+      "details": "Incorrect OTP attempt for registration on +919360890186",
+      "timestamp": "2026-09-16T08:56:16.151Z"
+    },
+    {
+      "id": "audit_4b611dab8abd",
+      "actorId": "system",
+      "actorName": "System",
+      "actorRole": "system",
+      "action": "OTP_FAILED",
+      "patientId": null,
+      "doctorId": null,
+      "details": "Incorrect OTP attempt for registration on +919360890186",
+      "timestamp": "2026-09-16T08:58:06.669Z"
+    },
+    {
+      "id": "audit_253a68659785",
+      "actorId": "doc-sharma",
+      "actorName": "Dr. Anita Sharma",
+      "actorRole": "doctor",
+      "action": "VIEW_RECORD",
+      "patientId": "pat-ramesh",
+      "doctorId": "doc-sharma",
+      "details": "Dr. Dr. Anita Sharma viewed authorized longitudinal record for patient Ramesh Kumar",
+      "timestamp": "2026-09-16T09:00:08.077Z"
+    },
+    {
+      "id": "audit_d3affee1c750",
+      "actorId": "doc-sharma",
+      "actorName": "Dr. Anita Sharma",
+      "actorRole": "doctor",
+      "action": "VIEW_RECORD",
+      "patientId": "pat-ramesh",
+      "doctorId": "doc-sharma",
+      "details": "Dr. Dr. Anita Sharma viewed authorized longitudinal record for patient Ramesh Kumar",
+      "timestamp": "2026-09-16T09:00:08.114Z"
+    },
+    {
+      "id": "audit_1b5872b91b3d",
+      "actorId": "unauthenticated",
+      "actorName": "System",
+      "actorRole": "system",
+      "action": "OTP_REQUESTED",
+      "patientId": null,
+      "doctorId": null,
+      "details": "Registration OTP generated for +919****86",
+      "timestamp": "2026-09-16T13:59:44.197Z"
+    },
+    {
+      "id": "audit_338dcffa64b1",
+      "actorId": "unauthenticated",
+      "actorName": "System",
+      "actorRole": "system",
+      "action": "OTP_REQUESTED",
+      "patientId": null,
+      "doctorId": null,
+      "details": "Registration OTP generated for +919****86",
+      "timestamp": "2026-09-16T14:00:24.289Z"
+    },
+    {
+      "id": "audit_61c30ae54785",
+      "actorId": "unauthenticated",
+      "actorName": "System",
+      "actorRole": "system",
+      "action": "OTP_REQUESTED",
+      "patientId": null,
+      "doctorId": null,
+      "details": "Registration OTP generated for +919****86",
+      "timestamp": "2026-09-16T14:20:39.021Z"
+    },
+    {
+      "id": "audit_8019cbacd7e7",
+      "actorId": "unauthenticated",
+      "actorName": "System",
+      "actorRole": "system",
+      "action": "OTP_REQUESTED",
+      "patientId": null,
+      "doctorId": null,
+      "details": "Registration OTP generated for +919****86",
+      "timestamp": "2026-09-16T14:22:54.919Z"
+    },
+    {
+      "id": "audit_01874ac878bd",
+      "actorId": "unauthenticated",
+      "actorName": "System",
+      "actorRole": "system",
+      "action": "OTP_REQUESTED",
+      "patientId": null,
+      "doctorId": null,
+      "details": "Registration OTP generated for +919****86",
+      "timestamp": "2026-09-16T15:22:18.523Z"
+    },
+    {
+      "id": "audit_5efaea5a90e0",
+      "actorId": "unauthenticated",
+      "actorName": "System",
+      "actorRole": "system",
+      "action": "OTP_REQUESTED",
+      "patientId": null,
+      "doctorId": null,
+      "details": "Registration OTP generated for +919****86",
+      "timestamp": "2026-09-16T15:53:06.991Z"
+    },
+    {
+      "id": "audit_c3663ed20fb5",
+      "actorId": "pat-032818",
+      "actorName": "Ramesh Test",
+      "actorRole": "patient",
+      "action": "ACCOUNT_CREATED",
+      "patientId": null,
+      "doctorId": null,
+      "details": "New PATIENT account created for Ramesh Test (+919360890186)",
+      "timestamp": "2026-09-16T15:53:52.829Z"
+    },
+    {
+      "id": "audit_a85aa4d92510",
+      "actorId": "pat-032818",
+      "actorName": "Ramesh Test",
+      "actorRole": "patient",
+      "action": "LOGIN",
+      "patientId": null,
+      "doctorId": null,
+      "details": "First login via registration for Ramesh Test",
+      "timestamp": "2026-09-16T15:53:52.835Z"
+    },
+    {
+      "id": "audit_1bbaf04c7883",
+      "actorId": "pat-ramesh",
+      "actorName": "Ramesh Kumar",
+      "actorRole": "patient",
+      "action": "OTP_REQUESTED",
+      "patientId": null,
+      "doctorId": null,
+      "details": "Login OTP requested for Ramesh Kumar (patient)",
+      "timestamp": "2026-09-16T16:18:22.056Z"
+    },
+    {
+      "id": "audit_a74a9de61c2b",
+      "actorId": "pat-ramesh",
+      "actorName": "Ramesh Kumar",
+      "actorRole": "patient",
+      "action": "LOGIN",
+      "patientId": null,
+      "doctorId": null,
+      "details": "Successful OTP login for Ramesh Kumar (PATIENT)",
+      "timestamp": "2026-09-16T16:18:22.141Z"
+    },
+    {
+      "id": "audit_79b1c385055b",
+      "actorId": "doc-sharma",
+      "actorName": "Dr. Anita Sharma",
+      "actorRole": "doctor",
+      "action": "OTP_REQUESTED",
+      "patientId": null,
+      "doctorId": null,
+      "details": "Login OTP requested for Dr. Anita Sharma (doctor)",
+      "timestamp": "2026-09-16T16:18:22.453Z"
+    },
+    {
+      "id": "audit_9de115edd52e",
+      "actorId": "doc-sharma",
+      "actorName": "Dr. Anita Sharma",
+      "actorRole": "doctor",
+      "action": "LOGIN",
+      "patientId": null,
+      "doctorId": null,
+      "details": "Successful OTP login for Dr. Anita Sharma (DOCTOR)",
+      "timestamp": "2026-09-16T16:18:22.549Z"
+    },
+    {
+      "id": "audit_3cd44dc68130",
+      "actorId": "doc-sharma",
+      "actorName": "Dr. Anita Sharma",
+      "actorRole": "doctor",
+      "action": "VIEW_RECORD",
+      "patientId": "pat-ramesh",
+      "doctorId": "doc-sharma",
+      "details": "Dr. Dr. Anita Sharma viewed authorized longitudinal record for patient Ramesh Kumar",
+      "timestamp": "2026-09-16T16:18:22.597Z"
+    },
+    {
+      "id": "audit_3195cf746375",
+      "actorId": "doc-verma",
+      "actorName": "Dr. Rajesh Verma",
+      "actorRole": "doctor",
+      "action": "UNAUTHORIZED_ATTEMPT",
+      "patientId": "pat-sunita",
+      "doctorId": "doc-verma",
+      "details": "BLOCKED: Dr. Dr. Rajesh Verma attempted to access records of non-consenting patient Sunita Devi",
+      "timestamp": "2026-09-16T16:18:22.608Z"
+    },
+    {
+      "id": "audit_2bcdb9f13cae",
+      "actorId": "doc-sharma",
+      "actorName": "Dr. Anita Sharma",
+      "actorRole": "doctor",
+      "action": "CREATE_RECORD",
+      "patientId": "pat-ramesh",
+      "doctorId": "doc-sharma",
+      "details": "Dr. Dr. Anita Sharma created clinical encounter note: \"OPD Follow-up Note (16/9/2026)\"",
+      "timestamp": "2026-09-16T16:18:22.741Z"
+    },
+    {
+      "id": "audit_2952cb77b81e",
+      "actorId": "doc-sharma",
+      "actorName": "Dr. Anita Sharma",
+      "actorRole": "doctor",
+      "action": "REQUEST_ACCESS",
+      "patientId": "pat-sunita",
+      "doctorId": "doc-sharma",
+      "details": "Dr. Dr. Anita Sharma requested medical record access for patient Sunita Devi (Categories: diagnoses, prescriptions, clinical_notes)",
+      "timestamp": "2026-09-16T16:18:23.056Z"
+    },
+    {
+      "id": "audit_053fb61f19af",
+      "actorId": "pat-sunita",
+      "actorName": "Sunita Devi",
+      "actorRole": "patient",
+      "action": "APPROVE_ACCESS",
+      "patientId": "pat-sunita",
+      "doctorId": "doc-sharma",
+      "details": "Patient Sunita Devi approved medical record access for Dr. Dr. Anita Sharma (Community Health Centre (CHC) Rampur) for categories: [diagnoses, prescriptions] via verified OTP",
+      "timestamp": "2026-09-16T16:18:23.122Z"
+    },
+    {
+      "id": "audit_083470283b8d",
+      "actorId": "pat-032818",
+      "actorName": "Ramesh Test",
+      "actorRole": "patient",
+      "action": "OTP_REQUESTED",
+      "patientId": null,
+      "doctorId": null,
+      "details": "Login OTP requested for Ramesh Test (patient)",
+      "timestamp": "2026-09-16T16:36:30.389Z"
+    },
+    {
+      "id": "audit_811778c76e8c",
+      "actorId": "system",
+      "actorName": "System",
+      "actorRole": "system",
+      "action": "OTP_FAILED",
+      "patientId": null,
+      "doctorId": null,
+      "details": "Incorrect login OTP for +919360890186",
+      "timestamp": "2026-09-16T16:37:36.382Z"
+    },
+    {
+      "id": "audit_293a0857f6a9",
+      "actorId": "pat-032818",
+      "actorName": "Ramesh Test",
+      "actorRole": "patient",
+      "action": "OTP_REQUESTED",
+      "patientId": null,
+      "doctorId": null,
+      "details": "Login OTP requested for Ramesh Test (patient)",
+      "timestamp": "2026-09-16T16:43:20.895Z"
+    },
+    {
+      "id": "audit_4070b51034f7",
+      "actorId": "pat-032818",
+      "actorName": "Ramesh Test",
+      "actorRole": "patient",
+      "action": "OTP_REQUESTED",
+      "patientId": null,
+      "doctorId": null,
+      "details": "Login OTP requested for Ramesh Test (patient)",
+      "timestamp": "2026-09-16T16:48:04.150Z"
+    },
+    {
+      "id": "audit_edcc7491aa3e",
+      "actorId": "pat-032818",
+      "actorName": "Ramesh Test",
+      "actorRole": "patient",
+      "action": "LOGIN",
+      "patientId": null,
+      "doctorId": null,
+      "details": "Successful OTP login for Ramesh Test (PATIENT)",
+      "timestamp": "2026-09-16T16:48:17.359Z"
+    },
+    {
+      "id": "audit_55a055394dd2",
+      "actorId": "doc-verma",
+      "actorName": "Dr. Rajesh Verma",
+      "actorRole": "doctor",
+      "action": "UNAUTHORIZED_ATTEMPT",
+      "patientId": "pat-ramesh",
+      "doctorId": "doc-verma",
+      "details": "BLOCKED: Dr. Dr. Rajesh Verma attempted to access records of non-consenting patient Ramesh Kumar",
+      "timestamp": "2026-09-16T16:49:30.425Z"
+    },
+    {
+      "id": "audit_b0f09077e579",
+      "actorId": "doc-verma",
+      "actorName": "Dr. Rajesh Verma",
+      "actorRole": "doctor",
+      "action": "UNAUTHORIZED_ATTEMPT",
+      "patientId": "pat-ramesh",
+      "doctorId": "doc-verma",
+      "details": "BLOCKED: Dr. Dr. Rajesh Verma attempted to access records of non-consenting patient Ramesh Kumar",
+      "timestamp": "2026-09-16T16:49:30.469Z"
+    },
+    {
+      "id": "audit_f452348fdb2d",
+      "actorId": "doc-verma",
+      "actorName": "Dr. Rajesh Verma",
+      "actorRole": "doctor",
+      "action": "UNAUTHORIZED_ATTEMPT",
+      "patientId": "pat-032818",
+      "doctorId": "doc-verma",
+      "details": "BLOCKED: Dr. Dr. Rajesh Verma attempted to access records of non-consenting patient Ramesh Test",
+      "timestamp": "2026-09-16T16:49:33.661Z"
+    },
+    {
+      "id": "audit_34e84be17bd1",
+      "actorId": "doc-verma",
+      "actorName": "Dr. Rajesh Verma",
+      "actorRole": "doctor",
+      "action": "REQUEST_ACCESS",
+      "patientId": "pat-032818",
+      "doctorId": "doc-verma",
+      "details": "Dr. Dr. Rajesh Verma requested medical record access for patient Ramesh Test (Categories: diagnoses, prescriptions, lab_reports, imaging, clinical_notes, uploaded_documents, self_reported_symptoms)",
+      "timestamp": "2026-09-16T16:49:36.021Z"
+    },
+    {
+      "id": "audit_26a817cdc048",
+      "actorId": "doc-verma",
+      "actorName": "Dr. Rajesh Verma",
+      "actorRole": "doctor",
+      "action": "UNAUTHORIZED_ATTEMPT",
+      "patientId": "pat-032818",
+      "doctorId": "doc-verma",
+      "details": "BLOCKED: Dr. Dr. Rajesh Verma attempted to access records of non-consenting patient Ramesh Test",
+      "timestamp": "2026-09-16T16:49:53.958Z"
+    },
+    {
+      "id": "audit_ad1e04e97245",
+      "actorId": "doc-verma",
+      "actorName": "Dr. Rajesh Verma",
+      "actorRole": "doctor",
+      "action": "UNAUTHORIZED_ATTEMPT",
+      "patientId": "pat-032818",
+      "doctorId": "doc-verma",
+      "details": "BLOCKED: Dr. Dr. Rajesh Verma attempted to access records of non-consenting patient Ramesh Test",
+      "timestamp": "2026-09-16T16:49:58.070Z"
+    },
+    {
+      "id": "audit_705f77181450",
+      "actorId": "doc-verma",
+      "actorName": "Dr. Rajesh Verma",
+      "actorRole": "doctor",
+      "action": "UNAUTHORIZED_ATTEMPT",
+      "patientId": "pat-ramesh",
+      "doctorId": "doc-verma",
+      "details": "BLOCKED: Dr. Dr. Rajesh Verma attempted to access records of non-consenting patient Ramesh Kumar",
+      "timestamp": "2026-09-16T16:50:12.062Z"
+    },
+    {
+      "id": "audit_ab482af45c01",
+      "actorId": "doc-verma",
+      "actorName": "Dr. Rajesh Verma",
+      "actorRole": "doctor",
+      "action": "UNAUTHORIZED_ATTEMPT",
+      "patientId": "pat-ramesh",
+      "doctorId": "doc-verma",
+      "details": "BLOCKED: Dr. Dr. Rajesh Verma attempted to access records of non-consenting patient Ramesh Kumar",
+      "timestamp": "2026-09-16T16:50:12.102Z"
+    },
+    {
+      "id": "audit_ed0b799fa17c",
+      "actorId": "doc-verma",
+      "actorName": "Dr. Rajesh Verma",
+      "actorRole": "doctor",
+      "action": "REQUEST_ACCESS",
+      "patientId": "pat-ramesh",
+      "doctorId": "doc-verma",
+      "details": "Dr. Dr. Rajesh Verma requested medical record access for patient Ramesh Kumar (Categories: diagnoses, prescriptions, lab_reports, imaging, clinical_notes, uploaded_documents, self_reported_symptoms)",
+      "timestamp": "2026-09-16T16:50:18.495Z"
+    },
+    {
+      "id": "audit_53db67ce8a11",
+      "actorId": "pat-ramesh",
+      "actorName": "Ramesh Kumar",
+      "actorRole": "patient",
+      "action": "APPROVE_ACCESS",
+      "patientId": "pat-ramesh",
+      "doctorId": "doc-verma",
+      "details": "Patient Ramesh Kumar approved medical record access for Dr. Dr. Rajesh Verma (Sitapur District Hospital & Trauma Centre) for categories: [diagnoses, prescriptions, lab_reports, imaging, clinical_notes, uploaded_documents, self_reported_symptoms] via verified OTP",
+      "timestamp": "2026-09-16T16:50:42.792Z"
+    },
+    {
+      "id": "audit_42c517b2f708",
+      "actorId": "doc-verma",
+      "actorName": "Dr. Rajesh Verma",
+      "actorRole": "doctor",
+      "action": "VIEW_RECORD",
+      "patientId": "pat-ramesh",
+      "doctorId": "doc-verma",
+      "details": "Dr. Dr. Rajesh Verma viewed authorized longitudinal record for patient Ramesh Kumar",
+      "timestamp": "2026-09-16T16:50:51.301Z"
+    },
+    {
+      "id": "audit_fee93bdbca91",
+      "actorId": "doc-verma",
+      "actorName": "Dr. Rajesh Verma",
+      "actorRole": "doctor",
+      "action": "VIEW_RECORD",
+      "patientId": "pat-ramesh",
+      "doctorId": "doc-verma",
+      "details": "Dr. Dr. Rajesh Verma viewed authorized longitudinal record for patient Ramesh Kumar",
+      "timestamp": "2026-09-16T16:50:51.355Z"
+    },
+    {
+      "id": "audit_4dc59dc1a530",
+      "actorId": "doc-verma",
+      "actorName": "Dr. Rajesh Verma",
+      "actorRole": "doctor",
+      "action": "UNAUTHORIZED_ATTEMPT",
+      "patientId": "pat-032818",
+      "doctorId": "doc-verma",
+      "details": "BLOCKED: Dr. Dr. Rajesh Verma attempted to access records of non-consenting patient Ramesh Test",
+      "timestamp": "2026-09-16T16:50:57.810Z"
+    },
+    {
+      "id": "audit_8fcb0b667820",
+      "actorId": "doc-verma",
+      "actorName": "Dr. Rajesh Verma",
+      "actorRole": "doctor",
+      "action": "UNAUTHORIZED_ATTEMPT",
+      "patientId": "pat-032818",
+      "doctorId": "doc-verma",
+      "details": "BLOCKED: Dr. Dr. Rajesh Verma attempted to access records of non-consenting patient Ramesh Test",
+      "timestamp": "2026-09-16T16:51:01.758Z"
+    },
+    {
+      "id": "audit_c771129e4584",
+      "actorId": "pat-032818",
+      "actorName": "Ramesh Test",
+      "actorRole": "patient",
+      "action": "OTP_REQUESTED",
+      "patientId": null,
+      "doctorId": null,
+      "details": "Login OTP requested for Ramesh Test (patient)",
+      "timestamp": "2026-09-17T04:13:08.190Z"
+    },
+    {
+      "id": "audit_89ffcd53b372",
+      "actorId": "pat-032818",
+      "actorName": "Ramesh Test",
+      "actorRole": "patient",
+      "action": "LOGIN",
+      "patientId": null,
+      "doctorId": null,
+      "details": "Successful OTP login for Ramesh Test (PATIENT)",
+      "timestamp": "2026-09-17T04:13:30.203Z"
+    },
+    {
+      "id": "audit_6b4d0604a2d1",
+      "actorId": "pat-ramesh",
+      "actorName": "Ramesh Kumar",
+      "actorRole": "patient",
+      "action": "BOOK_APPOINTMENT",
+      "patientId": "pat-ramesh",
+      "doctorId": "doc-sharma",
+      "details": "Appointment booked for Ramesh Kumar with Dr. Anita Sharma on 2026-10-01 (11:00 AM)",
+      "timestamp": "2026-09-20T14:32:43.640Z"
+    },
+    {
+      "id": "audit_9daafb5876e2",
+      "actorId": "pat-ramesh",
+      "actorName": "Ramesh Kumar",
+      "actorRole": "patient",
+      "action": "BOOK_APPOINTMENT",
+      "patientId": "pat-ramesh",
+      "doctorId": "doc-sharma",
+      "details": "Appointment booked for Ramesh Kumar with Dr. Anita Sharma on 2026-11-15 (02:30 PM)",
+      "timestamp": "2026-09-20T15:57:32.477Z"
+    },
+    {
+      "id": "audit_a4f51f8bd09c",
+      "actorId": "unauthenticated",
+      "actorName": "System",
+      "actorRole": "system",
+      "action": "OTP_REQUESTED",
+      "patientId": null,
+      "doctorId": null,
+      "details": "Registration OTP generated for +919****84",
+      "timestamp": "2026-09-20T16:12:57.324Z"
+    },
+    {
+      "id": "audit_6ceeeee741b3",
+      "actorId": "pat-777346",
+      "actorName": "Priya Sundaram",
+      "actorRole": "patient",
+      "action": "ACCOUNT_CREATED",
+      "patientId": null,
+      "doctorId": null,
+      "details": "New PATIENT account created for Priya Sundaram (+919820268584)",
+      "timestamp": "2026-09-20T16:12:57.353Z"
+    },
+    {
+      "id": "audit_5ec3a12a5482",
+      "actorId": "pat-777346",
+      "actorName": "Priya Sundaram",
+      "actorRole": "patient",
+      "action": "LOGIN",
+      "patientId": null,
+      "doctorId": null,
+      "details": "First login via registration for Priya Sundaram",
+      "timestamp": "2026-09-20T16:12:57.361Z"
+    },
+    {
+      "id": "audit_c853b608d8b0",
+      "actorId": "pat-777346",
+      "actorName": "Priya Sundaram",
+      "actorRole": "patient",
+      "action": "OTP_REQUESTED",
+      "patientId": null,
+      "doctorId": null,
+      "details": "Login OTP requested for Priya Sundaram (patient)",
+      "timestamp": "2026-09-20T16:12:57.597Z"
+    },
+    {
+      "id": "audit_29e0e4526520",
+      "actorId": "pat-777346",
+      "actorName": "Priya Sundaram",
+      "actorRole": "patient",
+      "action": "LOGIN",
+      "patientId": null,
+      "doctorId": null,
+      "details": "Successful OTP login for Priya Sundaram (PATIENT)",
+      "timestamp": "2026-09-20T16:12:57.618Z"
+    },
+    {
+      "id": "audit_5bd0a54ad61b",
+      "actorId": "pat-ramesh",
+      "actorName": "Ramesh Kumar",
+      "actorRole": "patient",
+      "action": "BOOK_APPOINTMENT",
+      "patientId": "pat-ramesh",
+      "doctorId": "doc-sharma",
+      "details": "Appointment booked for Ramesh Kumar with Dr. Anita Sharma on 2026-09-23 (09:30 AM)",
+      "timestamp": "2026-09-21T14:34:49.219Z"
+    },
+    {
+      "id": "audit_807e081d7077",
+      "actorId": "pat-ramesh",
+      "actorName": "Ramesh Kumar",
+      "actorRole": "patient",
+      "action": "LOGOUT",
+      "patientId": null,
+      "doctorId": null,
+      "details": "User Ramesh Kumar logged out",
+      "timestamp": "2026-09-21T14:36:07.434Z"
+    },
+    {
+      "id": "audit_a555d5a10309",
+      "actorId": "pat-032818",
+      "actorName": "Ramesh Test",
+      "actorRole": "patient",
+      "action": "OTP_REQUESTED",
+      "patientId": null,
+      "doctorId": null,
+      "details": "Login OTP requested for Ramesh Test (patient)",
+      "timestamp": "2026-09-21T14:36:19.040Z"
+    },
+    {
+      "id": "audit_5614a87f9052",
+      "actorId": "unauthenticated",
+      "actorName": "System",
+      "actorRole": "system",
+      "action": "OTP_REQUESTED",
+      "patientId": null,
+      "doctorId": null,
+      "details": "Registration OTP generated for +919****58",
+      "timestamp": "2026-09-21T14:36:35.839Z"
+    },
+    {
+      "id": "audit_4346e93b4d9e",
+      "actorId": "pat-395998",
+      "actorName": "Ananya Deshmukh",
+      "actorRole": "patient",
+      "action": "ACCOUNT_CREATED",
+      "patientId": null,
+      "doctorId": null,
+      "details": "New PATIENT account created for Ananya Deshmukh (+919804782558)",
+      "timestamp": "2026-09-21T14:36:36.004Z"
+    },
+    {
+      "id": "audit_8be78db3e454",
+      "actorId": "pat-395998",
+      "actorName": "Ananya Deshmukh",
+      "actorRole": "patient",
+      "action": "LOGIN",
+      "patientId": null,
+      "doctorId": null,
+      "details": "First login via registration for Ananya Deshmukh",
+      "timestamp": "2026-09-21T14:36:36.012Z"
+    },
+    {
+      "id": "audit_5df99c256afd",
+      "actorId": "pat-ramesh",
+      "actorName": "Ramesh Kumar",
+      "actorRole": "patient",
+      "action": "OTP_REQUESTED",
+      "patientId": null,
+      "doctorId": null,
+      "details": "Login OTP requested for Ramesh Kumar (patient)",
+      "timestamp": "2026-09-21T14:36:38.834Z"
+    },
+    {
+      "id": "audit_464a19df7544",
+      "actorId": "pat-ramesh",
+      "actorName": "Ramesh Kumar",
+      "actorRole": "patient",
+      "action": "LOGIN",
+      "patientId": null,
+      "doctorId": null,
+      "details": "Successful OTP login for Ramesh Kumar (PATIENT)",
+      "timestamp": "2026-09-21T14:36:38.972Z"
+    },
+    {
+      "id": "audit_4b0119f1587b",
+      "actorId": "doc-sharma",
+      "actorName": "Dr. Anita Sharma",
+      "actorRole": "doctor",
+      "action": "OTP_REQUESTED",
+      "patientId": null,
+      "doctorId": null,
+      "details": "Login OTP requested for Dr. Anita Sharma (doctor)",
+      "timestamp": "2026-09-21T14:36:56.071Z"
+    },
+    {
+      "id": "audit_da30a0e3d175",
+      "actorId": "doc-sharma",
+      "actorName": "Dr. Anita Sharma",
+      "actorRole": "doctor",
+      "action": "LOGIN",
+      "patientId": null,
+      "doctorId": null,
+      "details": "Successful OTP login for Dr. Anita Sharma (DOCTOR)",
+      "timestamp": "2026-09-21T14:36:56.228Z"
+    },
+    {
+      "id": "audit_f587aedcbf24",
+      "actorId": "doc-sharma",
+      "actorName": "Dr. Anita Sharma",
+      "actorRole": "doctor",
+      "action": "VIEW_RECORD",
+      "patientId": "pat-ramesh",
+      "doctorId": "doc-sharma",
+      "details": "Dr. Dr. Anita Sharma viewed authorized longitudinal record for patient Ramesh Kumar",
+      "timestamp": "2026-09-21T14:36:56.382Z"
+    },
+    {
+      "id": "audit_01a565d5006c",
+      "actorId": "doc-sharma",
+      "actorName": "Dr. Anita Sharma",
+      "actorRole": "doctor",
+      "action": "VIEW_RECORD",
+      "patientId": "pat-ramesh",
+      "doctorId": "doc-sharma",
+      "details": "Dr. Dr. Anita Sharma viewed authorized longitudinal record for patient Ramesh Kumar",
+      "timestamp": "2026-09-21T14:36:56.412Z"
+    },
+    {
+      "id": "audit_cba96fb257d3",
+      "actorId": "doc-sharma",
+      "actorName": "Dr. Anita Sharma",
+      "actorRole": "doctor",
+      "action": "VIEW_RECORD",
+      "patientId": "pat-ramesh",
+      "doctorId": "doc-sharma",
+      "details": "Dr. Dr. Anita Sharma viewed authorized longitudinal record for patient Ramesh Kumar",
+      "timestamp": "2026-09-21T14:36:58.219Z"
+    },
+    {
+      "id": "audit_477c7c5633b6",
+      "actorId": "doc-sharma",
+      "actorName": "Dr. Anita Sharma",
+      "actorRole": "doctor",
+      "action": "VIEW_RECORD",
+      "patientId": "pat-ramesh",
+      "doctorId": "doc-sharma",
+      "details": "Dr. Dr. Anita Sharma viewed authorized longitudinal record for patient Ramesh Kumar",
+      "timestamp": "2026-09-21T14:36:58.246Z"
+    },
+    {
+      "id": "audit_3f6668887e36",
+      "actorId": "pat-ramesh",
+      "actorName": "Ramesh Kumar",
+      "actorRole": "patient",
+      "action": "OTP_REQUESTED",
+      "patientId": null,
+      "doctorId": null,
+      "details": "Login OTP requested for Ramesh Kumar (patient)",
+      "timestamp": "2026-09-21T14:37:00.126Z"
+    },
+    {
+      "id": "audit_4d58d4bffc61",
+      "actorId": "pat-ramesh",
+      "actorName": "Ramesh Kumar",
+      "actorRole": "patient",
+      "action": "LOGIN",
+      "patientId": null,
+      "doctorId": null,
+      "details": "Successful OTP login for Ramesh Kumar (PATIENT)",
+      "timestamp": "2026-09-21T14:37:00.292Z"
+    },
+    {
+      "id": "audit_e6193ca51be1",
+      "actorId": "unauthenticated",
+      "actorName": "System",
+      "actorRole": "system",
+      "action": "OTP_REQUESTED",
+      "patientId": null,
+      "doctorId": null,
+      "details": "Registration OTP generated for +919****62",
+      "timestamp": "2026-09-21T14:37:45.294Z"
+    },
+    {
+      "id": "audit_ab395e09d5cc",
+      "actorId": "pat-465451",
+      "actorName": "Ananya Deshmukh",
+      "actorRole": "patient",
+      "action": "ACCOUNT_CREATED",
+      "patientId": null,
+      "doctorId": null,
+      "details": "New PATIENT account created for Ananya Deshmukh (+919801440662)",
+      "timestamp": "2026-09-21T14:37:45.458Z"
+    },
+    {
+      "id": "audit_ec5dc16ae2dd",
+      "actorId": "pat-465451",
+      "actorName": "Ananya Deshmukh",
+      "actorRole": "patient",
+      "action": "LOGIN",
+      "patientId": null,
+      "doctorId": null,
+      "details": "First login via registration for Ananya Deshmukh",
+      "timestamp": "2026-09-21T14:37:45.465Z"
+    },
+    {
+      "id": "audit_d85cad35ceb0",
+      "actorId": "pat-ramesh",
+      "actorName": "Ramesh Kumar",
+      "actorRole": "patient",
+      "action": "OTP_REQUESTED",
+      "patientId": null,
+      "doctorId": null,
+      "details": "Login OTP requested for Ramesh Kumar (patient)",
+      "timestamp": "2026-09-21T14:37:48.158Z"
+    },
+    {
+      "id": "audit_552d919f5274",
+      "actorId": "pat-ramesh",
+      "actorName": "Ramesh Kumar",
+      "actorRole": "patient",
+      "action": "LOGIN",
+      "patientId": null,
+      "doctorId": null,
+      "details": "Successful OTP login for Ramesh Kumar (PATIENT)",
+      "timestamp": "2026-09-21T14:37:48.293Z"
+    },
+    {
+      "id": "audit_deb9ac8dea39",
+      "actorId": "pat-ramesh",
+      "actorName": "Ramesh Kumar",
+      "actorRole": "patient",
+      "action": "BOOK_APPOINTMENT",
+      "patientId": "pat-ramesh",
+      "doctorId": "doc-sharma",
+      "details": "Appointment booked for Ramesh Kumar with Dr. Anita Sharma on 2026-09-22 (10:30 AM)",
+      "timestamp": "2026-09-21T14:37:55.454Z"
+    },
+    {
+      "id": "audit_b89f385f865a",
+      "actorId": "doc-sharma",
+      "actorName": "Dr. Anita Sharma",
+      "actorRole": "doctor",
+      "action": "OTP_REQUESTED",
+      "patientId": null,
+      "doctorId": null,
+      "details": "Login OTP requested for Dr. Anita Sharma (doctor)",
+      "timestamp": "2026-09-21T14:38:10.057Z"
+    },
+    {
+      "id": "audit_916d6e1dbd7e",
+      "actorId": "doc-sharma",
+      "actorName": "Dr. Anita Sharma",
+      "actorRole": "doctor",
+      "action": "LOGIN",
+      "patientId": null,
+      "doctorId": null,
+      "details": "Successful OTP login for Dr. Anita Sharma (DOCTOR)",
+      "timestamp": "2026-09-21T14:38:10.228Z"
+    },
+    {
+      "id": "audit_2c5d90fb836b",
+      "actorId": "doc-sharma",
+      "actorName": "Dr. Anita Sharma",
+      "actorRole": "doctor",
+      "action": "VIEW_RECORD",
+      "patientId": "pat-ramesh",
+      "doctorId": "doc-sharma",
+      "details": "Dr. Dr. Anita Sharma viewed authorized longitudinal record for patient Ramesh Kumar",
+      "timestamp": "2026-09-21T14:38:10.404Z"
+    },
+    {
+      "id": "audit_9013437938d4",
+      "actorId": "doc-sharma",
+      "actorName": "Dr. Anita Sharma",
+      "actorRole": "doctor",
+      "action": "VIEW_RECORD",
+      "patientId": "pat-ramesh",
+      "doctorId": "doc-sharma",
+      "details": "Dr. Dr. Anita Sharma viewed authorized longitudinal record for patient Ramesh Kumar",
+      "timestamp": "2026-09-21T14:38:10.439Z"
+    },
+    {
+      "id": "audit_4b224cb76750",
+      "actorId": "doc-sharma",
+      "actorName": "Dr. Anita Sharma",
+      "actorRole": "doctor",
+      "action": "VIEW_RECORD",
+      "patientId": "pat-ramesh",
+      "doctorId": "doc-sharma",
+      "details": "Dr. Dr. Anita Sharma viewed authorized longitudinal record for patient Ramesh Kumar",
+      "timestamp": "2026-09-21T14:38:12.235Z"
+    },
+    {
+      "id": "audit_68d371aeb155",
+      "actorId": "doc-sharma",
+      "actorName": "Dr. Anita Sharma",
+      "actorRole": "doctor",
+      "action": "VIEW_RECORD",
+      "patientId": "pat-ramesh",
+      "doctorId": "doc-sharma",
+      "details": "Dr. Dr. Anita Sharma viewed authorized longitudinal record for patient Ramesh Kumar",
+      "timestamp": "2026-09-21T14:38:12.259Z"
+    },
+    {
+      "id": "audit_a54304c1271b",
+      "actorId": "pat-ramesh",
+      "actorName": "Ramesh Kumar",
+      "actorRole": "patient",
+      "action": "OTP_REQUESTED",
+      "patientId": null,
+      "doctorId": null,
+      "details": "Login OTP requested for Ramesh Kumar (patient)",
+      "timestamp": "2026-09-21T14:38:14.106Z"
+    },
+    {
+      "id": "audit_722f44834220",
+      "actorId": "pat-ramesh",
+      "actorName": "Ramesh Kumar",
+      "actorRole": "patient",
+      "action": "LOGIN",
+      "patientId": null,
+      "doctorId": null,
+      "details": "Successful OTP login for Ramesh Kumar (PATIENT)",
+      "timestamp": "2026-09-21T14:38:14.238Z"
+    },
+    {
+      "id": "audit_e81f3c509528",
+      "actorId": "pat-ramesh",
+      "actorName": "Ramesh Kumar",
+      "actorRole": "patient",
+      "action": "LOGOUT",
+      "patientId": null,
+      "doctorId": null,
+      "details": "User Ramesh Kumar logged out",
+      "timestamp": "2026-09-21T14:38:18.034Z"
+    },
+    {
+      "id": "audit_b9741e2f9b69",
+      "actorId": "unauthenticated",
+      "actorName": "System",
+      "actorRole": "system",
+      "action": "OTP_REQUESTED",
+      "patientId": null,
+      "doctorId": null,
+      "details": "Registration OTP generated for +919****09",
+      "timestamp": "2026-09-21T14:38:44.788Z"
+    },
+    {
+      "id": "audit_dad2882c06fb",
+      "actorId": "pat-524972",
+      "actorName": "Ananya Deshmukh",
+      "actorRole": "patient",
+      "action": "ACCOUNT_CREATED",
+      "patientId": null,
+      "doctorId": null,
+      "details": "New PATIENT account created for Ananya Deshmukh (+919154667809)",
+      "timestamp": "2026-09-21T14:38:44.979Z"
+    },
+    {
+      "id": "audit_9155333f6c3e",
+      "actorId": "pat-524972",
+      "actorName": "Ananya Deshmukh",
+      "actorRole": "patient",
+      "action": "LOGIN",
+      "patientId": null,
+      "doctorId": null,
+      "details": "First login via registration for Ananya Deshmukh",
+      "timestamp": "2026-09-21T14:38:44.987Z"
+    },
+    {
+      "id": "audit_4572abfc6e72",
+      "actorId": "pat-ramesh",
+      "actorName": "Ramesh Kumar",
+      "actorRole": "patient",
+      "action": "OTP_REQUESTED",
+      "patientId": null,
+      "doctorId": null,
+      "details": "Login OTP requested for Ramesh Kumar (patient)",
+      "timestamp": "2026-09-21T14:38:47.803Z"
+    },
+    {
+      "id": "audit_6ec1d3d4d206",
+      "actorId": "pat-ramesh",
+      "actorName": "Ramesh Kumar",
+      "actorRole": "patient",
+      "action": "LOGIN",
+      "patientId": null,
+      "doctorId": null,
+      "details": "Successful OTP login for Ramesh Kumar (PATIENT)",
+      "timestamp": "2026-09-21T14:38:47.943Z"
+    },
+    {
+      "id": "audit_9978bbb07ca3",
+      "actorId": "doc-sharma",
+      "actorName": "Dr. Anita Sharma",
+      "actorRole": "doctor",
+      "action": "OTP_REQUESTED",
+      "patientId": null,
+      "doctorId": null,
+      "details": "Login OTP requested for Dr. Anita Sharma (doctor)",
+      "timestamp": "2026-09-21T14:39:08.588Z"
+    },
+    {
+      "id": "audit_1a3c62193903",
+      "actorId": "doc-sharma",
+      "actorName": "Dr. Anita Sharma",
+      "actorRole": "doctor",
+      "action": "LOGIN",
+      "patientId": null,
+      "doctorId": null,
+      "details": "Successful OTP login for Dr. Anita Sharma (DOCTOR)",
+      "timestamp": "2026-09-21T14:39:08.718Z"
+    },
+    {
+      "id": "audit_af17c7969605",
+      "actorId": "doc-sharma",
+      "actorName": "Dr. Anita Sharma",
+      "actorRole": "doctor",
+      "action": "VIEW_RECORD",
+      "patientId": "pat-ramesh",
+      "doctorId": "doc-sharma",
+      "details": "Dr. Dr. Anita Sharma viewed authorized longitudinal record for patient Ramesh Kumar",
+      "timestamp": "2026-09-21T14:39:08.844Z"
+    },
+    {
+      "id": "audit_b0231e867432",
+      "actorId": "doc-sharma",
+      "actorName": "Dr. Anita Sharma",
+      "actorRole": "doctor",
+      "action": "VIEW_RECORD",
+      "patientId": "pat-ramesh",
+      "doctorId": "doc-sharma",
+      "details": "Dr. Dr. Anita Sharma viewed authorized longitudinal record for patient Ramesh Kumar",
+      "timestamp": "2026-09-21T14:39:08.873Z"
+    },
+    {
+      "id": "audit_211b54e89737",
+      "actorId": "doc-sharma",
+      "actorName": "Dr. Anita Sharma",
+      "actorRole": "doctor",
+      "action": "VIEW_RECORD",
+      "patientId": "pat-ramesh",
+      "doctorId": "doc-sharma",
+      "details": "Dr. Dr. Anita Sharma viewed authorized longitudinal record for patient Ramesh Kumar",
+      "timestamp": "2026-09-21T14:39:10.543Z"
+    },
+    {
+      "id": "audit_5edeb565ea1a",
+      "actorId": "doc-sharma",
+      "actorName": "Dr. Anita Sharma",
+      "actorRole": "doctor",
+      "action": "VIEW_RECORD",
+      "patientId": "pat-ramesh",
+      "doctorId": "doc-sharma",
+      "details": "Dr. Dr. Anita Sharma viewed authorized longitudinal record for patient Ramesh Kumar",
+      "timestamp": "2026-09-21T14:39:10.570Z"
+    },
+    {
+      "id": "audit_0dfc6e4d7d13",
+      "actorId": "unauthenticated",
+      "actorName": "System",
+      "actorRole": "system",
+      "action": "OTP_REQUESTED",
+      "patientId": null,
+      "doctorId": null,
+      "details": "Registration OTP generated for +919****07",
+      "timestamp": "2026-09-21T14:40:23.667Z"
+    },
+    {
+      "id": "audit_b193d16849ef",
+      "actorId": "pat-623859",
+      "actorName": "Ananya Deshmukh",
+      "actorRole": "patient",
+      "action": "ACCOUNT_CREATED",
+      "patientId": null,
+      "doctorId": null,
+      "details": "New PATIENT account created for Ananya Deshmukh (+919586708207)",
+      "timestamp": "2026-09-21T14:40:23.870Z"
+    },
+    {
+      "id": "audit_8c418a1fc34e",
+      "actorId": "pat-623859",
+      "actorName": "Ananya Deshmukh",
+      "actorRole": "patient",
+      "action": "LOGIN",
+      "patientId": null,
+      "doctorId": null,
+      "details": "First login via registration for Ananya Deshmukh",
+      "timestamp": "2026-09-21T14:40:23.877Z"
+    },
+    {
+      "id": "audit_4a69ed4d479a",
+      "actorId": "pat-ramesh",
+      "actorName": "Ramesh Kumar",
+      "actorRole": "patient",
+      "action": "BOOK_APPOINTMENT",
+      "patientId": "pat-ramesh",
+      "doctorId": "doc-sharma",
+      "details": "Appointment booked for Ramesh Kumar with Dr. Anita Sharma on 2026-09-24 (04:30 PM)",
+      "timestamp": "2026-09-21T14:40:40.908Z"
+    },
+    {
+      "id": "audit_c99252febbfb",
+      "actorId": "doc-sharma",
+      "actorName": "Dr. Anita Sharma",
+      "actorRole": "doctor",
+      "action": "OTP_REQUESTED",
+      "patientId": null,
+      "doctorId": null,
+      "details": "Login OTP requested for Dr. Anita Sharma (doctor)",
+      "timestamp": "2026-09-21T14:40:56.290Z"
+    },
+    {
+      "id": "audit_0236b4880ad1",
+      "actorId": "doc-sharma",
+      "actorName": "Dr. Anita Sharma",
+      "actorRole": "doctor",
+      "action": "LOGIN",
+      "patientId": null,
+      "doctorId": null,
+      "details": "Successful OTP login for Dr. Anita Sharma (DOCTOR)",
+      "timestamp": "2026-09-21T14:40:56.439Z"
+    },
+    {
+      "id": "audit_bb2e2a069aa7",
+      "actorId": "doc-sharma",
+      "actorName": "Dr. Anita Sharma",
+      "actorRole": "doctor",
+      "action": "VIEW_RECORD",
+      "patientId": "pat-ramesh",
+      "doctorId": "doc-sharma",
+      "details": "Dr. Dr. Anita Sharma viewed authorized longitudinal record for patient Ramesh Kumar",
+      "timestamp": "2026-09-21T14:40:56.626Z"
+    },
+    {
+      "id": "audit_9ca600c2c458",
+      "actorId": "doc-sharma",
+      "actorName": "Dr. Anita Sharma",
+      "actorRole": "doctor",
+      "action": "VIEW_RECORD",
+      "patientId": "pat-ramesh",
+      "doctorId": "doc-sharma",
+      "details": "Dr. Dr. Anita Sharma viewed authorized longitudinal record for patient Ramesh Kumar",
+      "timestamp": "2026-09-21T14:40:56.658Z"
+    },
+    {
+      "id": "audit_2ee065ec57b5",
+      "actorId": "doc-sharma",
+      "actorName": "Dr. Anita Sharma",
+      "actorRole": "doctor",
+      "action": "VIEW_RECORD",
+      "patientId": "pat-ramesh",
+      "doctorId": "doc-sharma",
+      "details": "Dr. Dr. Anita Sharma viewed authorized longitudinal record for patient Ramesh Kumar",
+      "timestamp": "2026-09-21T14:40:58.444Z"
+    },
+    {
+      "id": "audit_35f2d167f600",
+      "actorId": "doc-sharma",
+      "actorName": "Dr. Anita Sharma",
+      "actorRole": "doctor",
+      "action": "VIEW_RECORD",
+      "patientId": "pat-ramesh",
+      "doctorId": "doc-sharma",
+      "details": "Dr. Dr. Anita Sharma viewed authorized longitudinal record for patient Ramesh Kumar",
+      "timestamp": "2026-09-21T14:40:58.488Z"
+    },
+    {
+      "id": "audit_c41d3056a61c",
+      "actorId": "pat-sunita",
+      "actorName": "Sunita Devi",
+      "actorRole": "patient",
+      "action": "OTP_REQUESTED",
+      "patientId": null,
+      "doctorId": null,
+      "details": "Login OTP requested for Sunita Devi (patient)",
+      "timestamp": "2026-09-21T14:41:00.454Z"
+    },
+    {
+      "id": "audit_79063454ed3a",
+      "actorId": "pat-sunita",
+      "actorName": "Sunita Devi",
+      "actorRole": "patient",
+      "action": "LOGIN",
+      "patientId": null,
+      "doctorId": null,
+      "details": "Successful OTP login for Sunita Devi (PATIENT)",
+      "timestamp": "2026-09-21T14:41:00.637Z"
+    },
+    {
+      "id": "audit_111e85e9016a",
+      "actorId": "pat-sunita",
+      "actorName": "Sunita Devi",
+      "actorRole": "patient",
+      "action": "LOGOUT",
+      "patientId": null,
+      "doctorId": null,
+      "details": "User Sunita Devi logged out",
+      "timestamp": "2026-09-21T14:41:04.953Z"
+    },
+    {
+      "id": "audit_ec2f23c982ba",
+      "actorId": "unauthenticated",
+      "actorName": "System",
+      "actorRole": "system",
+      "action": "OTP_REQUESTED",
+      "patientId": null,
+      "doctorId": null,
+      "details": "Registration OTP generated for +919****84",
+      "timestamp": "2026-09-21T14:41:39.920Z"
+    },
+    {
+      "id": "audit_08851ebe9bd9",
+      "actorId": "pat-700138",
+      "actorName": "Ananya Deshmukh",
+      "actorRole": "patient",
+      "action": "ACCOUNT_CREATED",
+      "patientId": null,
+      "doctorId": null,
+      "details": "New PATIENT account created for Ananya Deshmukh (+919341015084)",
+      "timestamp": "2026-09-21T14:41:40.146Z"
+    },
+    {
+      "id": "audit_ba94d1cbd0eb",
+      "actorId": "pat-700138",
+      "actorName": "Ananya Deshmukh",
+      "actorRole": "patient",
+      "action": "LOGIN",
+      "patientId": null,
+      "doctorId": null,
+      "details": "First login via registration for Ananya Deshmukh",
+      "timestamp": "2026-09-21T14:41:40.156Z"
+    },
+    {
+      "id": "audit_eeb5eab24375",
+      "actorId": "pat-700138",
+      "actorName": "Ananya Deshmukh",
+      "actorRole": "patient",
+      "action": "OTP_REQUESTED",
+      "patientId": null,
+      "doctorId": null,
+      "details": "Login OTP requested for Ananya Deshmukh (patient)",
+      "timestamp": "2026-09-21T14:41:42.979Z"
+    },
+    {
+      "id": "audit_fefbf0870681",
+      "actorId": "pat-700138",
+      "actorName": "Ananya Deshmukh",
+      "actorRole": "patient",
+      "action": "LOGIN",
+      "patientId": null,
+      "doctorId": null,
+      "details": "Successful OTP login for Ananya Deshmukh (PATIENT)",
+      "timestamp": "2026-09-21T14:41:43.130Z"
+    },
+    {
+      "id": "audit_dff202536159",
+      "actorId": "doc-sharma",
+      "actorName": "Dr. Anita Sharma",
+      "actorRole": "doctor",
+      "action": "OTP_REQUESTED",
+      "patientId": null,
+      "doctorId": null,
+      "details": "Login OTP requested for Dr. Anita Sharma (doctor)",
+      "timestamp": "2026-09-21T14:42:04.367Z"
+    },
+    {
+      "id": "audit_ea7fe018ae97",
+      "actorId": "doc-sharma",
+      "actorName": "Dr. Anita Sharma",
+      "actorRole": "doctor",
+      "action": "LOGIN",
+      "patientId": null,
+      "doctorId": null,
+      "details": "Successful OTP login for Dr. Anita Sharma (DOCTOR)",
+      "timestamp": "2026-09-21T14:42:04.512Z"
+    },
+    {
+      "id": "audit_3f0046e1384c",
+      "actorId": "doc-sharma",
+      "actorName": "Dr. Anita Sharma",
+      "actorRole": "doctor",
+      "action": "VIEW_RECORD",
+      "patientId": "pat-ramesh",
+      "doctorId": "doc-sharma",
+      "details": "Dr. Dr. Anita Sharma viewed authorized longitudinal record for patient Ramesh Kumar",
+      "timestamp": "2026-09-21T14:42:04.628Z"
+    },
+    {
+      "id": "audit_6150c3380c56",
+      "actorId": "doc-sharma",
+      "actorName": "Dr. Anita Sharma",
+      "actorRole": "doctor",
+      "action": "VIEW_RECORD",
+      "patientId": "pat-ramesh",
+      "doctorId": "doc-sharma",
+      "details": "Dr. Dr. Anita Sharma viewed authorized longitudinal record for patient Ramesh Kumar",
+      "timestamp": "2026-09-21T14:42:04.659Z"
+    },
+    {
+      "id": "audit_104da7c7a97e",
+      "actorId": "doc-sharma",
+      "actorName": "Dr. Anita Sharma",
+      "actorRole": "doctor",
+      "action": "VIEW_RECORD",
+      "patientId": "pat-ramesh",
+      "doctorId": "doc-sharma",
+      "details": "Dr. Dr. Anita Sharma viewed authorized longitudinal record for patient Ramesh Kumar",
+      "timestamp": "2026-09-21T14:42:06.339Z"
+    },
+    {
+      "id": "audit_7502973740c1",
+      "actorId": "doc-sharma",
+      "actorName": "Dr. Anita Sharma",
+      "actorRole": "doctor",
+      "action": "VIEW_RECORD",
+      "patientId": "pat-ramesh",
+      "doctorId": "doc-sharma",
+      "details": "Dr. Dr. Anita Sharma viewed authorized longitudinal record for patient Ramesh Kumar",
+      "timestamp": "2026-09-21T14:42:06.366Z"
+    },
+    {
+      "id": "audit_d04e1ccaf4a3",
+      "actorId": "pat-sunita",
+      "actorName": "Sunita Devi",
+      "actorRole": "patient",
+      "action": "OTP_REQUESTED",
+      "patientId": null,
+      "doctorId": null,
+      "details": "Login OTP requested for Sunita Devi (patient)",
+      "timestamp": "2026-09-21T14:42:08.213Z"
+    },
+    {
+      "id": "audit_50788ecfff36",
+      "actorId": "pat-sunita",
+      "actorName": "Sunita Devi",
+      "actorRole": "patient",
+      "action": "LOGIN",
+      "patientId": null,
+      "doctorId": null,
+      "details": "Successful OTP login for Sunita Devi (PATIENT)",
+      "timestamp": "2026-09-21T14:42:08.357Z"
+    },
+    {
+      "id": "audit_0bb54c9736e8",
+      "actorId": "pat-sunita",
+      "actorName": "Sunita Devi",
+      "actorRole": "patient",
+      "action": "LOGOUT",
+      "patientId": null,
+      "doctorId": null,
+      "details": "User Sunita Devi logged out",
+      "timestamp": "2026-09-21T14:42:12.749Z"
+    },
+    {
+      "id": "audit_83880a8f783b",
+      "actorId": "unauthenticated",
+      "actorName": "System",
+      "actorRole": "system",
+      "action": "OTP_REQUESTED",
+      "patientId": null,
+      "doctorId": null,
+      "details": "Registration OTP generated for +919****18",
+      "timestamp": "2026-09-21T14:42:56.043Z"
+    },
+    {
+      "id": "audit_203052734137",
+      "actorId": "pat-776464",
+      "actorName": "Ananya Deshmukh",
+      "actorRole": "patient",
+      "action": "ACCOUNT_CREATED",
+      "patientId": null,
+      "doctorId": null,
+      "details": "New PATIENT account created for Ananya Deshmukh (+919801320818)",
+      "timestamp": "2026-09-21T14:42:56.477Z"
+    },
+    {
+      "id": "audit_a386f6e04ec6",
+      "actorId": "pat-776464",
+      "actorName": "Ananya Deshmukh",
+      "actorRole": "patient",
+      "action": "LOGIN",
+      "patientId": null,
+      "doctorId": null,
+      "details": "First login via registration for Ananya Deshmukh",
+      "timestamp": "2026-09-21T14:42:56.489Z"
+    },
+    {
+      "id": "audit_da334e69397b",
+      "actorId": "pat-776464",
+      "actorName": "Ananya Deshmukh",
+      "actorRole": "patient",
+      "action": "OTP_REQUESTED",
+      "patientId": null,
+      "doctorId": null,
+      "details": "Login OTP requested for Ananya Deshmukh (patient)",
+      "timestamp": "2026-09-21T14:42:59.443Z"
+    },
+    {
+      "id": "audit_a07c1da29120",
+      "actorId": "pat-776464",
+      "actorName": "Ananya Deshmukh",
+      "actorRole": "patient",
+      "action": "LOGIN",
+      "patientId": null,
+      "doctorId": null,
+      "details": "Successful OTP login for Ananya Deshmukh (PATIENT)",
+      "timestamp": "2026-09-21T14:42:59.827Z"
+    },
+    {
+      "id": "audit_22728a2ec799",
+      "actorId": "pat-776464",
+      "actorName": "Ananya Deshmukh",
+      "actorRole": "patient",
+      "action": "BOOK_APPOINTMENT",
+      "patientId": "pat-776464",
+      "doctorId": "doc-verma",
+      "details": "Appointment booked for Ananya Deshmukh with Dr. Rajesh Verma on 2026-12-14 (02:00 PM)",
+      "timestamp": "2026-09-21T14:43:06.746Z"
+    },
+    {
+      "id": "audit_a1024e99c83e",
+      "actorId": "pat-sunita",
+      "actorName": "Sunita Devi",
+      "actorRole": "patient",
+      "action": "OTP_REQUESTED",
+      "patientId": null,
+      "doctorId": null,
+      "details": "Login OTP requested for Sunita Devi (patient)",
+      "timestamp": "2026-09-21T14:43:34.092Z"
+    },
+    {
+      "id": "audit_cd4dc3669f7f",
+      "actorId": "pat-sunita",
+      "actorName": "Sunita Devi",
+      "actorRole": "patient",
+      "action": "LOGIN",
+      "patientId": null,
+      "doctorId": null,
+      "details": "Successful OTP login for Sunita Devi (PATIENT)",
+      "timestamp": "2026-09-21T14:43:34.471Z"
+    },
+    {
+      "id": "audit_18c05992e964",
+      "actorId": "pat-sunita",
+      "actorName": "Sunita Devi",
+      "actorRole": "patient",
+      "action": "LOGOUT",
+      "patientId": null,
+      "doctorId": null,
+      "details": "User Sunita Devi logged out",
+      "timestamp": "2026-09-21T14:43:38.918Z"
+    },
+    {
+      "id": "audit_0d1b225afdfe",
+      "actorId": "unauthenticated",
+      "actorName": "System",
+      "actorRole": "system",
+      "action": "OTP_REQUESTED",
+      "patientId": null,
+      "doctorId": null,
+      "details": "Registration OTP generated for +919****23",
+      "timestamp": "2026-09-21T14:44:16.037Z"
+    },
+    {
+      "id": "audit_eb302d4ded40",
+      "actorId": "pat-856237",
+      "actorName": "Ananya Deshmukh",
+      "actorRole": "patient",
+      "action": "ACCOUNT_CREATED",
+      "patientId": null,
+      "doctorId": null,
+      "details": "New PATIENT account created for Ananya Deshmukh (+919966047323)",
+      "timestamp": "2026-09-21T14:44:16.248Z"
+    },
+    {
+      "id": "audit_f6a3a136bc70",
+      "actorId": "pat-856237",
+      "actorName": "Ananya Deshmukh",
+      "actorRole": "patient",
+      "action": "LOGIN",
+      "patientId": null,
+      "doctorId": null,
+      "details": "First login via registration for Ananya Deshmukh",
+      "timestamp": "2026-09-21T14:44:16.255Z"
+    },
+    {
+      "id": "audit_aaaf9abeadb4",
+      "actorId": "pat-856237",
+      "actorName": "Ananya Deshmukh",
+      "actorRole": "patient",
+      "action": "OTP_REQUESTED",
+      "patientId": null,
+      "doctorId": null,
+      "details": "Login OTP requested for Ananya Deshmukh (patient)",
+      "timestamp": "2026-09-21T14:44:19.322Z"
+    },
+    {
+      "id": "audit_d5388173fd4c",
+      "actorId": "pat-856237",
+      "actorName": "Ananya Deshmukh",
+      "actorRole": "patient",
+      "action": "LOGIN",
+      "patientId": null,
+      "doctorId": null,
+      "details": "Successful OTP login for Ananya Deshmukh (PATIENT)",
+      "timestamp": "2026-09-21T14:44:19.455Z"
+    },
+    {
+      "id": "audit_a0ebcb368bc0",
+      "actorId": "pat-856237",
+      "actorName": "Ananya Deshmukh",
+      "actorRole": "patient",
+      "action": "BOOK_APPOINTMENT",
+      "patientId": "pat-856237",
+      "doctorId": "doc-verma",
+      "details": "Appointment booked for Ananya Deshmukh with Dr. Rajesh Verma on 2026-12-15 (02:00 PM)",
+      "timestamp": "2026-09-21T14:44:26.117Z"
+    },
+    {
+      "id": "audit_2a208d12d8df",
+      "actorId": "doc-verma",
+      "actorName": "Dr. Rajesh Verma",
+      "actorRole": "doctor",
+      "action": "OTP_REQUESTED",
+      "patientId": null,
+      "doctorId": null,
+      "details": "Login OTP requested for Dr. Rajesh Verma (doctor)",
+      "timestamp": "2026-09-21T14:44:40.312Z"
+    },
+    {
+      "id": "audit_807b9c39b117",
+      "actorId": "doc-verma",
+      "actorName": "Dr. Rajesh Verma",
+      "actorRole": "doctor",
+      "action": "LOGIN",
+      "patientId": null,
+      "doctorId": null,
+      "details": "Successful OTP login for Dr. Rajesh Verma (DOCTOR)",
+      "timestamp": "2026-09-21T14:44:40.454Z"
+    },
+    {
+      "id": "audit_42c412dae5d8",
+      "actorId": "doc-verma",
+      "actorName": "Dr. Rajesh Verma",
+      "actorRole": "doctor",
+      "action": "VIEW_RECORD",
+      "patientId": "pat-ramesh",
+      "doctorId": "doc-verma",
+      "details": "Dr. Dr. Rajesh Verma viewed authorized longitudinal record for patient Ramesh Kumar",
+      "timestamp": "2026-09-21T14:44:40.624Z"
+    },
+    {
+      "id": "audit_04a3e594bbfe",
+      "actorId": "doc-verma",
+      "actorName": "Dr. Rajesh Verma",
+      "actorRole": "doctor",
+      "action": "VIEW_RECORD",
+      "patientId": "pat-ramesh",
+      "doctorId": "doc-verma",
+      "details": "Dr. Dr. Rajesh Verma viewed authorized longitudinal record for patient Ramesh Kumar",
+      "timestamp": "2026-09-21T14:44:40.658Z"
+    },
+    {
+      "id": "audit_e29ba8b16694",
+      "actorId": "doc-verma",
+      "actorName": "Dr. Rajesh Verma",
+      "actorRole": "doctor",
+      "action": "VIEW_RECORD",
+      "patientId": "pat-ramesh",
+      "doctorId": "doc-verma",
+      "details": "Dr. Dr. Rajesh Verma viewed authorized longitudinal record for patient Ramesh Kumar",
+      "timestamp": "2026-09-21T14:44:42.450Z"
+    },
+    {
+      "id": "audit_899fd58b9091",
+      "actorId": "doc-verma",
+      "actorName": "Dr. Rajesh Verma",
+      "actorRole": "doctor",
+      "action": "VIEW_RECORD",
+      "patientId": "pat-ramesh",
+      "doctorId": "doc-verma",
+      "details": "Dr. Dr. Rajesh Verma viewed authorized longitudinal record for patient Ramesh Kumar",
+      "timestamp": "2026-09-21T14:44:42.476Z"
+    },
+    {
+      "id": "audit_e448081ae3c9",
+      "actorId": "pat-sunita",
+      "actorName": "Sunita Devi",
+      "actorRole": "patient",
+      "action": "OTP_REQUESTED",
+      "patientId": null,
+      "doctorId": null,
+      "details": "Login OTP requested for Sunita Devi (patient)",
+      "timestamp": "2026-09-21T14:44:44.430Z"
+    },
+    {
+      "id": "audit_d2fe4164e435",
+      "actorId": "pat-sunita",
+      "actorName": "Sunita Devi",
+      "actorRole": "patient",
+      "action": "LOGIN",
+      "patientId": null,
+      "doctorId": null,
+      "details": "Successful OTP login for Sunita Devi (PATIENT)",
+      "timestamp": "2026-09-21T14:44:44.568Z"
+    },
+    {
+      "id": "audit_12c0cf0cb4c2",
+      "actorId": "pat-sunita",
+      "actorName": "Sunita Devi",
+      "actorRole": "patient",
+      "action": "LOGOUT",
+      "patientId": null,
+      "doctorId": null,
+      "details": "User Sunita Devi logged out",
+      "timestamp": "2026-09-21T14:44:48.692Z"
+    }
+  ],
+  "documents": [],
+  "selfReports": [],
+  "securityAlerts": [],
+  "specialties": [
+    {
+      "id": "spec-cardio",
+      "name": "Cardiology",
+      "slug": "cardiology",
+      "iconName": "Heart",
+      "description": "Comprehensive cardiovascular care, ECG, echo, hypertension, and coronary artery disease management.",
+      "commonSymptoms": [
+        "Chest pain",
+        "Palpitations",
+        "Shortness of breath",
+        "High blood pressure",
+        "Dizziness"
+      ]
+    },
+    {
+      "id": "spec-neuro",
+      "name": "Neurology & Neurosurgery",
+      "slug": "neurology",
+      "iconName": "Brain",
+      "description": "Advanced neurological disorders, epilepsy, migraine, stroke rehabilitation, and spinal health.",
+      "commonSymptoms": [
+        "Severe headaches",
+        "Numbness or tingling",
+        "Tremors",
+        "Seizures",
+        "Memory loss"
+      ]
+    },
+    {
+      "id": "spec-ortho",
+      "name": "Orthopedics & Joint Care",
+      "slug": "orthopedics",
+      "iconName": "Activity",
+      "description": "Robotic joint replacement, sports injury rehab, arthroscopy, and fracture management.",
+      "commonSymptoms": [
+        "Knee pain",
+        "Backache",
+        "Joint stiffness",
+        "Fracture",
+        "Sports injury"
+      ]
+    },
+    {
+      "id": "spec-pedia",
+      "name": "Pediatrics & Neonatology",
+      "slug": "pediatrics",
+      "iconName": "Baby",
+      "description": "Child health, immunization schedules, newborn intensive care, and developmental tracking.",
+      "commonSymptoms": [
+        "Childhood fever",
+        "Cough & cold",
+        "Delayed milestones",
+        "Growth concerns",
+        "Vaccination"
+      ]
+    },
+    {
+      "id": "spec-derma",
+      "name": "Dermatology & Cosmetology",
+      "slug": "dermatology",
+      "iconName": "Sparkles",
+      "description": "Clinical skin therapy, acne, eczema, psoriasis, and laser dermatological procedures.",
+      "commonSymptoms": [
+        "Skin rash",
+        "Acne & scars",
+        "Hair loss",
+        "Skin pigmentation",
+        "Itching"
+      ]
+    },
+    {
+      "id": "spec-onco",
+      "name": "Medical & Surgical Oncology",
+      "slug": "oncology",
+      "iconName": "Shield",
+      "description": "Multi-disciplinary cancer therapy, precision chemotherapy, and oncological surgeries.",
+      "commonSymptoms": [
+        "Unexplained weight loss",
+        "Persistent lump",
+        "Chronic fatigue",
+        "Abnormal bleeding"
+      ]
+    },
+    {
+      "id": "spec-gynae",
+      "name": "Obstetrics & Gynecology",
+      "slug": "gynecology",
+      "iconName": "Users",
+      "description": "Maternity care, high-risk pregnancy, women's wellness, and reproductive health.",
+      "commonSymptoms": [
+        "Irregular periods",
+        "Pelvic pain",
+        "Pregnancy checkup",
+        "PCOS",
+        "Menopause symptoms"
+      ]
+    },
+    {
+      "id": "spec-gastro",
+      "name": "Gastroenterology & Hepatology",
+      "slug": "gastroenterology",
+      "iconName": "Stethoscope",
+      "description": "Digestive tract disorders, liver clinics, therapeutic endoscopy, and reflux management.",
+      "commonSymptoms": [
+        "Acid reflux & heartburn",
+        "Stomach bloating",
+        "Jaundice",
+        "Constipation",
+        "Abdominal cramps"
+      ]
+    },
+    {
+      "id": "spec-pulmo",
+      "name": "Pulmonology & Chest Medicine",
+      "slug": "pulmonology",
+      "iconName": "Wind",
+      "description": "Asthma, chronic bronchitis, post-viral pulmonary recovery, and sleep apnea diagnostics.",
+      "commonSymptoms": [
+        "Chronic cough",
+        "Wheezing",
+        "Breathlessness",
+        "Chest congestion",
+        "Snoring / sleep apnea"
+      ]
+    },
+    {
+      "id": "spec-genmed",
+      "name": "Internal & General Medicine",
+      "slug": "general-medicine",
+      "iconName": "UserCheck",
+      "description": "Primary medical care, diabetes, infectious diseases, preventive health checks, and wellness.",
+      "commonSymptoms": [
+        "Fever & chills",
+        "Fatigue & weakness",
+        "Diabetes check",
+        "Hypertension",
+        "Body aches"
+      ]
+    }
+  ],
+  "hospitals": [
+    {
+      "id": "hosp-01",
+      "name": "CareBridge Apex Super-Specialty Hospital",
+      "type": "Super-Specialty Tertiary Hospital",
+      "tagline": "Centre of Excellence in Cardiac & Neuro Sciences",
+      "overview": "CareBridge Apex Hospital is a premier 650-bed quaternary care hospital featuring state-of-the-art cath labs, robotic surgical suites, and dedicated 24x7 trauma & emergency wards.",
+      "imageUrl": "https://images.unsplash.com/photo-1587351021759-3e566b6af7cc?w=800&auto=format&fit=crop&q=80",
+      "address": "42 Outer Ring Road, Bellandur",
+      "district": "Bengaluru Urban",
+      "state": "Karnataka",
+      "pincode": "560103",
+      "coordinates": {
+        "lat": 12.9298,
+        "lng": 77.6848
+      },
+      "distanceKm": 1.2,
+      "phone": "+91 80 4910 2000",
+      "emergencyContact": "1066 / +91 80 4910 2911",
+      "emergency24x7": true,
+      "icuBeds": 120,
+      "openingHours": "24 Hours / 7 Days",
+      "rating": 4.88,
+      "reviewCount": 1420,
+      "departments": [
+        "Cardiology",
+        "Neurology",
+        "Orthopedics",
+        "Oncology",
+        "Emergency Care",
+        "Gastroenterology"
+      ],
+      "services": [
+        "24x7 Emergency & Trauma",
+        "Robotic Knee Replacement",
+        "PET-CT & 3T MRI",
+        "NABH Accredited Blood Bank",
+        "Organ Transplant Suite"
+      ],
+      "featuredDoctorIds": [
+        "doc-sharma",
+        "doc-patel"
+      ]
+    },
+    {
+      "id": "hosp-02",
+      "name": "CareBridge Heart & Trauma Institute",
+      "type": "Multi-Specialty Tertiary Hospital",
+      "tagline": "Rapid Response Emergency & Cardiovascular Care",
+      "overview": "Equipped with dedicated acute myocardial infarction rapid protocols, Level-1 trauma bays, and 85 high-dependency intensive care beds.",
+      "imageUrl": "https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?w=800&auto=format&fit=crop&q=80",
+      "address": "112 Anna Salai, Teynampet",
+      "district": "Chennai",
+      "state": "Tamil Nadu",
+      "pincode": "600018",
+      "coordinates": {
+        "lat": 13.0418,
+        "lng": 80.2507
+      },
+      "distanceKm": 3.4,
+      "phone": "+91 44 2430 8000",
+      "emergencyContact": "1066 / +91 44 2430 8911",
+      "emergency24x7": true,
+      "icuBeds": 85,
+      "openingHours": "24 Hours / 7 Days",
+      "rating": 4.82,
+      "reviewCount": 980,
+      "departments": [
+        "Cardiology",
+        "Trauma & Emergency",
+        "Pulmonology",
+        "Critical Care",
+        "Internal Medicine"
+      ],
+      "services": [
+        "Primary Angioplasty 24x7",
+        "Stroke Rapid Response Bay",
+        "Extracorporeal Life Support (ECMO)",
+        "Digital Dialysis Unit"
+      ],
+      "featuredDoctorIds": [
+        "doc-gupta"
+      ]
+    },
+    {
+      "id": "hosp-03",
+      "name": "CareBridge Women & Children's Pavilion",
+      "type": "Specialized Mother & Child Hospital",
+      "tagline": "Compassionate Maternity, Neonatal & Pediatric Care",
+      "overview": "Specialized 280-bed hospital dedicated to maternal fetal medicine, Level-III NICU care, adolescent health, and advanced pediatric surgical procedures.",
+      "imageUrl": "https://images.unsplash.com/photo-1516549655169-df83a0774514?w=800&auto=format&fit=crop&q=80",
+      "address": "18 Institutional Area, Sheikh Sarai",
+      "district": "South Delhi",
+      "state": "Delhi",
+      "pincode": "110017",
+      "coordinates": {
+        "lat": 28.5355,
+        "lng": 77.2289
+      },
+      "distanceKm": 4.1,
+      "phone": "+91 11 4150 7000",
+      "emergencyContact": "1066 / +91 11 4150 7911",
+      "emergency24x7": true,
+      "icuBeds": 50,
+      "openingHours": "24 Hours / 7 Days",
+      "rating": 4.91,
+      "reviewCount": 860,
+      "departments": [
+        "Pediatrics",
+        "Obstetrics & Gynecology",
+        "Neonatal ICU",
+        "Genetics & Fertility"
+      ],
+      "services": [
+        "Level III Neonatal ICU",
+        "Laparoscopic Gynaecology",
+        "Fetal Medicine & 4D Ultrasound",
+        "Pediatric Emergency Unit"
+      ],
+      "featuredDoctorIds": [
+        "doc-menon",
+        "doc-chatterjee"
+      ]
+    },
+    {
+      "id": "hosp-04",
+      "name": "CareBridge Brain & Spine Institute",
+      "type": "Super-Specialty Neuroscience Hospital",
+      "tagline": "Precision Neuro-Interventions & Advanced Spine Surgery",
+      "overview": "Comprehensive neuroscience facility featuring intra-operative neuro-monitoring, biplane neurovascular cath labs, and specialized stroke recovery therapy.",
+      "imageUrl": "https://images.unsplash.com/photo-1586773860418-d37222d8fce3?w=800&auto=format&fit=crop&q=80",
+      "address": "Road No. 2, Banjara Hills",
+      "district": "Hyderabad",
+      "state": "Telangana",
+      "pincode": "500034",
+      "coordinates": {
+        "lat": 17.4156,
+        "lng": 78.435
+      },
+      "distanceKm": 2.7,
+      "phone": "+91 40 3350 4000",
+      "emergencyContact": "1066 / +91 40 3350 4911",
+      "emergency24x7": true,
+      "icuBeds": 70,
+      "openingHours": "24 Hours / 7 Days",
+      "rating": 4.86,
+      "reviewCount": 710,
+      "departments": [
+        "Neurology",
+        "Neurosurgery",
+        "Spine Rehabilitation",
+        "Interventional Radiology"
+      ],
+      "services": [
+        "24x7 Acute Stroke Thrombectomy",
+        "Minimally Invasive Spine Surgery",
+        "Epilepsy Monitoring Unit",
+        "Neuro-ICU Care"
+      ],
+      "featuredDoctorIds": [
+        "doc-reddy"
+      ]
+    },
+    {
+      "id": "hosp-05",
+      "name": "CareBridge Metro Multi-Specialty Hospital",
+      "type": "Multi-Specialty Tertiary Hospital",
+      "tagline": "Comprehensive Healthcare for the Metropolis",
+      "overview": "A full-spectrum 520-bed tertiary facility serving Western India with world-class surgical oncology, orthopedic trauma, and digestive health institutes.",
+      "imageUrl": "https://images.unsplash.com/photo-1538108149393-fbbd81895907?w=800&auto=format&fit=crop&q=80",
+      "address": "Link Road, Andheri West",
+      "district": "Mumbai Suburban",
+      "state": "Maharashtra",
+      "pincode": "400053",
+      "coordinates": {
+        "lat": 19.1363,
+        "lng": 72.8277
+      },
+      "distanceKm": 5,
+      "phone": "+91 22 6620 9000",
+      "emergencyContact": "1066 / +91 22 6620 9911",
+      "emergency24x7": true,
+      "icuBeds": 95,
+      "openingHours": "24 Hours / 7 Days",
+      "rating": 4.79,
+      "reviewCount": 1150,
+      "departments": [
+        "Orthopedics",
+        "Gastroenterology",
+        "Cardiology",
+        "Internal Medicine",
+        "Emergency Care",
+        "Surgical Oncology"
+      ],
+      "services": [
+        "Computer-Navigated Joint Surgery",
+        "Endoscopic Ultrasound (EUS)",
+        "Multidisciplinary Tumor Board",
+        "Daycare Chemotherapy"
+      ],
+      "featuredDoctorIds": [
+        "doc-verma",
+        "doc-kulkarni"
+      ]
+    }
+  ],
+  "doctorsDirectory": [
+    {
+      "id": "doc-sharma",
+      "uid": "doc-sharma",
+      "fullName": "Dr. Anita Sharma",
+      "title": "Senior Consultant - Interventional Cardiology",
+      "specialty": "Cardiology",
+      "qualifications": "MBBS, MD (Internal Medicine), DM (Cardiology), FACC",
+      "experienceYears": 15,
+      "registrationNumber": "MCI/UP/2012/048821",
+      "councilName": "Uttar Pradesh Medical Council",
+      "hospitalAffiliation": "CareBridge Apex Super-Specialty Hospital",
+      "hospitalId": "hosp-01",
+      "avatarUrl": "https://images.unsplash.com/photo-1559839734-2b71ea197ec2?w=400&auto=format&fit=crop&q=80",
+      "about": "Dr. Anita Sharma is a renowned interventional cardiologist specializing in coronary artery disease, preventative cardiovascular risk assessment, and complex angioplasties.",
+      "areasOfExpertise": [
+        "Coronary Angioplasty",
+        "Heart Failure Management",
+        "Preventive Cardiology",
+        "Echocardiography"
+      ],
+      "languages": [
+        "English",
+        "Hindi",
+        "Kannada"
+      ],
+      "consultationFee": 800,
+      "rating": 4.92,
+      "reviewCount": 420,
+      "nextAvailableSlot": "Today at 04:30 PM",
+      "consultationModes": [
+        "in_person",
+        "teleconsultation"
+      ],
+      "availableDays": [
+        "Mon",
+        "Tue",
+        "Wed",
+        "Thu",
+        "Fri",
+        "Sat"
+      ],
+      "availableSlots": [
+        "09:30 AM",
+        "10:30 AM",
+        "11:30 AM",
+        "04:30 PM",
+        "05:30 PM",
+        "06:30 PM"
+      ]
+    },
+    {
+      "id": "doc-verma",
+      "uid": "doc-verma",
+      "fullName": "Dr. Rajesh Verma",
+      "title": "Chief Consultant - Orthopedic & Joint Reconstruction",
+      "specialty": "Orthopedics & Joint Care",
+      "qualifications": "MBBS, MS (Orthopedics), MCh (Joint Reconstruction, UK)",
+      "experienceYears": 18,
+      "registrationNumber": "NMC/2016/091244",
+      "councilName": "National Medical Commission (NMC)",
+      "hospitalAffiliation": "CareBridge Metro Multi-Specialty Hospital",
+      "hospitalId": "hosp-05",
+      "avatarUrl": "https://images.unsplash.com/photo-1622253692010-333f2da6031d?w=400&auto=format&fit=crop&q=80",
+      "about": "Expert in primary and revision knee and hip arthroplasty, sports ligament reconstructions, and minimally invasive complex fracture fixation.",
+      "areasOfExpertise": [
+        "Robotic Knee Replacement",
+        "Hip Arthroplasty",
+        "Arthroscopic Surgery",
+        "Complex Trauma"
+      ],
+      "languages": [
+        "English",
+        "Hindi",
+        "Marathi"
+      ],
+      "consultationFee": 900,
+      "rating": 4.88,
+      "reviewCount": 380,
+      "nextAvailableSlot": "Tomorrow at 10:00 AM",
+      "consultationModes": [
+        "in_person",
+        "teleconsultation"
+      ],
+      "availableDays": [
+        "Mon",
+        "Wed",
+        "Thu",
+        "Fri",
+        "Sat"
+      ],
+      "availableSlots": [
+        "10:00 AM",
+        "11:00 AM",
+        "02:00 PM",
+        "03:00 PM",
+        "04:00 PM"
+      ]
+    },
+    {
+      "id": "doc-menon",
+      "uid": "doc-menon",
+      "fullName": "Dr. Priya Menon",
+      "title": "Lead Consultant - Pediatrics & Neonatology",
+      "specialty": "Pediatrics & Neonatology",
+      "qualifications": "MBBS, MD (Pediatrics), Fellowship in Neonatology (AIIMS)",
+      "experienceYears": 12,
+      "registrationNumber": "KMC/2014/082190",
+      "councilName": "Karnataka Medical Council",
+      "hospitalAffiliation": "CareBridge Women & Children's Pavilion",
+      "hospitalId": "hosp-03",
+      "avatarUrl": "https://images.unsplash.com/photo-1594824813684-2fbf0beea853?w=400&auto=format&fit=crop&q=80",
+      "about": "Compassionate pediatric care focusing on pediatric infections, immunization schedules, infant nutrition, and child developmental milestones.",
+      "areasOfExpertise": [
+        "Newborn Care",
+        "Pediatric Asthma",
+        "Vaccination Protocols",
+        "Growth & Nutrition"
+      ],
+      "languages": [
+        "English",
+        "Hindi",
+        "Malayalam"
+      ],
+      "consultationFee": 650,
+      "rating": 4.95,
+      "reviewCount": 540,
+      "nextAvailableSlot": "Today at 05:15 PM",
+      "consultationModes": [
+        "in_person",
+        "teleconsultation"
+      ],
+      "availableDays": [
+        "Mon",
+        "Tue",
+        "Wed",
+        "Thu",
+        "Fri"
+      ],
+      "availableSlots": [
+        "09:00 AM",
+        "10:00 AM",
+        "11:00 AM",
+        "04:00 PM",
+        "05:15 PM"
+      ]
+    },
+    {
+      "id": "doc-reddy",
+      "uid": "doc-reddy",
+      "fullName": "Dr. Arvind Reddy",
+      "title": "Senior Consultant - Neurologist & Stroke Lead",
+      "specialty": "Neurology & Neurosurgery",
+      "qualifications": "MBBS, MD (General Medicine), DM (Neurology)",
+      "experienceYears": 20,
+      "registrationNumber": "APMC/2005/019942",
+      "councilName": "Andhra Pradesh Medical Council",
+      "hospitalAffiliation": "CareBridge Brain & Spine Institute",
+      "hospitalId": "hosp-04",
+      "avatarUrl": "https://images.unsplash.com/photo-1537368910025-700350fe46c7?w=400&auto=format&fit=crop&q=80",
+      "about": "Specialized in acute stroke interventions, Parkinson's management, refractory epilepsy care, and clinical neurophysiology.",
+      "areasOfExpertise": [
+        "Stroke Thrombolysis",
+        "Epilepsy Management",
+        "Movement Disorders",
+        "Neuropathy"
+      ],
+      "languages": [
+        "English",
+        "Telugu",
+        "Hindi"
+      ],
+      "consultationFee": 1100,
+      "rating": 4.91,
+      "reviewCount": 295,
+      "nextAvailableSlot": "Tomorrow at 11:30 AM",
+      "consultationModes": [
+        "in_person",
+        "teleconsultation"
+      ],
+      "availableDays": [
+        "Tue",
+        "Wed",
+        "Thu",
+        "Fri",
+        "Sat"
+      ],
+      "availableSlots": [
+        "10:30 AM",
+        "11:30 AM",
+        "03:00 PM",
+        "04:00 PM",
+        "05:00 PM"
+      ]
+    },
+    {
+      "id": "doc-patel",
+      "uid": "doc-patel",
+      "fullName": "Dr. Meera Patel",
+      "title": "Senior Consultant - Clinical & Aesthetic Dermatologist",
+      "specialty": "Dermatology & Cosmetology",
+      "qualifications": "MBBS, MD (Dermatology, Venereology & Leprosy)",
+      "experienceYears": 10,
+      "registrationNumber": "GMMC/2015/063311",
+      "councilName": "Gujarat Medical Council",
+      "hospitalAffiliation": "CareBridge Apex Super-Specialty Hospital",
+      "hospitalId": "hosp-01",
+      "avatarUrl": "https://images.unsplash.com/photo-1551601651-2a8555f1a136?w=400&auto=format&fit=crop&q=80",
+      "about": "Expertise in chronic dermatitis, psoriasis biologic therapy, acne scar management, and evidence-based clinical dermatology.",
+      "areasOfExpertise": [
+        "Clinical Dermatology",
+        "Psoriasis Clinic",
+        "Eczema & Allergy",
+        "Hair Loss Therapies"
+      ],
+      "languages": [
+        "English",
+        "Gujarati",
+        "Hindi"
+      ],
+      "consultationFee": 600,
+      "rating": 4.86,
+      "reviewCount": 320,
+      "nextAvailableSlot": "Today at 06:00 PM",
+      "consultationModes": [
+        "in_person",
+        "teleconsultation"
+      ],
+      "availableDays": [
+        "Mon",
+        "Tue",
+        "Wed",
+        "Fri",
+        "Sat"
+      ],
+      "availableSlots": [
+        "11:00 AM",
+        "12:00 PM",
+        "04:00 PM",
+        "05:00 PM",
+        "06:00 PM"
+      ]
+    },
+    {
+      "id": "doc-kulkarni",
+      "uid": "doc-kulkarni",
+      "fullName": "Dr. Vikram Kulkarni",
+      "title": "Director - Surgical Oncology Services",
+      "specialty": "Medical & Surgical Oncology",
+      "qualifications": "MBBS, MS (General Surgery), MCh (Surgical Oncology, Tata Memorial)",
+      "experienceYears": 22,
+      "registrationNumber": "MMC/2003/014490",
+      "councilName": "Maharashtra Medical Council",
+      "hospitalAffiliation": "CareBridge Metro Multi-Specialty Hospital",
+      "hospitalId": "hosp-05",
+      "avatarUrl": "https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?w=400&auto=format&fit=crop&q=80",
+      "about": "Dedicated oncology surgeon specializing in gastrointestinal, breast, and thoracic oncological resections with organ preservation techniques.",
+      "areasOfExpertise": [
+        "Breast Oncoplastic Surgery",
+        "GI Oncology",
+        "Thoracic Oncology",
+        "HIPEC Procedures"
+      ],
+      "languages": [
+        "English",
+        "Marathi",
+        "Hindi"
+      ],
+      "consultationFee": 1500,
+      "rating": 4.93,
+      "reviewCount": 210,
+      "nextAvailableSlot": "Thursday at 02:00 PM",
+      "consultationModes": [
+        "in_person",
+        "teleconsultation"
+      ],
+      "availableDays": [
+        "Mon",
+        "Tue",
+        "Thu",
+        "Fri"
+      ],
+      "availableSlots": [
+        "02:00 PM",
+        "03:00 PM",
+        "04:00 PM",
+        "05:00 PM"
+      ]
+    },
+    {
+      "id": "doc-chatterjee",
+      "uid": "doc-chatterjee",
+      "fullName": "Dr. Sunita Chatterjee",
+      "title": "Senior Consultant - Obstetrics & High-Risk Pregnancy",
+      "specialty": "Obstetrics & Gynecology",
+      "qualifications": "MBBS, MD (Obs & Gynae), FICOG",
+      "experienceYears": 16,
+      "registrationNumber": "WBMC/2009/032210",
+      "councilName": "West Bengal Medical Council",
+      "hospitalAffiliation": "CareBridge Women & Children's Pavilion",
+      "hospitalId": "hosp-03",
+      "avatarUrl": "https://images.unsplash.com/photo-1638202993928-7267aad84c31?w=400&auto=format&fit=crop&q=80",
+      "about": "Specializes in high-risk pregnancy monitoring, minimally invasive laparoscopic gynecological surgery, PCOS management, and adolescent healthcare.",
+      "areasOfExpertise": [
+        "High-Risk Pregnancy",
+        "Laparoscopic Hysterectomy",
+        "PCOS & Infertility",
+        "Antenatal Screening"
+      ],
+      "languages": [
+        "English",
+        "Bengali",
+        "Hindi"
+      ],
+      "consultationFee": 850,
+      "rating": 4.89,
+      "reviewCount": 470,
+      "nextAvailableSlot": "Tomorrow at 09:30 AM",
+      "consultationModes": [
+        "in_person",
+        "teleconsultation"
+      ],
+      "availableDays": [
+        "Mon",
+        "Tue",
+        "Wed",
+        "Thu",
+        "Sat"
+      ],
+      "availableSlots": [
+        "09:30 AM",
+        "10:30 AM",
+        "11:30 AM",
+        "03:30 PM",
+        "04:30 PM"
+      ]
+    },
+    {
+      "id": "doc-gupta",
+      "uid": "doc-gupta",
+      "fullName": "Dr. Alok Gupta",
+      "title": "Consultant Physician & Diabetologist",
+      "specialty": "Internal & General Medicine",
+      "qualifications": "MBBS, MD (General Medicine), PG Diploma in Diabetology",
+      "experienceYears": 14,
+      "registrationNumber": "DMC/2011/055120",
+      "councilName": "Delhi Medical Council",
+      "hospitalAffiliation": "CareBridge Heart & Trauma Institute",
+      "hospitalId": "hosp-02",
+      "avatarUrl": "https://images.unsplash.com/photo-1582750433449-648ed127bb54?w=400&auto=format&fit=crop&q=80",
+      "about": "Expert physician addressing metabolic disorders, glycemic control in diabetic patients, hypertension titration, and acute seasonal febrile illnesses.",
+      "areasOfExpertise": [
+        "Type 2 Diabetes",
+        "Hypertension Control",
+        "Geriatric Care",
+        "Infectious Diseases"
+      ],
+      "languages": [
+        "English",
+        "Hindi",
+        "Tamil"
+      ],
+      "consultationFee": 500,
+      "rating": 4.81,
+      "reviewCount": 395,
+      "nextAvailableSlot": "Today at 03:30 PM",
+      "consultationModes": [
+        "in_person",
+        "teleconsultation"
+      ],
+      "availableDays": [
+        "Mon",
+        "Tue",
+        "Wed",
+        "Thu",
+        "Fri",
+        "Sat"
+      ],
+      "availableSlots": [
+        "09:00 AM",
+        "10:00 AM",
+        "02:30 PM",
+        "03:30 PM",
+        "04:30 PM"
+      ]
+    }
+  ],
+  "medicines": [
+    {
+      "id": "med-01",
+      "brandName": "Dolo 650",
+      "genericName": "Paracetamol 650 mg",
+      "composition": "Paracetamol IP 650mg",
+      "dosageForm": "Tablet",
+      "strength": "650 mg",
+      "category": "Pain & Analgesics",
+      "manufacturer": "Micro Labs Ltd",
+      "price": 32.5,
+      "prescriptionRequired": false,
+      "usageInstructions": "Take 1 tablet after meals every 6-8 hours as needed. Maximum 4 tablets in 24 hours."
+    },
+    {
+      "id": "med-02",
+      "brandName": "Augmentin 625 Duo",
+      "genericName": "Amoxicillin + Potassium Clavulanate",
+      "composition": "Amoxicillin (500mg) + Clavulanic Acid (125mg)",
+      "dosageForm": "Tablet",
+      "strength": "625 mg",
+      "category": "Antibiotics",
+      "manufacturer": "GlaxoSmithKline Pharmaceuticals Ltd",
+      "price": 204,
+      "prescriptionRequired": true,
+      "usageInstructions": "Take 1 tablet twice daily with meals for 5-7 days or as prescribed."
+    },
+    {
+      "id": "med-03",
+      "brandName": "Glycomet 500 SR",
+      "genericName": "Metformin Hydrochloride (Sustained Release)",
+      "composition": "Metformin Hydrochloride IP 500mg",
+      "dosageForm": "Tablet",
+      "strength": "500 mg",
+      "category": "Diabetic Care",
+      "manufacturer": "USV Private Limited",
+      "price": 48,
+      "prescriptionRequired": true,
+      "usageInstructions": "Take 1 tablet with evening meals to minimize gastrointestinal discomfort."
+    },
+    {
+      "id": "med-04",
+      "brandName": "Telma 40",
+      "genericName": "Telmisartan 40 mg",
+      "composition": "Telmisartan IP 40mg",
+      "dosageForm": "Tablet",
+      "strength": "40 mg",
+      "category": "Cardiovascular",
+      "manufacturer": "Glenmark Pharmaceuticals",
+      "price": 125,
+      "prescriptionRequired": true,
+      "usageInstructions": "Take 1 tablet once daily in the morning with or without water."
+    },
+    {
+      "id": "med-05",
+      "brandName": "Pan 40",
+      "genericName": "Pantoprazole Sodium Gastro-resistant",
+      "composition": "Pantoprazole Sodium IP 40mg",
+      "dosageForm": "Tablet",
+      "strength": "40 mg",
+      "category": "Gastrointestinal",
+      "manufacturer": "Alkem Laboratories Ltd",
+      "price": 142.5,
+      "prescriptionRequired": false,
+      "usageInstructions": "Take 1 tablet empty stomach in the morning 30 minutes before breakfast."
+    },
+    {
+      "id": "med-06",
+      "brandName": "Atorva 20",
+      "genericName": "Atorvastatin 20 mg",
+      "composition": "Atorvastatin Calcium IP 20mg",
+      "dosageForm": "Tablet",
+      "strength": "20 mg",
+      "category": "Cardiovascular",
+      "manufacturer": "Zydus Cadila",
+      "price": 185,
+      "prescriptionRequired": true,
+      "usageInstructions": "Take 1 tablet daily at night before sleep."
+    },
+    {
+      "id": "med-07",
+      "brandName": "Montair LC",
+      "genericName": "Montelukast + Levocetirizine",
+      "composition": "Montelukast Sodium (10mg) + Levocetirizine HCl (5mg)",
+      "dosageForm": "Tablet",
+      "strength": "10 mg + 5 mg",
+      "category": "Respiratory & Allergy",
+      "manufacturer": "Cipla Ltd",
+      "price": 198,
+      "prescriptionRequired": true,
+      "usageInstructions": "Take 1 tablet once daily at bedtime."
+    },
+    {
+      "id": "med-08",
+      "brandName": "Budecort 200 Inhaler",
+      "genericName": "Budesonide Inhalation Aerosol",
+      "composition": "Budesonide IP 200 mcg per actuation",
+      "dosageForm": "Inhaler",
+      "strength": "200 mcg",
+      "category": "Respiratory & Allergy",
+      "manufacturer": "Cipla Ltd",
+      "price": 345,
+      "prescriptionRequired": true,
+      "usageInstructions": "Inhale 1-2 puffs twice daily through spacer; rinse mouth thoroughly after inhalation."
+    },
+    {
+      "id": "med-09",
+      "brandName": "Volini Gel",
+      "genericName": "Diclofenac Diethylamine + Methyl Salicylate",
+      "composition": "Diclofenac Diethylamine 1.16% w/w",
+      "dosageForm": "Ointment",
+      "strength": "30 g",
+      "category": "Pain & Analgesics",
+      "manufacturer": "Sun Pharmaceutical Industries Ltd",
+      "price": 110,
+      "prescriptionRequired": false,
+      "usageInstructions": "Apply 3-4 times a day gently on the affected area. Wash hands after use."
+    },
+    {
+      "id": "med-10",
+      "brandName": "Lantus Solostar Pen",
+      "genericName": "Insulin Glargine",
+      "composition": "Insulin Glargine 100 Units/ml",
+      "dosageForm": "Injection",
+      "strength": "100 IU/ml",
+      "category": "Diabetic Care",
+      "manufacturer": "Sanofi India Ltd",
+      "price": 620,
+      "prescriptionRequired": true,
+      "usageInstructions": "Inject subcutaneously once daily at the same time each day."
+    }
+  ],
+  "pharmacies": [
+    {
+      "id": "ph-01",
+      "name": "CareBridge 24x7 In-Hospital Pharmacy",
+      "address": "Ground Floor, CareBridge Apex Super-Specialty Hospital, Outer Ring Road",
+      "district": "Bengaluru Urban",
+      "state": "Karnataka",
+      "pincode": "560103",
+      "phone": "+91 80 4910 2150",
+      "coordinates": {
+        "lat": 12.9299,
+        "lng": 77.6849
+      },
+      "distanceKm": 0.2,
+      "open24x7": true,
+      "openingHours": "24 Hours / 7 Days",
+      "rating": 4.9
+    },
+    {
+      "id": "ph-02",
+      "name": "Apollo Pharmacy - Ring Road Junction",
+      "address": "Shop 4, Outer Ring Road, Near EcoWorld",
+      "district": "Bengaluru Urban",
+      "state": "Karnataka",
+      "pincode": "560103",
+      "phone": "+91 80 2574 1120",
+      "coordinates": {
+        "lat": 12.928,
+        "lng": 77.681
+      },
+      "distanceKm": 0.9,
+      "open24x7": true,
+      "openingHours": "24 Hours / 7 Days",
+      "rating": 4.7
+    },
+    {
+      "id": "ph-03",
+      "name": "MedPlus Health Services - Bellandur Lake Rd",
+      "address": "Plot 12, Bellandur Lake Road",
+      "district": "Bengaluru Urban",
+      "state": "Karnataka",
+      "pincode": "560103",
+      "phone": "+91 80 4122 8890",
+      "coordinates": {
+        "lat": 12.932,
+        "lng": 77.677
+      },
+      "distanceKm": 1.6,
+      "open24x7": false,
+      "openingHours": "07:30 AM - 11:30 PM",
+      "rating": 4.6
+    },
+    {
+      "id": "ph-04",
+      "name": "Wellness Forever Chemists & Superstore",
+      "address": "Block A, Central Boulevard, Sarjapur Road",
+      "district": "Bengaluru Urban",
+      "state": "Karnataka",
+      "pincode": "560102",
+      "phone": "+91 80 6712 9900",
+      "coordinates": {
+        "lat": 12.921,
+        "lng": 77.672
+      },
+      "distanceKm": 2.8,
+      "open24x7": true,
+      "openingHours": "24 Hours / 7 Days",
+      "rating": 4.8
+    }
+  ],
+  "medicineInventory": [
+    {
+      "id": "inv-01",
+      "pharmacyId": "ph-01",
+      "pharmacyName": "CareBridge 24x7 In-Hospital Pharmacy",
+      "pharmacyAddress": "Outer Ring Road, Bellandur, Bengaluru",
+      "pharmacyPhone": "+91 80 4910 2150",
+      "distanceKm": 0.2,
+      "medicineId": "med-01",
+      "medicineName": "Dolo 650",
+      "genericName": "Paracetamol 650 mg",
+      "dosageForm": "Tablet",
+      "status": "IN_STOCK",
+      "quantity": 450,
+      "unitPrice": 32.5,
+      "lastUpdated": "2026-09-20T10:00:00Z"
+    },
+    {
+      "id": "inv-02",
+      "pharmacyId": "ph-02",
+      "pharmacyName": "Apollo Pharmacy - Ring Road Junction",
+      "pharmacyAddress": "Outer Ring Road, Near EcoWorld, Bengaluru",
+      "pharmacyPhone": "+91 80 2574 1120",
+      "distanceKm": 0.9,
+      "medicineId": "med-01",
+      "medicineName": "Dolo 650",
+      "genericName": "Paracetamol 650 mg",
+      "dosageForm": "Tablet",
+      "status": "IN_STOCK",
+      "quantity": 120,
+      "unitPrice": 33,
+      "lastUpdated": "2026-09-20T09:30:00Z"
+    },
+    {
+      "id": "inv-03",
+      "pharmacyId": "ph-01",
+      "pharmacyName": "CareBridge 24x7 In-Hospital Pharmacy",
+      "pharmacyAddress": "Outer Ring Road, Bellandur, Bengaluru",
+      "pharmacyPhone": "+91 80 4910 2150",
+      "distanceKm": 0.2,
+      "medicineId": "med-02",
+      "medicineName": "Augmentin 625 Duo",
+      "genericName": "Amoxicillin + Potassium Clavulanate",
+      "dosageForm": "Tablet",
+      "status": "IN_STOCK",
+      "quantity": 85,
+      "unitPrice": 204,
+      "lastUpdated": "2026-09-20T10:00:00Z"
+    },
+    {
+      "id": "inv-04",
+      "pharmacyId": "ph-02",
+      "pharmacyName": "Apollo Pharmacy - Ring Road Junction",
+      "pharmacyAddress": "Outer Ring Road, Near EcoWorld, Bengaluru",
+      "pharmacyPhone": "+91 80 2574 1120",
+      "distanceKm": 0.9,
+      "medicineId": "med-02",
+      "medicineName": "Augmentin 625 Duo",
+      "genericName": "Amoxicillin + Potassium Clavulanate",
+      "dosageForm": "Tablet",
+      "status": "LOW_STOCK",
+      "quantity": 12,
+      "unitPrice": 208,
+      "lastUpdated": "2026-09-20T09:30:00Z"
+    },
+    {
+      "id": "inv-05",
+      "pharmacyId": "ph-03",
+      "pharmacyName": "MedPlus Health Services - Bellandur Lake Rd",
+      "pharmacyAddress": "Bellandur Lake Road, Bengaluru",
+      "pharmacyPhone": "+91 80 4122 8890",
+      "distanceKm": 1.6,
+      "medicineId": "med-02",
+      "medicineName": "Augmentin 625 Duo",
+      "genericName": "Amoxicillin + Potassium Clavulanate",
+      "dosageForm": "Tablet",
+      "status": "OUT_OF_STOCK",
+      "quantity": 0,
+      "unitPrice": 204,
+      "lastUpdated": "2026-09-20T08:00:00Z"
+    },
+    {
+      "id": "inv-06",
+      "pharmacyId": "ph-01",
+      "pharmacyName": "CareBridge 24x7 In-Hospital Pharmacy",
+      "pharmacyAddress": "Outer Ring Road, Bellandur, Bengaluru",
+      "pharmacyPhone": "+91 80 4910 2150",
+      "distanceKm": 0.2,
+      "medicineId": "med-03",
+      "medicineName": "Glycomet 500 SR",
+      "genericName": "Metformin Hydrochloride (Sustained Release)",
+      "dosageForm": "Tablet",
+      "status": "IN_STOCK",
+      "quantity": 210,
+      "unitPrice": 48,
+      "lastUpdated": "2026-09-20T10:00:00Z"
+    },
+    {
+      "id": "inv-07",
+      "pharmacyId": "ph-01",
+      "pharmacyName": "CareBridge 24x7 In-Hospital Pharmacy",
+      "pharmacyAddress": "Outer Ring Road, Bellandur, Bengaluru",
+      "pharmacyPhone": "+91 80 4910 2150",
+      "distanceKm": 0.2,
+      "medicineId": "med-04",
+      "medicineName": "Telma 40",
+      "genericName": "Telmisartan 40 mg",
+      "dosageForm": "Tablet",
+      "status": "IN_STOCK",
+      "quantity": 140,
+      "unitPrice": 125,
+      "lastUpdated": "2026-09-20T10:00:00Z"
+    },
+    {
+      "id": "inv-08",
+      "pharmacyId": "ph-02",
+      "pharmacyName": "Apollo Pharmacy - Ring Road Junction",
+      "pharmacyAddress": "Outer Ring Road, Near EcoWorld, Bengaluru",
+      "pharmacyPhone": "+91 80 2574 1120",
+      "distanceKm": 0.9,
+      "medicineId": "med-04",
+      "medicineName": "Telma 40",
+      "genericName": "Telmisartan 40 mg",
+      "dosageForm": "Tablet",
+      "status": "LOW_STOCK",
+      "quantity": 15,
+      "unitPrice": 127,
+      "lastUpdated": "2026-09-20T09:30:00Z"
+    },
+    {
+      "id": "inv-09",
+      "pharmacyId": "ph-01",
+      "pharmacyName": "CareBridge 24x7 In-Hospital Pharmacy",
+      "pharmacyAddress": "Outer Ring Road, Bellandur, Bengaluru",
+      "pharmacyPhone": "+91 80 4910 2150",
+      "distanceKm": 0.2,
+      "medicineId": "med-08",
+      "medicineName": "Budecort 200 Inhaler",
+      "genericName": "Budesonide Inhalation Aerosol",
+      "dosageForm": "Inhaler",
+      "status": "IN_STOCK",
+      "quantity": 25,
+      "unitPrice": 345,
+      "lastUpdated": "2026-09-20T10:00:00Z"
+    },
+    {
+      "id": "inv-10",
+      "pharmacyId": "ph-01",
+      "pharmacyName": "CareBridge 24x7 In-Hospital Pharmacy",
+      "pharmacyAddress": "Outer Ring Road, Bellandur, Bengaluru",
+      "pharmacyPhone": "+91 80 4910 2150",
+      "distanceKm": 0.2,
+      "medicineId": "med-10",
+      "medicineName": "Lantus Solostar Pen",
+      "genericName": "Insulin Glargine",
+      "dosageForm": "Injection",
+      "status": "LOW_STOCK",
+      "quantity": 8,
+      "unitPrice": 620,
+      "lastUpdated": "2026-09-20T10:00:00Z"
+    }
+  ],
+  "appointments": [
+    {
+      "patientId": "pat-856237",
+      "patientName": "Ananya Deshmukh",
+      "patientPhone": "+919966047323",
+      "patientAge": 45,
+      "patientGender": "Male",
+      "doctorId": "doc-verma",
+      "doctorName": "Dr. Rajesh Verma",
+      "doctorSpecialty": "Orthopedics & Joint Care",
+      "doctorAvatarUrl": "https://images.unsplash.com/photo-1622253692010-333f2da6031d?w=400&auto=format&fit=crop&q=80",
+      "hospitalId": "hosp-05",
+      "hospitalName": "CareBridge Metro Multi-Specialty Hospital",
+      "hospitalAddress": "CareBridge Metro Multi-Specialty Hospital, English",
+      "date": "2026-12-15",
+      "timeSlot": "02:00 PM",
+      "type": "in_person",
+      "status": "confirmed",
+      "fee": 900,
+      "paymentStatus": "paid",
+      "id": "apt_10feb981a999",
+      "bookingReference": "CB-2026-87920",
+      "createdAt": "2026-09-21T14:44:26.106Z"
+    },
+    {
+      "patientId": "pat-776464",
+      "patientName": "Ananya Deshmukh",
+      "patientPhone": "+919801320818",
+      "patientAge": 45,
+      "patientGender": "Male",
+      "doctorId": "doc-verma",
+      "doctorName": "Dr. Rajesh Verma",
+      "doctorSpecialty": "Orthopedics & Joint Care",
+      "doctorAvatarUrl": "https://images.unsplash.com/photo-1622253692010-333f2da6031d?w=400&auto=format&fit=crop&q=80",
+      "hospitalId": "hosp-05",
+      "hospitalName": "CareBridge Metro Multi-Specialty Hospital",
+      "hospitalAddress": "CareBridge Metro Multi-Specialty Hospital, English",
+      "date": "2026-12-14",
+      "timeSlot": "02:00 PM",
+      "type": "in_person",
+      "status": "confirmed",
+      "fee": 900,
+      "paymentStatus": "paid",
+      "id": "apt_1ac3428fb68f",
+      "bookingReference": "CB-2026-99078",
+      "createdAt": "2026-09-21T14:43:06.735Z"
+    },
+    {
+      "patientId": "pat-ramesh",
+      "patientName": "Ramesh Kumar",
+      "patientPhone": "+91 94150 12345",
+      "patientAge": 45,
+      "patientGender": "Male",
+      "doctorId": "doc-sharma",
+      "doctorName": "Dr. Anita Sharma",
+      "doctorSpecialty": "Cardiology",
+      "doctorAvatarUrl": "https://images.unsplash.com/photo-1559839734-2b71ea197ec2?w=400&auto=format&fit=crop&q=80",
+      "hospitalId": "hosp-01",
+      "hospitalName": "CareBridge Apex Super-Specialty Hospital",
+      "hospitalAddress": "CareBridge Apex Super-Specialty Hospital, English",
+      "date": "2026-09-24",
+      "timeSlot": "04:30 PM",
+      "type": "in_person",
+      "status": "confirmed",
+      "fee": 800,
+      "paymentStatus": "paid",
+      "id": "apt_75cd01f9ed14",
+      "bookingReference": "CB-2026-44677",
+      "createdAt": "2026-09-21T14:40:40.900Z"
+    },
+    {
+      "patientId": "pat-ramesh",
+      "patientName": "Ramesh Kumar",
+      "patientPhone": "+919415012345",
+      "patientAge": 45,
+      "patientGender": "Male",
+      "doctorId": "doc-sharma",
+      "doctorName": "Dr. Anita Sharma",
+      "doctorSpecialty": "Cardiology",
+      "doctorAvatarUrl": "https://images.unsplash.com/photo-1559839734-2b71ea197ec2?w=400&auto=format&fit=crop&q=80",
+      "hospitalId": "hosp-01",
+      "hospitalName": "CareBridge Apex Super-Specialty Hospital",
+      "hospitalAddress": "CareBridge Apex Super-Specialty Hospital, English",
+      "date": "2026-09-22",
+      "timeSlot": "10:30 AM",
+      "type": "in_person",
+      "status": "confirmed",
+      "fee": 800,
+      "paymentStatus": "paid",
+      "id": "apt_68b4bea6c56d",
+      "bookingReference": "CB-2026-42039",
+      "createdAt": "2026-09-21T14:37:55.446Z"
+    },
+    {
+      "patientId": "pat-ramesh",
+      "patientName": "Ramesh Kumar",
+      "patientPhone": "+91 94150 12345",
+      "patientAge": 45,
+      "patientGender": "Male",
+      "doctorId": "doc-sharma",
+      "doctorName": "Dr. Anita Sharma",
+      "doctorSpecialty": "Cardiology",
+      "doctorAvatarUrl": "https://images.unsplash.com/photo-1559839734-2b71ea197ec2?w=400&auto=format&fit=crop&q=80",
+      "hospitalId": "hosp-01",
+      "hospitalName": "CareBridge Apex Super-Specialty Hospital",
+      "hospitalAddress": "CareBridge Apex Super-Specialty Hospital, English",
+      "date": "2026-09-23",
+      "timeSlot": "09:30 AM",
+      "type": "in_person",
+      "status": "confirmed",
+      "fee": 800,
+      "paymentStatus": "paid",
+      "id": "apt_6b0ac8ac2844",
+      "bookingReference": "CB-2026-53509",
+      "createdAt": "2026-09-21T14:34:49.211Z"
+    },
+    {
+      "patientId": "pat-ramesh",
+      "patientName": "Ramesh Kumar",
+      "patientPhone": "+919876543210",
+      "doctorId": "doc-sharma",
+      "doctorName": "Dr. Anita Sharma",
+      "doctorSpecialty": "Cardiology",
+      "hospitalId": "hosp-01",
+      "hospitalName": "CareBridge Apex Super-Specialty Hospital",
+      "date": "2026-11-15",
+      "timeSlot": "02:30 PM",
+      "type": "in_person",
+      "status": "confirmed",
+      "fee": 800,
+      "paymentStatus": "pay_at_hospital",
+      "id": "apt_8a23b4de801b",
+      "bookingReference": "CB-2026-26848",
+      "createdAt": "2026-09-20T15:57:32.413Z"
+    },
+    {
+      "patientId": "pat-ramesh",
+      "patientName": "Ramesh Kumar",
+      "patientPhone": "+91 94150 12345",
+      "doctorId": "doc-sharma",
+      "doctorName": "Dr. Anita Sharma",
+      "doctorSpecialty": "Cardiology",
+      "hospitalId": "hosp-01",
+      "hospitalName": "CareBridge Apex Super-Specialty Hospital",
+      "date": "2026-10-01",
+      "timeSlot": "11:00 AM",
+      "type": "in_person",
+      "status": "confirmed",
+      "fee": 800,
+      "paymentStatus": "paid",
+      "id": "apt_7a0310d69e4a",
+      "bookingReference": "CB-2026-50593",
+      "createdAt": "2026-09-20T14:32:43.633Z"
+    },
+    {
+      "id": "apt-001",
+      "bookingReference": "CB-2026-99412",
+      "patientId": "pat-ramesh",
+      "patientName": "Ramesh Kumar",
+      "patientPhone": "+91 94150 12345",
+      "doctorId": "doc-sharma",
+      "doctorName": "Dr. Anita Sharma",
+      "doctorSpecialty": "Cardiology",
+      "doctorAvatarUrl": "https://images.unsplash.com/photo-1559839734-2b71ea197ec2?w=400&auto=format&fit=crop&q=80",
+      "hospitalId": "hosp-01",
+      "hospitalName": "CareBridge Apex Super-Specialty Hospital",
+      "hospitalAddress": "42 Outer Ring Road, Bellandur, Bengaluru",
+      "date": "2026-09-24",
+      "timeSlot": "10:30 AM",
+      "type": "in_person",
+      "status": "confirmed",
+      "fee": 800,
+      "paymentStatus": "paid",
+      "notes": "Quarterly review for hypertension and glycemic monitoring. Token CB-14.",
+      "createdAt": "2026-09-20T08:00:00Z"
+    },
+    {
+      "id": "apt-002",
+      "bookingReference": "CB-2026-99384",
+      "patientId": "pat-ramesh",
+      "patientName": "Ramesh Kumar",
+      "patientPhone": "+91 94150 12345",
+      "doctorId": "doc-verma",
+      "doctorName": "Dr. Rajesh Verma",
+      "doctorSpecialty": "Orthopedics & Joint Care",
+      "doctorAvatarUrl": "https://images.unsplash.com/photo-1622253692010-333f2da6031d?w=400&auto=format&fit=crop&q=80",
+      "hospitalId": "hosp-05",
+      "hospitalName": "CareBridge Metro Multi-Specialty Hospital",
+      "hospitalAddress": "Link Road, Andheri West, Mumbai",
+      "date": "2026-09-22",
+      "timeSlot": "04:00 PM",
+      "type": "teleconsultation",
+      "status": "completed",
+      "fee": 700,
+      "paymentStatus": "paid",
+      "notes": "Bilateral knee stiffness evaluation. Teleconsultation video session.",
+      "createdAt": "2026-09-19T14:20:00Z"
+    },
+    {
+      "id": "apt-003",
+      "bookingReference": "CB-2026-98210",
+      "patientId": "pat-sunita",
+      "patientName": "Sunita Devi",
+      "patientPhone": "+91 94150 67890",
+      "doctorId": "doc-chatterjee",
+      "doctorName": "Dr. Sunita Chatterjee",
+      "doctorSpecialty": "Obstetrics & Gynecology",
+      "doctorAvatarUrl": "https://images.unsplash.com/photo-1638202993928-7267aad84c31?w=400&auto=format&fit=crop&q=80",
+      "hospitalId": "hosp-03",
+      "hospitalName": "CareBridge Women & Children's Pavilion",
+      "hospitalAddress": "18 Institutional Area, Sheikh Sarai, New Delhi",
+      "date": "2026-09-23",
+      "timeSlot": "11:00 AM",
+      "type": "in_person",
+      "status": "confirmed",
+      "fee": 850,
+      "paymentStatus": "paid",
+      "notes": "Third trimester routine antenatal checkup. Token CB-08.",
+      "createdAt": "2026-09-18T10:00:00Z"
+    }
+  ],
+  "prescriptions": [
+    {
+      "patientId": "pat-ramesh",
+      "patientName": "Ramesh Kumar",
+      "doctorId": "doc-sharma",
+      "doctorName": "Dr. Anita Sharma",
+      "doctorRegistration": "MCI/UP/2012/048821",
+      "doctorSpecialty": "Cardiology",
+      "hospitalName": "CareBridge Apex Super-Specialty Hospital",
+      "date": "2026-09-20",
+      "diagnosis": [
+        "Essential Hypertension Stage 1",
+        "Type-2 Diabetes Mellitus"
+      ],
+      "vitals": {
+        "bloodPressure": "126/82 mmHg",
+        "pulseBpm": 72,
+        "spo2": 99,
+        "temperatureF": 98.4
+      },
+      "medicines": [
+        {
+          "id": "rx-1",
+          "medicineName": "Telmisartan 40mg",
+          "dosage": "1 tablet",
+          "frequency": "1-0-0",
+          "duration": "30 days",
+          "instructions": "After breakfast"
+        }
+      ],
+      "advice": "Maintain low salt intake and monitor fasting blood glucose weekly.",
+      "doctorSignatureStamp": "SHA256-TEST-VERIFIED-NMC",
+      "id": "rx_58b579b67ba3",
+      "createdAt": "2026-09-20T15:57:32.534Z"
+    },
+    {
+      "id": "rx-9901",
+      "appointmentId": "apt-001",
+      "patientId": "pat-ramesh",
+      "patientName": "Ramesh Kumar",
+      "patientAge": 52,
+      "patientGender": "Male",
+      "doctorId": "doc-sharma",
+      "doctorName": "Dr. Anita Sharma",
+      "doctorRegistration": "MCI/UP/2012/048821",
+      "doctorSpecialty": "Cardiology",
+      "hospitalName": "CareBridge Apex Super-Specialty Hospital",
+      "date": "2026-08-15",
+      "diagnosis": [
+        "Primary Essential Hypertension (Stage 1)",
+        "Type 2 Diabetes Mellitus (Managed)"
+      ],
+      "vitals": {
+        "bloodPressure": "128/82 mmHg",
+        "pulseBpm": 72,
+        "spo2": 98,
+        "temperatureF": 98.4
+      },
+      "medicines": [
+        {
+          "id": "rx-m1",
+          "medicineName": "Telma 40 (Telmisartan 40mg)",
+          "dosage": "1 Tablet",
+          "frequency": "Once Daily (Morning)",
+          "duration": "90 Days",
+          "instructions": "Take in the morning after breakfast with water."
+        },
+        {
+          "id": "rx-m2",
+          "medicineName": "Glycomet 500 SR (Metformin 500mg)",
+          "dosage": "1 Tablet",
+          "frequency": "Twice Daily (Morning & Night)",
+          "duration": "90 Days",
+          "instructions": "Take immediately with meals."
+        }
+      ],
+      "advice": "Restrict dietary sodium to under 3g/day. 30 minutes of brisk morning walking. Monitor fasting glucose weekly.",
+      "followUpDate": "2026-11-15",
+      "doctorSignatureStamp": "SHA256:7f83b1657ff1fc53b92dc18148a1d65dfc2d4b1fa3d677284addd200126d9069",
+      "createdAt": "2026-08-15T11:45:00Z"
+    }
+  ],
+  "notifications": [
+    {
+      "id": "notif_a3d91a10f2b1",
+      "userId": "pat-856237",
+      "title": "Appointment Confirmed: Dr. Rajesh Verma",
+      "message": "Your appointment is confirmed for 2026-12-15 at 02:00 PM. Reference: CB-2026-87920",
+      "category": "appointment",
+      "read": false,
+      "actionUrl": "/appointments",
+      "createdAt": "2026-09-21T14:44:26.106Z"
+    },
+    {
+      "id": "notif_321c4dfefa3c",
+      "userId": "pat-776464",
+      "title": "Appointment Confirmed: Dr. Rajesh Verma",
+      "message": "Your appointment is confirmed for 2026-12-14 at 02:00 PM. Reference: CB-2026-99078",
+      "category": "appointment",
+      "read": false,
+      "actionUrl": "/appointments",
+      "createdAt": "2026-09-21T14:43:06.735Z"
+    },
+    {
+      "id": "notif_022df33e8a1c",
+      "userId": "pat-ramesh",
+      "title": "Appointment Confirmed: Dr. Anita Sharma",
+      "message": "Your appointment is confirmed for 2026-09-24 at 04:30 PM. Reference: CB-2026-44677",
+      "category": "appointment",
+      "read": false,
+      "actionUrl": "/appointments",
+      "createdAt": "2026-09-21T14:40:40.900Z"
+    },
+    {
+      "id": "notif_023253b318cb",
+      "userId": "pat-ramesh",
+      "title": "Appointment Confirmed: Dr. Anita Sharma",
+      "message": "Your appointment is confirmed for 2026-09-22 at 10:30 AM. Reference: CB-2026-42039",
+      "category": "appointment",
+      "read": false,
+      "actionUrl": "/appointments",
+      "createdAt": "2026-09-21T14:37:55.446Z"
+    },
+    {
+      "id": "notif_f9f0fc8878a2",
+      "userId": "pat-ramesh",
+      "title": "Appointment Confirmed: Dr. Anita Sharma",
+      "message": "Your appointment is confirmed for 2026-09-23 at 09:30 AM. Reference: CB-2026-53509",
+      "category": "appointment",
+      "read": false,
+      "actionUrl": "/appointments",
+      "createdAt": "2026-09-21T14:34:49.212Z"
+    },
+    {
+      "id": "notif_4e3509bddd37",
+      "userId": "pat-ramesh",
+      "title": "Prescription Issued by Dr. Anita Sharma",
+      "message": "Your prescription for Essential Hypertension Stage 1, Type-2 Diabetes Mellitus is ready.",
+      "category": "prescription",
+      "read": false,
+      "actionUrl": "/prescriptions/rx_58b579b67ba3",
+      "createdAt": "2026-09-20T15:57:32.534Z"
+    },
+    {
+      "id": "notif_933ce015557f",
+      "userId": "pat-ramesh",
+      "title": "Appointment Confirmed: Dr. Anita Sharma",
+      "message": "Your appointment is confirmed for 2026-11-15 at 02:30 PM. Reference: CB-2026-26848",
+      "category": "appointment",
+      "read": false,
+      "actionUrl": "/appointments",
+      "createdAt": "2026-09-20T15:57:32.413Z"
+    },
+    {
+      "id": "notif_928dbe07822a",
+      "userId": "pat-ramesh",
+      "title": "Appointment Confirmed: Dr. Anita Sharma",
+      "message": "Your appointment is confirmed for 2026-10-01 at 11:00 AM. Reference: CB-2026-50593",
+      "category": "appointment",
+      "read": false,
+      "actionUrl": "/appointments",
+      "createdAt": "2026-09-20T14:32:43.633Z"
+    },
+    {
+      "id": "notif-01",
+      "userId": "pat-ramesh",
+      "title": "Upcoming Cardiology Appointment",
+      "message": "Your in-person consultation with Dr. Anita Sharma is scheduled for Sep 24, 10:30 AM at CareBridge Apex Hospital. Token: CB-14.",
+      "category": "appointment",
+      "read": false,
+      "actionUrl": "/appointments",
+      "createdAt": "2026-09-20T08:05:00Z"
+    },
+    {
+      "id": "notif-02",
+      "userId": "pat-ramesh",
+      "title": "Teleconsultation Video Link Active",
+      "message": "Your video room link with Dr. Rajesh Verma is ready. Consultation starts tomorrow at 04:00 PM.",
+      "category": "teleconsult",
+      "read": false,
+      "actionUrl": "/teleconsult/CB-ROOM-99384",
+      "createdAt": "2026-09-19T14:22:00Z"
+    },
+    {
+      "id": "notif-03",
+      "userId": "pat-ramesh",
+      "title": "Digital Prescription Available",
+      "message": "Dr. Anita Sharma has issued your updated 90-day maintenance prescription. View or print anytime.",
+      "category": "prescription",
+      "read": true,
+      "actionUrl": "/prescriptions/rx-9901",
+      "createdAt": "2026-08-15T11:45:00Z"
+    },
+    {
+      "id": "notif-04",
+      "userId": "pat-ramesh",
+      "title": "Security Alert: Access Verified",
+      "message": "Clinical record access was securely authenticated by Dr. Anita Sharma during your OPD encounter.",
+      "category": "security",
+      "read": true,
+      "actionUrl": "/patient/consents",
+      "createdAt": "2026-08-15T11:30:00Z"
+    }
+  ]
+}

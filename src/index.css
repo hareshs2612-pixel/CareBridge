@@ -4,13 +4,13 @@
 
 @layer base {
   body {
-    @apply text-slate-800 bg-slate-50 font-sans selection:bg-teal-100 selection:text-teal-900;
+    @apply text-slate-900 bg-slate-50 font-sans selection:bg-blue-100 selection:text-blue-900 antialiased;
   }
 }
 
-/* Accessible focus ring for keyboard navigation */
+/* Accessible corporate focus ring for keyboard navigation */
 :focus-visible {
-  @apply outline-none ring-2 ring-teal-600 ring-offset-2;
+  @apply outline-none ring-2 ring-cb-blue ring-offset-2;
 }
 
 /* Custom scrollbar */

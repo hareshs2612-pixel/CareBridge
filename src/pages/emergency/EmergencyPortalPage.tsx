@@ -26,7 +26,7 @@ export const EmergencyPortalPage: React.FC = () => {
   const [targetUser, setTargetUser] = useState<UserProfile | undefined>(undefined);
 
   // Emergency override form state
-  const currentUser = dataStore.getCurrentUser();
+  const [currentUser, setCurrentUser] = useState<UserProfile>(dataStore.getCurrentUser());
   const [clinicalReason, setClinicalReason] = useState(
     'Acute trauma triage / uncommunicative patient following road accident'
   );
@@ -36,6 +36,12 @@ export const EmergencyPortalPage: React.FC = () => {
   const [emergencyBadgeId, setEmergencyBadgeId] = useState('EMG-TRIAGE-2026-904');
   const [overrideGranted, setOverrideGranted] = useState(false);
   const [accessEvent, setAccessEvent] = useState<EmergencyAccessEvent | null>(null);
+
+  useEffect(() => {
+    return dataStore.subscribe(() => {
+      setCurrentUser(dataStore.getCurrentUser());
+    });
+  }, []);
 
   useEffect(() => {
     if (searchQuery) {
@@ -136,7 +142,7 @@ export const EmergencyPortalPage: React.FC = () => {
                 searchQuery === 'pat-ramesh' ? 'bg-rose-600 text-white' : 'bg-slate-100 hover:bg-slate-200 text-slate-700'
               }`}
             >
-              Ramesh Kumar (Farmer)
+              Ramesh Kumar (UHID: pat-ramesh)
             </button>
             <button
               type="button"
@@ -145,7 +151,7 @@ export const EmergencyPortalPage: React.FC = () => {
                 searchQuery === 'pat-sunita' ? 'bg-rose-600 text-white' : 'bg-slate-100 hover:bg-slate-200 text-slate-700'
               }`}
             >
-              Sunita Devi (Pregnant)
+              Sunita Devi (UHID: pat-sunita)
             </button>
           </div>
         </div>
