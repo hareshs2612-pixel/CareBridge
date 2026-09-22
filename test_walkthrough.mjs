@@ -1,4 +1,5 @@
 import puppeteer from 'puppeteer-core';
+import fs from 'fs';
 
 const CHROME_PATH = 'C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe';
 const BASE_URL = 'http://localhost:5173';
@@ -266,9 +267,53 @@ async function main() {
 
   // FLOW 7: Appointment Booking (/appointments/book)
   await runFlow('7. Appointment Booking', async () => {
-    // Use doc-verma with a future date to ensure repeatable non-conflicting booking
-    const testDate = '2026-12-' + String(10 + Math.floor(Math.random() * 15)).padStart(2, '0');
-    await page.goto(`${BASE_URL}/appointments/book?doctorId=doc-verma&date=${testDate}&timeSlot=02:00 PM`, { waitUntil: 'networkidle0' });
+    // Clean test-created appointments from prior test runs to ensure idempotency
+    try {
+      const dbPath = './server/data/dev-db.json';
+      if (fs.existsSync(dbPath)) {
+        const raw = fs.readFileSync(dbPath, 'utf8');
+        const db = JSON.parse(raw);
+        if (Array.isArray(db.appointments)) {
+          const initialCount = db.appointments.length;
+          db.appointments = db.appointments.filter(
+            a => a.patientPhone !== '9876543210' && a.patientName !== 'Ananya Deshmukh'
+          );
+          if (db.appointments.length !== initialCount) {
+            fs.writeFileSync(dbPath, JSON.stringify(db, null, 2), 'utf8');
+          }
+        }
+      }
+    } catch (e) {
+      // Non-fatal if filesystem operation fails
+    }
+
+    // Query doctor's booked slots to select an actually available date & timeSlot
+    let testDate = '2026-12-25';
+    let testSlot = '02:00 PM';
+    try {
+      const res = await fetch('http://localhost:8787/api/appointments?doctorId=doc-verma');
+      if (res.ok) {
+        const data = await res.json();
+        const booked = new Set(
+          (data.appointments || [])
+            .filter(a => a.status !== 'cancelled')
+            .map(a => `${a.date}_${a.timeSlot}`)
+        );
+        const candidateDates = ['2026-12-22', '2026-12-23', '2026-12-24', '2026-12-25', '2026-12-26'];
+        const candidateSlots = ['09:00 AM', '10:00 AM', '11:00 AM', '02:00 PM', '03:00 PM', '04:00 PM'];
+        findSlot: for (const d of candidateDates) {
+          for (const s of candidateSlots) {
+            if (!booked.has(`${d}_${s}`)) {
+              testDate = d;
+              testSlot = s;
+              break findSlot;
+            }
+          }
+        }
+      }
+    } catch (e) {}
+
+    await page.goto(`${BASE_URL}/appointments/book?doctorId=doc-verma&date=${testDate}&timeSlot=${encodeURIComponent(testSlot)}`, { waitUntil: 'networkidle0' });
 
     // Step 3: Patient Details
     const nameInput = await page.$('input[placeholder*="Full Name"]');
@@ -299,7 +344,7 @@ async function main() {
       throw new Error('Appointment confirmation or OPD slip not displayed after booking');
     }
 
-    return `Appointment booking completed successfully with Dr. Rajesh Verma on ${testDate}. Confirmation slip & booking reference generated.`;
+    return `Appointment booking completed successfully with Dr. Rajesh Verma on ${testDate} at ${testSlot}. Confirmation slip & booking reference generated.`;
   });
 
   // FLOW 8: Appointment Dashboard (/appointments)

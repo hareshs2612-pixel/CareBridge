@@ -20,7 +20,13 @@ import {
   Pharmacy,
   MedicineInventory,
   Prescription,
-  NotificationItem
+  NotificationItem,
+  TriageAssessment,
+  Referral,
+  DiagnosticTest,
+  DiagnosticOrder,
+  CarePlan,
+  FacilityOperationsMetrics
 } from '../types';
 import { dataStore } from './dataStore';
 
@@ -504,6 +510,220 @@ export const api = {
     } catch {
       dataStore.markNotificationRead(id);
     }
+  },
+
+  // ----------------------------------------------------
+  // Phase 2: Digital Triage
+  // ----------------------------------------------------
+  async submitTriage(data: {
+    patientId?: string;
+    patientName?: string;
+    symptoms: string[];
+    duration?: string;
+    severityFlags?: string[];
+    vitals?: { temperatureF?: number; pulseBpm?: number; spo2?: number; bloodPressure?: string };
+    assessedByRole?: 'patient' | 'healthcare_worker' | 'doctor';
+    assessedById?: string;
+    nearestFacilityRecommended?: string;
+  }): Promise<TriageAssessment> {
+    const res = await request<{ success: boolean; assessment: TriageAssessment }>('/triage', {
+      method: 'POST',
+      body: JSON.stringify(data)
+    });
+    return res.assessment;
+  },
+
+  async getTriageAssessments(patientId?: string): Promise<TriageAssessment[]> {
+    const query = patientId ? `?patientId=${patientId}` : '';
+    const res = await request<{ success: boolean; assessments: TriageAssessment[] }>(`/triage${query}`);
+    return res.assessments;
+  },
+
+  // ----------------------------------------------------
+  // Phase 2: Closed-Loop Referral Management
+  // ----------------------------------------------------
+  async getReferrals(filters: { patientId?: string; doctorId?: string; facilityId?: string; status?: string } = {}): Promise<Referral[]> {
+    const params = new URLSearchParams();
+    if (filters.patientId) params.append('patientId', filters.patientId);
+    if (filters.doctorId) params.append('doctorId', filters.doctorId);
+    if (filters.facilityId) params.append('facilityId', filters.facilityId);
+    if (filters.status) params.append('status', filters.status);
+    const query = params.toString() ? `?${params.toString()}` : '';
+    const res = await request<{ success: boolean; referrals: Referral[] }>(`/referrals${query}`);
+    return res.referrals;
+  },
+
+  async createReferral(data: Partial<Referral>): Promise<Referral> {
+    const res = await request<{ success: boolean; referral: Referral }>('/referrals', {
+      method: 'POST',
+      body: JSON.stringify(data)
+    });
+    return res.referral;
+  },
+
+  async updateReferralStatus(referralId: string, data: {
+    status: string;
+    notes?: string;
+    actorId?: string;
+    actorName?: string;
+    actorRole?: string;
+    scheduledAppointmentId?: string;
+    scheduledDate?: string;
+    destinationDoctorId?: string;
+    destinationDoctorName?: string;
+    feedbackReport?: string;
+  }): Promise<Referral> {
+    const res = await request<{ success: boolean; referral: Referral }>(`/referrals/${referralId}/status`, {
+      method: 'PATCH',
+      body: JSON.stringify(data)
+    });
+    return res.referral;
+  },
+
+  // ----------------------------------------------------
+  // Phase 2: Diagnostic Coordination
+  // ----------------------------------------------------
+  async getDiagnosticCatalog(): Promise<DiagnosticTest[]> {
+    const res = await request<{ success: boolean; tests: DiagnosticTest[] }>('/diagnostics/catalog');
+    return res.tests;
+  },
+
+  async getDiagnosticOrders(filters: { patientId?: string; doctorId?: string; facilityId?: string; status?: string } = {}): Promise<DiagnosticOrder[]> {
+    const params = new URLSearchParams();
+    if (filters.patientId) params.append('patientId', filters.patientId);
+    if (filters.doctorId) params.append('doctorId', filters.doctorId);
+    if (filters.facilityId) params.append('facilityId', filters.facilityId);
+    if (filters.status) params.append('status', filters.status);
+    const query = params.toString() ? `?${params.toString()}` : '';
+    const res = await request<{ success: boolean; orders: DiagnosticOrder[] }>(`/diagnostics/orders${query}`);
+    return res.orders;
+  },
+
+  async createDiagnosticOrder(data: {
+    patientId: string;
+    patientName: string;
+    patientPhone?: string;
+    doctorId: string;
+    doctorName: string;
+    facilityId?: string;
+    facilityName?: string;
+    tests: DiagnosticTest[];
+    clinicalIndication?: string;
+  }): Promise<DiagnosticOrder> {
+    const res = await request<{ success: boolean; order: DiagnosticOrder }>('/diagnostics/orders', {
+      method: 'POST',
+      body: JSON.stringify(data)
+    });
+    return res.order;
+  },
+
+  async scheduleDiagnosticOrder(orderId: string, data: { scheduledSlot: string; scheduledFacilityId?: string }): Promise<DiagnosticOrder> {
+    const res = await request<{ success: boolean; order: DiagnosticOrder }>(`/diagnostics/orders/${orderId}/schedule`, {
+      method: 'POST',
+      body: JSON.stringify(data)
+    });
+    return res.order;
+  },
+
+  async submitDiagnosticResult(orderId: string, data: {
+    results: any[];
+    reportSummary?: string;
+    abnormalFlagCount?: number;
+    criticalFlagCount?: number;
+  }): Promise<DiagnosticOrder> {
+    const res = await request<{ success: boolean; order: DiagnosticOrder }>(`/diagnostics/orders/${orderId}/result`, {
+      method: 'POST',
+      body: JSON.stringify(data)
+    });
+    return res.order;
+  },
+
+  async reviewDiagnosticOrder(orderId: string, data: { reviewedByDoctorId: string; doctorReviewNotes: string }): Promise<DiagnosticOrder> {
+    const res = await request<{ success: boolean; order: DiagnosticOrder }>(`/diagnostics/orders/${orderId}/review`, {
+      method: 'PATCH',
+      body: JSON.stringify(data)
+    });
+    return res.order;
+  },
+
+  // ----------------------------------------------------
+  // Phase 2: Care Plans & High-Risk Follow-Up
+  // ----------------------------------------------------
+  async getCarePlans(filters: { patientId?: string; doctorId?: string; riskTier?: string; status?: string } = {}): Promise<CarePlan[]> {
+    const params = new URLSearchParams();
+    if (filters.patientId) params.append('patientId', filters.patientId);
+    if (filters.doctorId) params.append('doctorId', filters.doctorId);
+    if (filters.riskTier) params.append('riskTier', filters.riskTier);
+    if (filters.status) params.append('status', filters.status);
+    const query = params.toString() ? `?${params.toString()}` : '';
+    const res = await request<{ success: boolean; carePlans: CarePlan[] }>(`/care-plans${query}`);
+    return res.carePlans;
+  },
+
+  async createCarePlan(data: Partial<CarePlan>): Promise<CarePlan> {
+    const res = await request<{ success: boolean; carePlan: CarePlan }>('/care-plans', {
+      method: 'POST',
+      body: JSON.stringify(data)
+    });
+    return res.carePlan;
+  },
+
+  async updateCarePlanTask(carePlanId: string, taskId: string, data: { completed: boolean; notes?: string }): Promise<CarePlan> {
+    const res = await request<{ success: boolean; carePlan: CarePlan }>(`/care-plans/${carePlanId}/tasks/${taskId}`, {
+      method: 'PATCH',
+      body: JSON.stringify(data)
+    });
+    return res.carePlan;
+  },
+
+  async escalateCarePlan(carePlanId: string, data: { reason: string; doctorId?: string }): Promise<CarePlan> {
+    const res = await request<{ success: boolean; carePlan: CarePlan }>(`/care-plans/${carePlanId}/escalate`, {
+      method: 'POST',
+      body: JSON.stringify(data)
+    });
+    return res.carePlan;
+  },
+
+  // ----------------------------------------------------
+  // Phase 2: Frontline Healthcare Worker
+  // ----------------------------------------------------
+  async getWorkerPatients(): Promise<any[]> {
+    const res = await request<{ success: boolean; patients: any[] }>('/worker/patients');
+    return res.patients;
+  },
+
+  async registerWorkerPatient(data: {
+    fullName: string;
+    phone: string;
+    gender?: string;
+    dob?: string;
+    bloodGroup?: string;
+    villageOrTown?: string;
+    district?: string;
+    state?: string;
+    pincode?: string;
+    initialVitals?: any;
+  }): Promise<{ user: UserProfile; patient: PatientProfile }> {
+    const res = await request<{ success: boolean; user: UserProfile; patient: PatientProfile }>('/worker/patients', {
+      method: 'POST',
+      body: JSON.stringify(data)
+    });
+    return { user: res.user, patient: res.patient };
+  },
+
+  // ----------------------------------------------------
+  // Phase 2: Facility Quality & Operations
+  // ----------------------------------------------------
+  async getFacilityOperations(facilityId: string): Promise<FacilityOperationsMetrics> {
+    const res = await request<{ success: boolean; metrics: FacilityOperationsMetrics }>(`/facilities/${facilityId}/operations`);
+    return res.metrics;
+  },
+
+  // ----------------------------------------------------
+  // Phase 2: Interoperability / FHIR Export
+  // ----------------------------------------------------
+  async getFhirPatientBundle(patientId: string): Promise<any> {
+    return request<any>(`/fhir/patients/${patientId}`);
   }
 };
 

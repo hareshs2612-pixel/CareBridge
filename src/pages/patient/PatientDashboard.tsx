@@ -37,7 +37,9 @@ import {
   Compass,
   BellRing,
   Calendar,
-  ArrowRight
+  ArrowRight,
+  GitPullRequest,
+  FlaskConical
 } from 'lucide-react';
 
 export const PatientDashboard: React.FC = () => {
@@ -336,14 +338,81 @@ export const PatientDashboard: React.FC = () => {
             SOS Emergency
           </Link>
           <Link
-            to="/navigator"
+            to="/triage"
             className="bg-teal-700 hover:bg-teal-800 text-white font-bold text-xs px-4 py-2.5 rounded-xl transition shadow-xs flex items-center gap-1.5"
           >
             <Compass className="w-4 h-4" />
-            Launch Navigator
+            Launch Triage
             <ArrowRight className="w-3.5 h-3.5" />
           </Link>
         </div>
+      </div>
+
+      {/* Corporate Care Continuity Pathways Hub */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+        <Link
+          to="/care-plans"
+          className="bg-white p-4 rounded-2xl border border-slate-200 shadow-xs hover:border-teal-300 hover:shadow-md transition group"
+        >
+          <div className="flex items-center justify-between mb-3">
+            <div className="p-2.5 rounded-xl bg-teal-50 text-teal-600 group-hover:bg-teal-600 group-hover:text-white transition">
+              <HeartHandshake className="w-5 h-5" />
+            </div>
+            <span className="text-[10px] font-bold uppercase tracking-wider bg-teal-50 text-teal-700 px-2 py-0.5 rounded-full">
+              Follow-Up
+            </span>
+          </div>
+          <h4 className="font-bold text-slate-900 text-sm">Care Plans & Checklists</h4>
+          <p className="text-xs text-slate-500 mt-1">High-risk chronic tracking, due dates, and instant doctor escalations.</p>
+        </Link>
+
+        <Link
+          to="/referrals"
+          className="bg-white p-4 rounded-2xl border border-slate-200 shadow-xs hover:border-blue-300 hover:shadow-md transition group"
+        >
+          <div className="flex items-center justify-between mb-3">
+            <div className="p-2.5 rounded-xl bg-blue-50 text-cb-blue group-hover:bg-cb-blue group-hover:text-white transition">
+              <GitPullRequest className="w-5 h-5" />
+            </div>
+            <span className="text-[10px] font-bold uppercase tracking-wider bg-blue-50 text-cb-blue px-2 py-0.5 rounded-full">
+              Closed Loop
+            </span>
+          </div>
+          <h4 className="font-bold text-slate-900 text-sm">Specialist Referrals</h4>
+          <p className="text-xs text-slate-500 mt-1">Track your referral from initiation to specialist consultation completion.</p>
+        </Link>
+
+        <Link
+          to="/diagnostics"
+          className="bg-white p-4 rounded-2xl border border-slate-200 shadow-xs hover:border-indigo-300 hover:shadow-md transition group"
+        >
+          <div className="flex items-center justify-between mb-3">
+            <div className="p-2.5 rounded-xl bg-indigo-50 text-indigo-600 group-hover:bg-indigo-600 group-hover:text-white transition">
+              <FlaskConical className="w-5 h-5" />
+            </div>
+            <span className="text-[10px] font-bold uppercase tracking-wider bg-indigo-50 text-indigo-700 px-2 py-0.5 rounded-full">
+              Diagnostics
+            </span>
+          </div>
+          <h4 className="font-bold text-slate-900 text-sm">Lab Orders & Results</h4>
+          <p className="text-xs text-slate-500 mt-1">Order tests, review abnormal value flags, and download signed EHR reports.</p>
+        </Link>
+
+        <Link
+          to="/facility-operations"
+          className="bg-white p-4 rounded-2xl border border-slate-200 shadow-xs hover:border-purple-300 hover:shadow-md transition group"
+        >
+          <div className="flex items-center justify-between mb-3">
+            <div className="p-2.5 rounded-xl bg-purple-50 text-purple-600 group-hover:bg-purple-600 group-hover:text-white transition">
+              <Activity className="w-5 h-5" />
+            </div>
+            <span className="text-[10px] font-bold uppercase tracking-wider bg-purple-50 text-purple-700 px-2 py-0.5 rounded-full">
+              Operations
+            </span>
+          </div>
+          <h4 className="font-bold text-slate-900 text-sm">Hospital Delays & Capacity</h4>
+          <p className="text-xs text-slate-500 mt-1">Live OPD queue times, triage delays, and real-time bed availability.</p>
+        </Link>
       </div>
 
       {/* Visible Proactive Escalation Alert if latest check-in is 'worse' */}

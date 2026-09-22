@@ -35,7 +35,9 @@ import {
   Video,
   Calendar,
   Pill,
-  ExternalLink
+  ExternalLink,
+  FlaskConical,
+  GitPullRequest
 } from 'lucide-react';
 
 export const DoctorDashboard: React.FC = () => {
@@ -258,8 +260,24 @@ export const DoctorDashboard: React.FC = () => {
 
           <div className="flex flex-wrap items-center gap-2.5">
             <Link
+              to="/diagnostics"
+              className="bg-indigo-600 hover:bg-indigo-500 text-white font-bold px-3.5 py-2.5 rounded-xl text-xs flex items-center gap-1.5 transition shadow-xs"
+            >
+              <FlaskConical className="w-4 h-4" />
+              <span>Diagnostic Reviews</span>
+            </Link>
+
+            <Link
+              to="/referrals"
+              className="bg-blue-600 hover:bg-blue-500 text-white font-bold px-3.5 py-2.5 rounded-xl text-xs flex items-center gap-1.5 transition shadow-xs"
+            >
+              <GitPullRequest className="w-4 h-4" />
+              <span>Specialist Referrals</span>
+            </Link>
+
+            <Link
               to="/doctor/note"
-              className="bg-cb-blue hover:bg-blue-600 text-white font-bold px-4 py-2.5 rounded-xl text-xs flex items-center gap-1.5 transition shadow-xs"
+              className="bg-cb-blue hover:bg-blue-600 text-white font-bold px-3.5 py-2.5 rounded-xl text-xs flex items-center gap-1.5 transition shadow-xs"
             >
               <PlusCircle className="w-4 h-4" />
               <span>New Clinical Note & Rx</span>
@@ -267,7 +285,7 @@ export const DoctorDashboard: React.FC = () => {
 
             <Link
               to="/teleconsult"
-              className="bg-emerald-600 hover:bg-emerald-500 text-white font-bold px-4 py-2.5 rounded-xl text-xs flex items-center gap-1.5 transition shadow-xs"
+              className="bg-emerald-600 hover:bg-emerald-500 text-white font-bold px-3.5 py-2.5 rounded-xl text-xs flex items-center gap-1.5 transition shadow-xs"
             >
               <Video className="w-4 h-4" />
               <span>Teleconsultation Room</span>

@@ -26,7 +26,11 @@ import {
   Stethoscope,
   Wind,
   UserCheck,
-  CheckCircle2
+  CheckCircle2,
+  Compass,
+  GitPullRequest,
+  FlaskConical,
+  HeartHandshake
 } from 'lucide-react';
 
 export const LandingPage: React.FC = () => {
@@ -527,7 +531,116 @@ export const LandingPage: React.FC = () => {
         </div>
       </section>
 
-      {/* 7. Corporate Trust & Compliance */}
+      {/* 7. Corporate Care Continuity Section */}
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="bg-gradient-to-br from-slate-900 via-cb-navy to-slate-950 rounded-3xl p-8 sm:p-12 text-white shadow-xl relative overflow-hidden">
+          <div className="absolute top-0 right-0 w-96 h-96 bg-cb-blue/10 rounded-full blur-3xl pointer-events-none" />
+
+          <div className="max-w-3xl mb-10 relative z-10">
+            <span className="text-xs font-bold uppercase tracking-wider text-teal-400 bg-teal-400/10 px-3 py-1 rounded-full border border-teal-400/20">
+              End-to-End Clinical Continuity
+            </span>
+            <h2 className="text-2xl sm:text-4xl font-black tracking-tight mt-4 font-heading">
+              Your care, connected from consultation to follow-up
+            </h2>
+            <p className="text-sm text-slate-300 mt-2 leading-relaxed">
+              Care doesn't end when your consultation concludes. CareBridge ties digital triage, specialist referrals, lab diagnostics, and active care plans into a single verified clinical loop.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 relative z-10">
+            {/* Card 1: Digital Triage */}
+            <Link
+              to="/triage"
+              className="bg-white/5 hover:bg-white/10 border border-white/10 hover:border-teal-400/40 rounded-2xl p-5 transition group flex flex-col justify-between"
+            >
+              <div>
+                <div className="w-10 h-10 rounded-xl bg-teal-500/20 text-teal-300 flex items-center justify-center mb-4 group-hover:scale-110 transition">
+                  <Compass className="w-5 h-5" />
+                </div>
+                <h3 className="font-bold text-base text-white group-hover:text-teal-300 transition">
+                  Digital Triage
+                </h3>
+                <p className="text-xs text-slate-400 mt-2 leading-relaxed">
+                  5-tier deterministic clinical assessment with red-flag detection and direct referral routing.
+                </p>
+              </div>
+              <div className="mt-4 flex items-center gap-1 text-xs font-bold text-teal-300">
+                <span>Start Assessment</span>
+                <ChevronRight className="w-4 h-4 group-hover:translate-x-1 transition" />
+              </div>
+            </Link>
+
+            {/* Card 2: Closed Loop Referrals */}
+            <Link
+              to="/referrals"
+              className="bg-white/5 hover:bg-white/10 border border-white/10 hover:border-blue-400/40 rounded-2xl p-5 transition group flex flex-col justify-between"
+            >
+              <div>
+                <div className="w-10 h-10 rounded-xl bg-blue-500/20 text-blue-300 flex items-center justify-center mb-4 group-hover:scale-110 transition">
+                  <GitPullRequest className="w-5 h-5" />
+                </div>
+                <h3 className="font-bold text-base text-white group-hover:text-blue-300 transition">
+                  Closed-Loop Referrals
+                </h3>
+                <p className="text-xs text-slate-400 mt-2 leading-relaxed">
+                  Track patient journeys across secondary and tertiary specialists with verified status milestones.
+                </p>
+              </div>
+              <div className="mt-4 flex items-center gap-1 text-xs font-bold text-blue-300">
+                <span>Track Referrals</span>
+                <ChevronRight className="w-4 h-4 group-hover:translate-x-1 transition" />
+              </div>
+            </Link>
+
+            {/* Card 3: Diagnostic Coordination */}
+            <Link
+              to="/diagnostics"
+              className="bg-white/5 hover:bg-white/10 border border-white/10 hover:border-indigo-400/40 rounded-2xl p-5 transition group flex flex-col justify-between"
+            >
+              <div>
+                <div className="w-10 h-10 rounded-xl bg-indigo-500/20 text-indigo-300 flex items-center justify-center mb-4 group-hover:scale-110 transition">
+                  <FlaskConical className="w-5 h-5" />
+                </div>
+                <h3 className="font-bold text-base text-white group-hover:text-indigo-300 transition">
+                  Lab Diagnostics
+                </h3>
+                <p className="text-xs text-slate-400 mt-2 leading-relaxed">
+                  Test ordering, critical abnormal flags highlight, and electronic physician review sign-off attached to EHR.
+                </p>
+              </div>
+              <div className="mt-4 flex items-center gap-1 text-xs font-bold text-indigo-300">
+                <span>View Lab Portal</span>
+                <ChevronRight className="w-4 h-4 group-hover:translate-x-1 transition" />
+              </div>
+            </Link>
+
+            {/* Card 4: High-Risk Care Plans */}
+            <Link
+              to="/care-plans"
+              className="bg-white/5 hover:bg-white/10 border border-white/10 hover:border-rose-400/40 rounded-2xl p-5 transition group flex flex-col justify-between"
+            >
+              <div>
+                <div className="w-10 h-10 rounded-xl bg-rose-500/20 text-rose-300 flex items-center justify-center mb-4 group-hover:scale-110 transition">
+                  <HeartHandshake className="w-5 h-5" />
+                </div>
+                <h3 className="font-bold text-base text-white group-hover:text-rose-300 transition">
+                  Care Plans & Follow-Up
+                </h3>
+                <p className="text-xs text-slate-400 mt-2 leading-relaxed">
+                  Chronic condition tracking, overdue checklists, and instant clinician escalations.
+                </p>
+              </div>
+              <div className="mt-4 flex items-center gap-1 text-xs font-bold text-rose-300">
+                <span>Review Plans</span>
+                <ChevronRight className="w-4 h-4 group-hover:translate-x-1 transition" />
+              </div>
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* 8. Corporate Trust & Compliance */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="border-t border-slate-200 pt-10">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 text-center sm:text-left">

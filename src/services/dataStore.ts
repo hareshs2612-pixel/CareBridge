@@ -24,7 +24,8 @@ import {
   MedicineInventory,
   Prescription,
   NotificationItem,
-  CityLocation
+  CityLocation,
+  SyncQueueItem
 } from '../types';
 import { 
   INITIAL_USERS, 
@@ -77,7 +78,8 @@ const STORAGE_KEYS = {
   CORPORATE_APPOINTMENTS: 'cb_corporate_appointments_v1',
   PRESCRIPTIONS: 'cb_prescriptions_v1',
   NOTIFICATIONS: 'cb_notifications_v1',
-  SELECTED_CITY: 'cb_selected_city_v1'
+  SELECTED_CITY: 'cb_selected_city_v1',
+  SYNC_QUEUE: 'cb_sync_queue_v1'
 };
 
 class DataStore {
@@ -1011,6 +1013,89 @@ class DataStore {
     localStorage.setItem(STORAGE_KEYS.NOTIFICATIONS, JSON.stringify(CORPORATE_NOTIFICATIONS));
     localStorage.setItem(STORAGE_KEYS.SELECTED_CITY, 'Bengaluru');
     this.notify();
+  }
+
+  // ----------------------------------------------------
+  // Phase 2: Low-Connectivity Strategy & Sync Queue
+  // ----------------------------------------------------
+  public getSyncQueue(): SyncQueueItem[] {
+    const raw = localStorage.getItem(STORAGE_KEYS.SYNC_QUEUE);
+    if (!raw) return [];
+    try {
+      return JSON.parse(raw);
+    } catch {
+      return [];
+    }
+  }
+
+  public addPendingSync(item: Omit<SyncQueueItem, 'id' | 'createdAt' | 'retryCount' | 'status'>): SyncQueueItem {
+    const queue = this.getSyncQueue();
+    const newItem: SyncQueueItem = {
+      ...item,
+      id: `sync_${Date.now()}_${Math.random().toString(36).slice(2, 7)}`,
+      createdAt: new Date().toISOString(),
+      retryCount: 0,
+      status: 'pending'
+    };
+    queue.push(newItem);
+    localStorage.setItem(STORAGE_KEYS.SYNC_QUEUE, JSON.stringify(queue));
+    this.notify();
+    return newItem;
+  }
+
+  public removeSyncItem(id: string) {
+    const queue = this.getSyncQueue().filter(i => i.id !== id);
+    localStorage.setItem(STORAGE_KEYS.SYNC_QUEUE, JSON.stringify(queue));
+    this.notify();
+  }
+
+  public async processSyncQueue(): Promise<{ processed: number; failed: number }> {
+    const queue = this.getSyncQueue();
+    if (queue.length === 0) return { processed: 0, failed: 0 };
+
+    let processed = 0;
+    let failed = 0;
+    const remaining: SyncQueueItem[] = [];
+
+    for (const item of queue) {
+      try {
+        let endpoint = '';
+        let method = 'POST';
+        if (item.action === 'create_triage') {
+          endpoint = '/api/triage';
+        } else if (item.action === 'create_referral') {
+          endpoint = '/api/referrals';
+        } else if (item.action === 'update_referral') {
+          endpoint = `/api/referrals/${item.payload.id}/status`;
+          method = 'PATCH';
+        } else if (item.action === 'order_diagnostic') {
+          endpoint = '/api/diagnostics/orders';
+        } else if (item.action === 'update_care_task') {
+          endpoint = `/api/care-plans/${item.payload.carePlanId}/tasks/${item.payload.taskId}`;
+          method = 'PATCH';
+        }
+
+        if (endpoint) {
+          const res = await fetch(endpoint, {
+            method,
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(item.payload)
+          });
+          if (!res.ok) throw new Error(`HTTP ${res.status}`);
+        }
+        processed++;
+      } catch (err) {
+        failed++;
+        item.retryCount = (item.retryCount || 0) + 1;
+        item.status = 'failed';
+        item.error = (err as Error).message;
+        remaining.push(item);
+      }
+    }
+
+    localStorage.setItem(STORAGE_KEYS.SYNC_QUEUE, JSON.stringify(remaining));
+    this.notify();
+    return { processed, failed };
   }
 }
 

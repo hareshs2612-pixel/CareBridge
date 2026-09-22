@@ -1,12 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { dataStore } from '../../services/dataStore';
+import { api } from '../../services/api';
 import { 
   UserProfile, 
-  PatientProfile, 
+  TriageTier, 
   TriageAssessment, 
-  TriageSeverity, 
-  ReferralRecord,
   HealthcareFacility 
 } from '../../types';
 import { 
@@ -16,552 +15,603 @@ import {
   Activity, 
   MapPin, 
   Clock, 
-  FileText, 
-  CheckCircle2, 
   ArrowRight, 
   RotateCcw, 
-  Sparkles, 
-  HelpCircle, 
   PhoneCall, 
-  Send,
+  Video,
+  Calendar,
   Building2,
-  Share2
+  CheckCircle2,
+  HelpCircle,
+  HeartPulse
 } from 'lucide-react';
 
-const COMMON_SYMPTOM_PRESETS = [
+interface SymptomScenario {
+  id: string;
+  label: string;
+  tier: TriageTier;
+  symptoms: string[];
+  category: string;
+  flags: string[];
+  guidance: string;
+  facilityRecommendation: string;
+}
+
+const SYMPTOM_SCENARIOS: SymptomScenario[] = [
   {
-    id: 's-1',
-    label: 'High morning blood sugar + fatigue',
-    category: 'Chronic Metabolic',
-    severity: 'consult_soon' as TriageSeverity,
-    recommendedCareLevel: 'Community Health Centre (CHC) - General Physician OPD',
-    primaryAction: 'Physician consultation within 24-48 hours. Review Metformin & Telmisartan adherence. Check fasting blood sugar.',
-    suggestedFacilityId: 'fac-02',
-    warningFlags: ['Fasting sugar persistently > 140 mg/dL', 'Morning dizziness or blurred vision'],
-    selfCareGuidance: ['Avoid sweets and refined flours', 'Maintain regular hydration with boiled water', 'Do not double medicine doses without doctor instruction']
+    id: 'sc-1',
+    label: 'Chest pain, left arm tightness, acute shortness of breath',
+    tier: 'emergency',
+    symptoms: ['Crushing chest pain', 'Left arm radiation', 'Shortness of breath', 'Cold sweats'],
+    category: 'Cardiovascular Emergency',
+    flags: ['chest_pain_severe', 'dyspnea_severe'],
+    guidance: 'CRITICAL EMERGENCY: Do not attempt to travel alone or drive. Immediately dial Emergency Hotline 1066 or Ambulance 108. Maintain seated posture.',
+    facilityRecommendation: 'CareBridge Apex Emergency Trauma Centre'
   },
   {
-    id: 's-2',
-    label: 'Chest pain, shortness of breath, sweating',
-    category: 'Emergency Cardiovascular',
-    severity: 'emergency' as TriageSeverity,
-    recommendedCareLevel: 'Emergency Room / District Hospital Trauma Centre',
-    primaryAction: 'Call 108 immediately. Do NOT drive or travel alone. Keep patient calm in resting position.',
-    suggestedFacilityId: 'fac-04',
-    warningFlags: ['Chest heaviness radiating to left arm/jaw', 'Cold sweats with acute breathlessness'],
-    selfCareGuidance: ['Do not consume heavy foods or water', 'Keep emergency contacts alerted', 'Keep patient in semi-upright seated posture']
+    id: 'sc-2',
+    label: 'High fever (103°F) with confusion and severe abdominal cramping',
+    tier: 'urgent',
+    symptoms: ['Persistent high fever > 103°F', 'Severe abdominal pain', 'Repeated vomiting'],
+    category: 'Acute Systemic / Abdominal',
+    flags: ['high_fever', 'severe_abdominal_pain'],
+    guidance: 'Urgent medical assessment needed within 2-4 hours. Proceed to the nearest hospital emergency OPD for intravenous hydration and blood work.',
+    facilityRecommendation: 'CareBridge Apex Fast-Track OPD'
   },
   {
-    id: 's-3',
-    label: 'Mild seasonal dry cough & dust irritation',
-    category: 'Frontline Primary',
-    severity: 'self_care' as TriageSeverity,
-    recommendedCareLevel: 'Health Sub-Centre Bilaspur or Home Care',
-    primaryAction: 'Warm saline gargles, steam inhalation, and hydration. Visit Sub-Centre if symptoms persist past 5 days.',
-    suggestedFacilityId: 'fac-03',
-    warningFlags: ['Fever above 101°F', 'Blood-tinged phlegm or chest pain on coughing'],
-    selfCareGuidance: ['Drink warm ginger/tulsi boiled water', 'Cover mouth with cloth during farm threshing', 'Rest indoors during midday dust']
+    id: 'sc-3',
+    label: 'Elevated morning blood glucose (160+ mg/dL) & headache with BP 150/95',
+    tier: 'priority_consultation',
+    symptoms: ['Elevated blood glucose', 'Persistent morning headache', 'Hypertensive reading'],
+    category: 'Chronic Metabolic Flare',
+    flags: ['chronic_flare', 'hypertension_symptom'],
+    guidance: 'Specialist physician review recommended within 24-48 hours. Continue prescribed maintenance dose and schedule an expedited OPD or assisted teleconsult.',
+    facilityRecommendation: 'Community Health Centre (CHC) Rampur - Internal Medicine OPD'
   },
   {
-    id: 's-4',
-    label: 'Pregnancy 2nd trimester: Routine checkup & mild swelling',
-    category: 'Maternal & Child Health',
-    severity: 'consult_soon' as TriageSeverity,
-    recommendedCareLevel: 'Primary Health Centre (PHC) - ANC Clinic',
-    primaryAction: 'Scheduled antenatal checkup at PHC Mohanpur. Screen blood pressure, urine protein, and weight.',
-    suggestedFacilityId: 'fac-01',
-    warningFlags: ['Sudden severe facial swelling', 'Severe headache or blurred vision', 'Decreased fetal movements'],
-    selfCareGuidance: ['Daily Iron & Folic Acid tablet after meals', 'Elevate feet when resting', 'Avoid heavy agricultural lifting']
+    id: 'sc-4',
+    label: 'Mild seasonal dry cough, nasal congestion & throat irritation (3 days)',
+    tier: 'routine_consultation',
+    symptoms: ['Dry cough', 'Nasal congestion', 'Sore throat'],
+    category: 'Upper Respiratory Infection',
+    flags: [],
+    guidance: 'Routine outpatient consultation recommended within 3-7 days if unresolved. Maintain oral hydration and saline gargles.',
+    facilityRecommendation: 'Primary Health Centre (PHC) Outpatient Clinic'
   },
   {
-    id: 's-5',
-    label: 'Watery diarrhea (3+ times) & mild thirst',
-    category: 'Acute Gastrointestinal',
-    severity: 'consult_soon' as TriageSeverity,
-    recommendedCareLevel: 'PHC or Sub-Centre Oral Rehydration Point',
-    primaryAction: 'Start Oral Rehydration Solution (ORS) immediately after every loose motion. Zinc 20mg daily.',
-    suggestedFacilityId: 'fac-01',
-    warningFlags: ['Inability to retain liquids', 'High fever, dark urine, or extreme lethargy'],
-    selfCareGuidance: ['1 ORS packet dissolved in exactly 1 Liter clean boiled water', 'Continue light boiled rice / dalia', 'Avoid unboiled well water']
+    id: 'sc-5',
+    label: 'Minor muscle soreness after farm work / routine dietary queries',
+    tier: 'low_priority',
+    symptoms: ['Mild muscular ache', 'General fatigue'],
+    category: 'Musculoskeletal / Wellness',
+    flags: [],
+    guidance: 'Self-care and supportive rest indicated. Consider over-the-counter paracetamol or topical balm from a Jan Aushadhi Kendra if discomfort persists.',
+    facilityRecommendation: 'Sub-Centre Bilaspur & Community Pharmacy'
   }
 ];
 
 export const GuidedCareNavigator: React.FC = () => {
-  const [currentUser, setCurrentUser] = useState<UserProfile>(dataStore.getCurrentUser());
-  const [patient, setPatient] = useState<PatientProfile | undefined>(dataStore.getPatientById(currentUser.uid));
-  const [facilities, setFacilities] = useState<HealthcareFacility[]>(dataStore.getFacilities());
-  
-  // Input state
-  const [selectedPresetId, setSelectedPresetId] = useState<string>('s-1');
-  const [customSymptomText, setCustomSymptomText] = useState<string>('');
-  const [durationDays, setDurationDays] = useState<string>('2');
-  const [hasRedFlags, setHasRedFlags] = useState<boolean>(false);
-  
-  // Triage assessment state
-  const [assessment, setAssessment] = useState<TriageAssessment | null>(null);
-  const [createdReferral, setCreatedReferral] = useState<ReferralRecord | null>(null);
-  const [isReferralCreated, setIsReferralCreated] = useState<boolean>(false);
-
   const navigate = useNavigate();
+  const [currentUser, setCurrentUser] = useState<UserProfile>(dataStore.getCurrentUser());
+  const [facilities] = useState<HealthcareFacility[]>(dataStore.getFacilities());
+
+  // Input states
+  const [selectedScenarioId, setSelectedScenarioId] = useState<string>('sc-3');
+  const [customSymptoms, setCustomSymptoms] = useState<string>('');
+  const [duration, setDuration] = useState<string>('2-3 days');
+  const [spo2, setSpo2] = useState<string>('');
+  const [pulse, setPulse] = useState<string>('');
+  const [temperature, setTemperature] = useState<string>('');
+  const [bloodPressure, setBloodPressure] = useState<string>('');
+  const [hasSeverePain, setHasSeverePain] = useState<boolean>(false);
+  const [hasBreathingDifficulty, setHasBreathingDifficulty] = useState<boolean>(false);
+
+  // Result state
+  const [assessment, setAssessment] = useState<TriageAssessment | null>(null);
+  const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
+  const [syncNotice, setSyncNotice] = useState<string>('');
 
   useEffect(() => {
-    const user = dataStore.getCurrentUser();
-    setCurrentUser(user);
-    setPatient(dataStore.getPatientById(user.uid));
-    setFacilities(dataStore.getFacilities());
+    return dataStore.subscribe(() => {
+      setCurrentUser(dataStore.getCurrentUser());
+    });
   }, []);
 
-  const handleRunTriage = () => {
-    const preset = COMMON_SYMPTOM_PRESETS.find(p => p.id === selectedPresetId);
-    let severity: TriageSeverity = preset ? preset.severity : 'consult_soon';
-    
-    // Safety rules override:
-    const lowerText = customSymptomText.toLowerCase();
-    if (
-      hasRedFlags || 
-      lowerText.includes('chest pain') || 
-      lowerText.includes('cannot breathe') || 
-      lowerText.includes('unconscious') ||
-      lowerText.includes('choking') ||
-      lowerText.includes('severe bleeding')
-    ) {
-      severity = 'emergency';
-    }
-
-    const matchedFacility = facilities.find(f => {
-      if (severity === 'emergency') return f.type === 'District Hospital' || f.has24x7Emergency;
-      if (severity === 'consult_soon') return f.id === preset?.suggestedFacilityId || f.type.includes('CHC') || f.type.includes('PHC');
-      return f.type.includes('Sub-Centre') || f.id === 'fac-03';
-    }) || facilities[0];
-
-    let recommendedCareLevel = preset?.recommendedCareLevel || 'Public Healthcare Centre (PHC/CHC)';
-    let primaryAction = preset?.primaryAction || 'Please consult the on-duty Medical Officer at your nearest Community Health Centre.';
-    let warningFlags = preset?.warningFlags || ['Rapidly worsening pain', 'Fever with chills', 'Inability to eat or drink'];
-    let selfCare = preset?.selfCareGuidance || ['Drink safe, boiled drinking water', 'Rest in a well-ventilated room'];
-
-    if (severity === 'emergency') {
-      recommendedCareLevel = 'Level 3 Emergency / District Hospital Trauma Facility';
-      primaryAction = 'IMMEDIATE EMERGENCY: Dial 108 or proceed at once to Sitapur District Hospital. Alert family members.';
-      warningFlags = ['Acute respiratory compromise', 'Cardiovascular distress', 'Sudden neurological symptoms'];
-      selfCare = ['Do not walk unassisted', 'Loosen tight clothing', 'Prepare Emergency Minimum Dataset'];
-    }
-
-    const newAssessment: TriageAssessment = {
-      id: `trg-${Date.now()}`,
-      patientId: currentUser.uid,
-      symptoms: [preset?.label || 'General symptom consultation', ...(customSymptomText ? [customSymptomText] : [])],
-      userDescription: customSymptomText,
-      severity,
-      severityLabel: severity === 'emergency' 
-        ? 'Urgent Emergency Care Needed' 
-        : severity === 'consult_soon' 
-          ? 'Doctor Consultation Recommended (Within 24-48h)' 
-          : 'Sub-Centre / Safe Self-Care Guidance',
-      recommendedCareLevel,
-      primaryAction,
-      warningFlags,
-      selfCareGuidance: selfCare,
-      suggestedFacilityId: matchedFacility.id,
-      suggestedFacilityName: matchedFacility.name,
-      disclaimer: 'CareBridge Decision Support: This is a safe non-diagnostic triage system designed to guide rural patients to the appropriate public healthcare facility. It does not replace clinical evaluation or official emergency services.',
-      timestamp: new Date().toISOString()
-    };
-
-    setAssessment(newAssessment);
-    setIsReferralCreated(false);
-    setCreatedReferral(null);
-
-    dataStore.addAuditLog({
-      actorId: currentUser.uid,
-      actorName: currentUser.fullName,
-      actorRole: currentUser.role,
-      action: 'AI_SUMMARIZATION_REQUESTED',
-      resourceType: 'health_record',
-      patientId: currentUser.uid,
-      details: `Care Navigator Triage completed: ${newAssessment.severity.toUpperCase()} [Level: ${recommendedCareLevel}]`
-    });
+  const handleScenarioSelect = (scenario: SymptomScenario) => {
+    setSelectedScenarioId(scenario.id);
+    setCustomSymptoms(scenario.symptoms.join(', '));
+    setHasBreathingDifficulty(scenario.flags.includes('dyspnea_severe'));
+    setHasSeverePain(scenario.flags.includes('chest_pain_severe') || scenario.flags.includes('severe_abdominal_pain'));
   };
 
-  const handleGenerateReferralCard = () => {
-    if (!assessment) return;
-    const destFacility = facilities.find(f => f.id === assessment.suggestedFacilityId) || facilities[1];
+  const handleRunTriage = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+    setSyncNotice('');
 
-    const newReferral: ReferralRecord = {
-      id: `ref-${Date.now()}`,
-      patientId: currentUser.uid,
-      patientName: currentUser.fullName,
-      patientAbhaId: currentUser.abhaId || '91-8724-1029-4412',
-      patientAge: patient?.dob ? (new Date().getFullYear() - new Date(patient.dob).getFullYear()) : 52,
-      patientGender: patient?.gender ? (patient.gender === 'male' ? 'Male' : 'Female') : 'Male',
-      patientBloodGroup: patient?.bloodGroup || 'B+',
-      referringProviderId: 'carebridge-triage',
-      referringProviderName: 'CareBridge Guided Triage System',
-      referringRole: 'Verified Triage Protocol',
-      referringFacility: 'Frontline Self-Assessment / Sub-Centre Bilaspur',
-      destinationFacilityId: destFacility.id,
-      destinationFacilityName: destFacility.name,
-      specialtyNeeded: assessment.severity === 'emergency' ? 'Emergency Medicine / Trauma' : 'General Medicine & Diabetology',
-      urgency: assessment.severity === 'emergency' ? 'immediate_emergency' : assessment.severity === 'consult_soon' ? 'urgent' : 'routine',
-      reasonForReferral: assessment.symptoms.join(', ') + (customSymptomText ? ` (${customSymptomText})` : ''),
-      clinicalSummary: `Patient presenting with ${assessment.symptoms.join(', ')} for ${durationDays} days. Pre-existing conditions: ${patient?.chronicConditions.map(c => c.name).join(', ') || 'None reported'}.`,
-      criticalAllergies: patient?.emergencyMinimumDataset.criticalAllergies || ['Penicillin (LIFE-THREATENING)'],
-      status: 'initiated',
-      createdAt: new Date().toISOString()
+    const activeScenario = SYMPTOM_SCENARIOS.find(s => s.id === selectedScenarioId);
+    const symptomsList = customSymptoms
+      ? customSymptoms.split(',').map(s => s.trim()).filter(Boolean)
+      : (activeScenario ? activeScenario.symptoms : ['General health evaluation']);
+
+    const severityFlags: string[] = [];
+    if (hasBreathingDifficulty) severityFlags.push('dyspnea_severe');
+    if (hasSeverePain) severityFlags.push('chest_pain_severe');
+
+    const vitalsPayload: any = {};
+    if (temperature) vitalsPayload.temperatureF = parseFloat(temperature);
+    if (pulse) vitalsPayload.pulseBpm = parseInt(pulse, 10);
+    if (spo2) vitalsPayload.spo2 = parseInt(spo2, 10);
+    if (bloodPressure) vitalsPayload.bloodPressure = bloodPressure;
+
+    const payload = {
+      patientId: currentUser.uid || 'pat-ramesh',
+      patientName: currentUser.fullName || 'Patient',
+      symptoms: symptomsList,
+      duration,
+      severityFlags,
+      vitals: vitalsPayload,
+      assessedByRole: (currentUser.role === 'doctor' ? 'doctor' : (currentUser.role === 'healthcare_worker' ? 'healthcare_worker' : 'patient')) as any,
+      assessedById: currentUser.uid,
+      nearestFacilityRecommended: activeScenario?.facilityRecommendation || 'CareBridge Apex Hospital'
     };
 
-    dataStore.createReferral(newReferral);
-    setCreatedReferral(newReferral);
-    setIsReferralCreated(true);
+    try {
+      const res = await api.submitTriage(payload);
+      setAssessment(res);
+    } catch (err) {
+      console.warn('[TRIAGE] API failed, queuing offline sync:', err);
+      dataStore.addPendingSync({
+        action: 'create_triage',
+        payload
+      });
+      setSyncNotice('Assessment saved locally. Queued for server sync upon connection.');
+      // Local evaluation fallback
+      setAssessment({
+        id: `tri_local_${Date.now()}`,
+        patientId: payload.patientId,
+        patientName: payload.patientName,
+        assessedAt: new Date().toISOString(),
+        symptoms: payload.symptoms,
+        duration: payload.duration,
+        severityFlags: payload.severityFlags,
+        vitals: payload.vitals,
+        tier: hasSeverePain || hasBreathingDifficulty ? 'emergency' : 'priority_consultation',
+        recommendedCarePath: hasSeverePain || hasBreathingDifficulty ? 'Immediate Emergency Evaluation' : 'Priority Physician OPD',
+        clinicalGuidance: 'Please consult an attending physician for direct examination.',
+        followUpWindowHours: hasSeverePain ? 0 : 24,
+        assessedByRole: payload.assessedByRole,
+        status: 'active'
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
+  const getTierBadge = (tier: TriageTier) => {
+    switch (tier) {
+      case 'emergency':
+        return {
+          bg: 'bg-rose-50 border-rose-200 text-rose-800',
+          badge: 'bg-rose-600 text-white',
+          title: 'TIER 5: EMERGENCY CARE',
+          subtitle: 'Immediate Hospital Transfer / Dial 1066'
+        };
+      case 'urgent':
+        return {
+          bg: 'bg-amber-50 border-amber-200 text-amber-900',
+          badge: 'bg-amber-600 text-white',
+          title: 'TIER 4: URGENT CARE',
+          subtitle: 'Evaluation recommended within 2 to 4 Hours'
+        };
+      case 'priority_consultation':
+        return {
+          bg: 'bg-blue-50 border-blue-200 text-blue-900',
+          badge: 'bg-blue-600 text-white',
+          title: 'TIER 3: PRIORITY CONSULTATION',
+          subtitle: 'Physician review within 24 to 48 Hours'
+        };
+      case 'routine_consultation':
+        return {
+          bg: 'bg-teal-50 border-teal-200 text-teal-900',
+          badge: 'bg-teal-600 text-white',
+          title: 'TIER 2: ROUTINE OUTPATIENT',
+          subtitle: 'Clinic consultation within 3 to 7 Days'
+        };
+      case 'low_priority':
+      default:
+        return {
+          bg: 'bg-emerald-50 border-emerald-200 text-emerald-900',
+          badge: 'bg-emerald-600 text-white',
+          title: 'TIER 1: LOW PRIORITY / SELF-CARE',
+          subtitle: 'Home management & pharmacy supportive guidance'
+        };
+    }
   };
 
   return (
-    <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-8">
-      {/* Header Banner */}
-      <div className="bg-gradient-to-r from-teal-800 via-teal-900 to-slate-900 text-white rounded-3xl p-6 sm:p-8 shadow-xl relative overflow-hidden">
-        <div className="relative z-10 max-w-3xl space-y-3">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-teal-500/20 border border-teal-400/30 text-teal-300 text-xs font-semibold">
-            <Compass className="w-3.5 h-3.5" />
-            <span>Step 1 & 2 of CareBridge Care Continuity</span>
-          </div>
-          <h1 className="text-2xl sm:text-3xl font-black tracking-tight">
-            Guided Care Navigator & Safe Triage
-          </h1>
-          <p className="text-sm text-teal-100 leading-relaxed">
-            Not sure where to go? Describe your health need or symptoms below. CareBridge directs you to the 
-            safest, closest public healthcare facility (Sub-Centre, PHC, CHC, or District Hospital) without long travel or unnecessary delays.
-          </p>
-
-          <div className="flex items-center gap-2 text-[11px] text-teal-300/90 pt-1">
-            <ShieldCheck className="w-4 h-4 text-teal-400" />
-            <span>Non-diagnostic decision support • Doctor retains clinical authority • Aligned with NHM protocols</span>
-          </div>
-        </div>
-      </div>
-
-      {/* Main Input Form */}
-      <div className="bg-white rounded-2xl border border-slate-200 p-6 shadow-sm space-y-6">
-        <div className="flex items-center justify-between border-b border-slate-100 pb-4">
-          <div className="flex items-center gap-2">
-            <div className="p-2 bg-teal-50 text-teal-700 rounded-xl">
-              <Activity className="w-5 h-5" />
+    <div className="min-h-screen bg-slate-50 py-8 px-4 sm:px-6 lg:px-8">
+      <div className="max-w-5xl mx-auto space-y-8">
+        
+        {/* Header Banner */}
+        <div className="bg-white rounded-2xl p-6 sm:p-8 shadow-sm border border-slate-200 flex flex-col md:flex-row md:items-center justify-between gap-6">
+          <div>
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-teal-50 border border-teal-200 text-teal-800 text-xs font-semibold tracking-wide uppercase mb-3">
+              <Compass className="w-3.5 h-3.5 text-teal-600" />
+              CareBridge Clinical Decision Support
             </div>
-            <div>
-              <h2 className="text-base font-bold text-slate-900">What symptoms or care need are you experiencing?</h2>
-              <p className="text-xs text-slate-500">Select a common scenario or type your details</p>
-            </div>
+            <h1 className="text-2xl sm:text-3xl font-bold text-slate-900 tracking-tight">
+              5-Tier Digital Triage & Guided Navigation
+            </h1>
+            <p className="text-slate-600 mt-2 text-sm sm:text-base max-w-2xl">
+              Standardized clinical triage assessment. Identifies severity flags, directs to the appropriate facility level, and connects seamlessly to appointments or emergency hotlines.
+            </p>
           </div>
-          <button
-            onClick={() => {
-              setSelectedPresetId('s-1');
-              setCustomSymptomText('');
-              setDurationDays('2');
-              setHasRedFlags(false);
-              setAssessment(null);
-              setIsReferralCreated(false);
-            }}
-            className="text-xs text-slate-500 hover:text-slate-800 flex items-center gap-1 font-medium transition"
-          >
-            <RotateCcw className="w-3.5 h-3.5" />
-            Reset
-          </button>
-        </div>
-
-        {/* Quick Symptom Chips */}
-        <div className="space-y-2">
-          <label className="text-xs font-bold uppercase tracking-wider text-slate-600 block">
-            Common Rural Health Scenarios
-          </label>
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
-            {COMMON_SYMPTOM_PRESETS.map((preset) => {
-              const isSelected = selectedPresetId === preset.id;
-              return (
-                <button
-                  key={preset.id}
-                  type="button"
-                  onClick={() => setSelectedPresetId(preset.id)}
-                  className={`text-left p-3 rounded-xl border transition flex items-start justify-between gap-2 ${
-                    isSelected
-                      ? 'border-teal-500 bg-teal-50/80 text-teal-950 font-semibold shadow-xs'
-                      : 'border-slate-200 hover:border-slate-300 bg-slate-50/50 text-slate-700'
-                  }`}
-                >
-                  <div className="space-y-1 flex-1">
-                    <div className="text-xs font-bold leading-tight">{preset.label}</div>
-                    <div className="text-[10px] text-slate-500 flex items-center gap-2">
-                      <span className="font-mono uppercase">{preset.category}</span>
-                    </div>
-                  </div>
-                  {isSelected && <CheckCircle2 className="w-4 h-4 text-teal-600 flex-shrink-0" />}
-                </button>
-              );
-            })}
-          </div>
-        </div>
-
-        {/* Custom Text and Duration */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 pt-2">
-          <div className="md:col-span-2 space-y-1.5">
-            <label className="text-xs font-bold text-slate-700 block">
-              Additional Details / Patient Voice
-            </label>
-            <textarea
-              rows={2}
-              placeholder="e.g. Feeling lightheaded when standing up in the afternoon; blood sugar was 145 on home strip yesterday..."
-              value={customSymptomText}
-              onChange={(e) => setCustomSymptomText(e.target.value)}
-              className="w-full text-xs p-3 rounded-xl border border-slate-300 focus:outline-none focus:ring-2 focus:ring-teal-500"
-            />
-          </div>
-
-          <div className="space-y-1.5">
-            <label className="text-xs font-bold text-slate-700 block">
-              Duration of symptoms
-            </label>
-            <select
-              value={durationDays}
-              onChange={(e) => setDurationDays(e.target.value)}
-              className="w-full text-xs p-2.5 rounded-xl border border-slate-300 focus:outline-none focus:ring-2 focus:ring-teal-500 bg-white"
+          <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
+            <a
+              href="tel:1066"
+              className="inline-flex items-center justify-center gap-2 px-4 py-2.5 bg-rose-600 hover:bg-rose-700 text-white text-sm font-semibold rounded-xl shadow-sm transition-colors"
             >
-              <option value="1">Less than 24 hours</option>
-              <option value="2">1 to 2 days</option>
-              <option value="5">3 to 5 days</option>
-              <option value="7">1 to 2 weeks</option>
-              <option value="30">More than a month</option>
-            </select>
-
-            <div className="pt-2">
-              <label className="flex items-center gap-2 cursor-pointer text-xs text-rose-800 font-semibold p-2 bg-rose-50 border border-rose-200 rounded-lg">
-                <input
-                  type="checkbox"
-                  checked={hasRedFlags}
-                  onChange={(e) => setHasRedFlags(e.target.checked)}
-                  className="rounded text-rose-600 focus:ring-rose-500"
-                />
-                <span>Severe pain, fainting, or acute chest pressure</span>
-              </label>
-            </div>
+              <PhoneCall className="w-4 h-4" />
+              Hotline 1066
+            </a>
+            <Link
+              to="/facilities"
+              className="inline-flex items-center justify-center gap-2 px-4 py-2.5 bg-slate-100 hover:bg-slate-200 text-slate-800 text-sm font-semibold rounded-xl border border-slate-200 transition-colors"
+            >
+              <Building2 className="w-4 h-4 text-slate-600" />
+              Find Facility
+            </Link>
           </div>
         </div>
 
-        <div className="pt-2 flex justify-end">
-          <button
-            onClick={handleRunTriage}
-            className="w-full sm:w-auto bg-teal-600 hover:bg-teal-700 text-white font-bold px-6 py-3 rounded-xl text-xs flex items-center justify-center gap-2 shadow-sm transition"
-          >
-            <Sparkles className="w-4 h-4" />
-            Analyze & Recommend Care Level
-          </button>
+        {/* Clinical Disclaimer */}
+        <div className="bg-amber-50/80 border border-amber-200 rounded-xl p-4 flex items-start gap-3 text-amber-900 text-xs sm:text-sm">
+          <AlertTriangle className="w-5 h-5 text-amber-600 flex-shrink-0 mt-0.5" />
+          <div>
+            <span className="font-semibold">Clinical Protocol Notice: </span>
+            This automated triage assistant utilizes evidence-based severity algorithms to recommend care levels. It is designed to assist care routing and does not replace in-person clinical diagnosis. For life-threatening emergencies, proceed to the nearest casualty unit immediately.
+          </div>
         </div>
-      </div>
 
-      {/* Triage Assessment Results */}
-      {assessment && (
-        <div className="space-y-6 animate-in fade-in slide-in-from-bottom-4 duration-300">
-          <div className={`rounded-2xl border-2 p-6 shadow-md ${
-            assessment.severity === 'emergency'
-              ? 'bg-rose-50 border-rose-400 text-rose-950'
-              : assessment.severity === 'consult_soon'
-                ? 'bg-amber-50/70 border-amber-300 text-amber-950'
-                : 'bg-teal-50/70 border-teal-300 text-teal-950'
-          }`}>
-            <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-black/10 pb-4">
-              <div className="flex items-start gap-3">
-                <div className={`p-3 rounded-2xl text-white ${
-                  assessment.severity === 'emergency' ? 'bg-rose-600' : assessment.severity === 'consult_soon' ? 'bg-amber-600' : 'bg-teal-600'
-                }`}>
-                  {assessment.severity === 'emergency' ? <AlertTriangle className="w-6 h-6" /> : <Activity className="w-6 h-6" />}
+        {/* Main Grid */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
+          
+          {/* Left Column: Triage Assessment Form */}
+          <div className="lg:col-span-7 space-y-6">
+            <form onSubmit={handleRunTriage} className="bg-white rounded-2xl p-6 sm:p-8 shadow-sm border border-slate-200 space-y-6">
+              <h2 className="text-lg font-bold text-slate-900 border-b border-slate-100 pb-3 flex items-center justify-between">
+                <span>Patient Assessment Intake</span>
+                <span className="text-xs font-normal text-slate-500">Step 1 of 2</span>
+              </h2>
+
+              {/* Preset Scenarios Selector */}
+              <div>
+                <label className="block text-xs font-semibold uppercase tracking-wider text-slate-500 mb-2">
+                  Select Common Presentation (or type custom)
+                </label>
+                <div className="space-y-2">
+                  {SYMPTOM_SCENARIOS.map(sc => (
+                    <button
+                      key={sc.id}
+                      type="button"
+                      onClick={() => handleScenarioSelect(sc)}
+                      className={`w-full text-left p-3 rounded-xl border text-sm transition-all flex items-start justify-between gap-3 ${
+                        selectedScenarioId === sc.id
+                          ? 'border-teal-500 bg-teal-50/50 shadow-sm font-medium text-slate-900 ring-1 ring-teal-500'
+                          : 'border-slate-200 hover:border-slate-300 bg-white text-slate-700'
+                      }`}
+                    >
+                      <div className="flex-1">
+                        <div className="text-xs font-semibold text-slate-500">{sc.category}</div>
+                        <div className="text-sm mt-0.5">{sc.label}</div>
+                      </div>
+                      <span className={`text-[10px] font-bold px-2 py-0.5 rounded-full uppercase ${
+                        sc.tier === 'emergency' ? 'bg-rose-100 text-rose-700' :
+                        sc.tier === 'urgent' ? 'bg-amber-100 text-amber-700' :
+                        sc.tier === 'priority_consultation' ? 'bg-blue-100 text-blue-700' :
+                        'bg-slate-100 text-slate-700'
+                      }`}>
+                        {sc.tier.replace(/_/g, ' ')}
+                      </span>
+                    </button>
+                  ))}
+                </div>
+              </div>
+
+              {/* Custom Symptom Details */}
+              <div>
+                <label className="block text-xs font-semibold uppercase tracking-wider text-slate-500 mb-2">
+                  Active Symptoms & Clinical Description
+                </label>
+                <textarea
+                  rows={3}
+                  value={customSymptoms}
+                  onChange={(e) => setCustomSymptoms(e.target.value)}
+                  placeholder="e.g. Sharp pain in chest, radiating to left shoulder, started 2 hours ago..."
+                  className="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 focus:outline-none focus:ring-2 focus:ring-teal-500 text-sm text-slate-900 placeholder:text-slate-400"
+                />
+              </div>
+
+              {/* Duration & Vitals */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div>
+                  <label className="block text-xs font-semibold uppercase tracking-wider text-slate-500 mb-1.5">
+                    Symptom Duration
+                  </label>
+                  <select
+                    value={duration}
+                    onChange={(e) => setDuration(e.target.value)}
+                    className="w-full px-3 py-2 rounded-xl border border-slate-300 text-sm focus:outline-none focus:ring-2 focus:ring-teal-500 bg-white"
+                  >
+                    <option value="Less than 2 hours">Less than 2 hours (Acute)</option>
+                    <option value="2 to 12 hours">2 to 12 hours</option>
+                    <option value="24 to 48 hours">24 to 48 hours</option>
+                    <option value="3 to 7 days">3 to 7 days</option>
+                    <option value="More than 1 week">More than 1 week (Chronic)</option>
+                  </select>
                 </div>
                 <div>
-                  <div className="flex items-center gap-2">
-                    <span className="text-xs font-black tracking-wider uppercase px-2.5 py-0.5 rounded-full bg-white/80">
-                      Triage Result: {assessment.severity.toUpperCase().replace('_', ' ')}
-                    </span>
-                    <span className="text-[11px] text-slate-500 font-mono">
-                      {new Date(assessment.timestamp).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
-                    </span>
-                  </div>
-                  <h2 className="text-lg sm:text-xl font-black mt-1">
-                    {assessment.severityLabel}
-                  </h2>
+                  <label className="block text-xs font-semibold uppercase tracking-wider text-slate-500 mb-1.5">
+                    Blood Pressure (Sitting)
+                  </label>
+                  <input
+                    type="text"
+                    value={bloodPressure}
+                    onChange={(e) => setBloodPressure(e.target.value)}
+                    placeholder="e.g. 140/90 mmHg"
+                    className="w-full px-3 py-2 rounded-xl border border-slate-300 text-sm focus:outline-none focus:ring-2 focus:ring-teal-500"
+                  />
                 </div>
               </div>
 
-              <div className="text-right">
-                <span className="text-xs font-semibold text-slate-500 block">Recommended Facility Tier</span>
-                <span className="text-sm font-extrabold text-slate-900 block">{assessment.recommendedCareLevel}</span>
-              </div>
-            </div>
-
-            {/* Primary Action Guidance */}
-            <div className="mt-4 p-4 rounded-xl bg-white/90 border border-black/5 shadow-xs space-y-2">
-              <div className="text-xs font-bold text-slate-800 flex items-center gap-1.5">
-                <ArrowRight className="w-4 h-4 text-teal-600" />
-                Primary Care Action:
-              </div>
-              <p className="text-sm font-semibold text-slate-900 leading-snug">
-                {assessment.primaryAction}
-              </p>
-            </div>
-
-            {/* Grid of details: Warnings & Self Care */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
-              <div className="p-4 rounded-xl bg-white/80 border border-black/5 space-y-2">
-                <div className="text-xs font-bold text-rose-800 flex items-center gap-1.5">
-                  <AlertTriangle className="w-3.5 h-3.5 text-rose-600" />
-                  Red Flag Warning Signs:
+              {/* Optional Physiological Readings */}
+              <div className="grid grid-cols-3 gap-3 pt-2">
+                <div>
+                  <label className="block text-[11px] font-medium text-slate-500 mb-1">Pulse (bpm)</label>
+                  <input
+                    type="number"
+                    value={pulse}
+                    onChange={(e) => setPulse(e.target.value)}
+                    placeholder="e.g. 78"
+                    className="w-full px-2.5 py-1.5 text-sm rounded-lg border border-slate-300 focus:outline-none focus:ring-2 focus:ring-teal-500"
+                  />
                 </div>
-                <ul className="text-xs text-slate-700 space-y-1 list-disc list-inside">
-                  {assessment.warningFlags.map((flag, idx) => (
-                    <li key={idx}>{flag}</li>
-                  ))}
-                </ul>
-              </div>
-
-              <div className="p-4 rounded-xl bg-white/80 border border-black/5 space-y-2">
-                <div className="text-xs font-bold text-teal-800 flex items-center gap-1.5">
-                  <CheckCircle2 className="w-3.5 h-3.5 text-teal-600" />
-                  Safe Interim Guidance:
+                <div>
+                  <label className="block text-[11px] font-medium text-slate-500 mb-1">SpO2 (%)</label>
+                  <input
+                    type="number"
+                    value={spo2}
+                    onChange={(e) => setSpo2(e.target.value)}
+                    placeholder="e.g. 98"
+                    className="w-full px-2.5 py-1.5 text-sm rounded-lg border border-slate-300 focus:outline-none focus:ring-2 focus:ring-teal-500"
+                  />
                 </div>
-                <ul className="text-xs text-slate-700 space-y-1 list-disc list-inside">
-                  {assessment.selfCareGuidance?.map((g, idx) => (
-                    <li key={idx}>{g}</li>
-                  ))}
-                </ul>
+                <div>
+                  <label className="block text-[11px] font-medium text-slate-500 mb-1">Temp (°F)</label>
+                  <input
+                    type="number"
+                    step="0.1"
+                    value={temperature}
+                    onChange={(e) => setTemperature(e.target.value)}
+                    placeholder="e.g. 98.6"
+                    className="w-full px-2.5 py-1.5 text-sm rounded-lg border border-slate-300 focus:outline-none focus:ring-2 focus:ring-teal-500"
+                  />
+                </div>
               </div>
-            </div>
 
-            {/* Disclaimer */}
-            <div className="mt-4 pt-3 border-t border-black/10 text-[11px] text-slate-600 flex items-start gap-2">
-              <ShieldCheck className="w-4 h-4 text-slate-400 flex-shrink-0 mt-0.5" />
-              <span>{assessment.disclaimer}</span>
-            </div>
+              {/* Red Flag Checkboxes */}
+              <div className="bg-slate-50 p-4 rounded-xl border border-slate-200 space-y-2.5">
+                <div className="text-xs font-bold uppercase tracking-wider text-slate-700">Immediate Clinical Flags</div>
+                <label className="flex items-center gap-2.5 text-sm text-slate-800 cursor-pointer">
+                  <input
+                    type="checkbox"
+                    checked={hasBreathingDifficulty}
+                    onChange={(e) => setHasBreathingDifficulty(e.target.checked)}
+                    className="w-4 h-4 rounded text-teal-600 focus:ring-teal-500"
+                  />
+                  <span>Significant difficulty breathing or blue lips/fingertips</span>
+                </label>
+                <label className="flex items-center gap-2.5 text-sm text-slate-800 cursor-pointer">
+                  <input
+                    type="checkbox"
+                    checked={hasSeverePain}
+                    onChange={(e) => setHasSeverePain(e.target.checked)}
+                    className="w-4 h-4 rounded text-teal-600 focus:ring-teal-500"
+                  />
+                  <span>Severe crushing chest pain or acute unmanageable pain (8+/10)</span>
+                </label>
+              </div>
+
+              <div className="pt-2 flex items-center justify-between gap-4">
+                <button
+                  type="button"
+                  onClick={() => {
+                    setCustomSymptoms('');
+                    setBloodPressure('');
+                    setPulse('');
+                    setSpo2('');
+                    setTemperature('');
+                    setHasBreathingDifficulty(false);
+                    setHasSeverePain(false);
+                    setAssessment(null);
+                  }}
+                  className="px-4 py-2.5 text-sm text-slate-600 hover:text-slate-900 border border-slate-200 rounded-xl hover:bg-slate-50 transition-colors flex items-center gap-1.5"
+                >
+                  <RotateCcw className="w-3.5 h-3.5" />
+                  Reset Form
+                </button>
+
+                <button
+                  type="submit"
+                  disabled={isSubmitting}
+                  className="px-6 py-2.5 bg-teal-600 hover:bg-teal-700 text-white font-semibold text-sm rounded-xl shadow-sm transition-colors flex items-center gap-2 disabled:opacity-50"
+                >
+                  <HeartPulse className="w-4 h-4" />
+                  {isSubmitting ? 'Evaluating Algorithm...' : 'Evaluate Clinical Triage'}
+                </button>
+              </div>
+            </form>
           </div>
 
-          {/* Action Step 3: Referral Card Generation */}
-          <div className="bg-white rounded-2xl border border-slate-200 p-6 shadow-sm space-y-4">
-            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
-              <div>
-                <h3 className="text-base font-bold text-slate-900 flex items-center gap-2">
-                  <Building2 className="w-5 h-5 text-teal-600" />
-                  Recommended Facility & Pre-filled Referral Card
-                </h3>
-                <p className="text-xs text-slate-500">
-                  CareBridge connects your triage result with the appropriate public health facility.
-                </p>
-              </div>
-
-              {!isReferralCreated ? (
-                <button
-                  onClick={handleGenerateReferralCard}
-                  className="bg-teal-600 hover:bg-teal-700 text-white font-bold px-5 py-2.5 rounded-xl text-xs flex items-center justify-center gap-2 transition shadow-sm"
-                >
-                  <FileText className="w-4 h-4" />
-                  Generate Digital Referral Card
-                </button>
-              ) : (
-                <span className="inline-flex items-center gap-1.5 text-xs font-bold text-emerald-700 bg-emerald-50 px-3 py-1.5 rounded-full border border-emerald-200">
-                  <CheckCircle2 className="w-4 h-4" />
-                  Referral Card Active & Logged
-                </span>
-              )}
-            </div>
-
-            {/* Facility Cues Preview */}
-            <div className="p-4 rounded-xl bg-slate-50 border border-slate-100 flex flex-col md:flex-row items-start md:items-center justify-between gap-3 text-xs">
-              <div className="space-y-1">
-                <span className="font-bold text-slate-900 text-sm">
-                  {assessment.suggestedFacilityName}
-                </span>
-                <div className="text-slate-500 flex flex-wrap items-center gap-x-3 gap-y-1">
-                  <span>Community Health Centre (CHC)</span>
-                  <span>• Distance: ~4.2 km</span>
-                  <span>• Wait time: 20-30 mins</span>
-                  <span>• Languages: Hindi, Awadhi</span>
-                </div>
-              </div>
-              <div className="flex items-center gap-2">
-                <Link
-                  to="/facilities"
-                  className="text-xs text-teal-700 hover:text-teal-800 font-bold flex items-center gap-1 border border-teal-200 bg-teal-50 px-3 py-1.5 rounded-lg"
-                >
-                  <MapPin className="w-3.5 h-3.5" />
-                  View on Map
-                </Link>
-              </div>
-            </div>
-
-            {/* Generated Referral Card Widget */}
-            {isReferralCreated && createdReferral && (
-              <div className="border-2 border-dashed border-teal-300 rounded-2xl p-5 bg-teal-50/40 space-y-4 animate-in zoom-in-95 duration-200">
-                <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 border-b border-teal-200 pb-3">
-                  <div>
-                    <span className="text-[10px] font-bold uppercase tracking-widest text-teal-700">Digital Referral Pass</span>
-                    <h4 className="text-base font-extrabold text-teal-950">Referral #{createdReferral.id.toUpperCase()}</h4>
-                  </div>
-                  <span className="text-xs font-bold bg-amber-100 text-amber-900 border border-amber-300 px-2.5 py-0.5 rounded-full uppercase">
-                    Status: {createdReferral.status}
+          {/* Right Column: Triage Result & Care Pathway */}
+          <div className="lg:col-span-5 space-y-6">
+            {assessment ? (
+              <div className={`rounded-2xl p-6 shadow-sm border ${getTierBadge(assessment.tier).bg} space-y-5 transition-all`}>
+                <div className="flex items-center justify-between">
+                  <span className={`px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider ${getTierBadge(assessment.tier).badge}`}>
+                    {assessment.tier.replace(/_/g, ' ')}
+                  </span>
+                  <span className="text-xs text-slate-500 flex items-center gap-1">
+                    <Clock className="w-3.5 h-3.5" />
+                    Window: {assessment.followUpWindowHours === 0 ? 'Immediate' : `${assessment.followUpWindowHours}h`}
                   </span>
                 </div>
 
-                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-3 text-xs">
-                  <div>
-                    <span className="text-slate-500 text-[11px] block">Patient Name</span>
-                    <strong className="text-slate-900">{createdReferral.patientName}</strong> ({createdReferral.patientAge}y, {createdReferral.patientGender})
-                  </div>
-                  <div>
-                    <span className="text-slate-500 text-[11px] block">ABHA ID</span>
-                    <span className="font-mono text-slate-800 text-[11px]">{createdReferral.patientAbhaId}</span>
-                  </div>
-                  <div>
-                    <span className="text-slate-500 text-[11px] block">Referred To</span>
-                    <strong className="text-slate-900">{createdReferral.destinationFacilityName}</strong>
-                  </div>
-                  <div>
-                    <span className="text-slate-500 text-[11px] block">Specialty Needed</span>
-                    <span className="text-teal-800 font-bold">{createdReferral.specialtyNeeded}</span>
-                  </div>
-                </div>
-
-                {/* Critical Allergy Tag */}
-                <div className="p-3 bg-rose-100/80 border border-rose-300 rounded-xl text-xs text-rose-950 flex items-center gap-2">
-                  <AlertTriangle className="w-4 h-4 text-rose-600 flex-shrink-0" />
-                  <div>
-                    <strong>CRITICAL ALLERGY ALERT FOR RECEIVING PHYSICIAN: </strong>
-                    <span>{createdReferral.criticalAllergies.join(', ')}</span>
-                  </div>
-                </div>
-
-                <div className="text-xs text-slate-700 bg-white p-3 rounded-xl border border-slate-200 space-y-1">
-                  <strong>Clinical Reason & Triage Summary:</strong>
-                  <p className="text-slate-600">{createdReferral.reasonForReferral}</p>
-                </div>
-
-                {/* Quick actions: Grant Consent & Go to Continuity */}
-                <div className="flex flex-wrap items-center justify-between gap-3 pt-2">
-                  <p className="text-[11px] text-slate-500">
-                    Shared with ASHA worker Rekha Devi and CHC Rampur OPD desk.
+                <div>
+                  <h3 className="text-xl font-bold text-slate-900">
+                    {getTierBadge(assessment.tier).title}
+                  </h3>
+                  <p className="text-sm font-medium mt-1 text-slate-700">
+                    {getTierBadge(assessment.tier).subtitle}
                   </p>
-                  <div className="flex items-center gap-2">
+                </div>
+
+                {/* Recommended Path Box */}
+                <div className="bg-white/90 p-4 rounded-xl border border-slate-200/80 shadow-xs space-y-2">
+                  <div className="text-xs font-bold text-slate-500 uppercase tracking-wider">Recommended Pathway</div>
+                  <div className="text-sm font-semibold text-slate-900">{assessment.recommendedCarePath}</div>
+                  <p className="text-xs text-slate-600 leading-relaxed mt-1">{assessment.clinicalGuidance}</p>
+                </div>
+
+                {/* Nearest Recommended Facility */}
+                {assessment.nearestFacilityRecommended && (
+                  <div className="bg-white/90 p-4 rounded-xl border border-slate-200/80 shadow-xs flex items-center justify-between gap-3">
+                    <div>
+                      <div className="text-xs font-bold text-slate-500 uppercase tracking-wider">Designated Facility</div>
+                      <div className="text-sm font-semibold text-slate-900 mt-0.5">{assessment.nearestFacilityRecommended}</div>
+                    </div>
                     <Link
-                      to="/patient/consents"
-                      className="bg-white hover:bg-slate-50 text-slate-700 border border-slate-200 font-bold text-xs px-3.5 py-2 rounded-xl transition"
+                      to="/facilities"
+                      className="px-3 py-1.5 bg-slate-100 hover:bg-slate-200 text-slate-800 text-xs font-semibold rounded-lg border border-slate-200 transition-colors"
                     >
-                      Configure Sharing Permissions
+                      View Map
                     </Link>
-                    <Link
-                      to="/patient"
-                      className="bg-teal-600 hover:bg-teal-700 text-white font-bold text-xs px-4 py-2 rounded-xl transition shadow-sm flex items-center gap-1"
+                  </div>
+                )}
+
+                {/* Action Buttons */}
+                <div className="pt-2 space-y-2.5">
+                  {assessment.tier === 'emergency' ? (
+                    <a
+                      href="tel:1066"
+                      className="w-full py-3 px-4 bg-rose-600 hover:bg-rose-700 text-white font-bold text-sm rounded-xl flex items-center justify-center gap-2 shadow-md transition-colors"
                     >
-                      Return to Dashboard
-                      <ArrowRight className="w-3.5 h-3.5" />
-                    </Link>
+                      <PhoneCall className="w-4 h-4" />
+                      Dial Emergency Hotline 1066 Now
+                    </a>
+                  ) : (
+                    <>
+                      <Link
+                        to="/appointments/book"
+                        className="w-full py-2.5 px-4 bg-teal-600 hover:bg-teal-700 text-white font-semibold text-sm rounded-xl flex items-center justify-center gap-2 shadow-sm transition-colors"
+                      >
+                        <Calendar className="w-4 h-4" />
+                        Book In-Person Appointment
+                      </Link>
+                      {assessment.teleconsultRecommended && (
+                        <Link
+                          to="/teleconsult"
+                          className="w-full py-2.5 px-4 bg-white hover:bg-slate-50 text-slate-800 font-semibold text-sm rounded-xl border border-slate-300 flex items-center justify-center gap-2 transition-colors"
+                        >
+                          <Video className="w-4 h-4 text-teal-600" />
+                          Start Assisted Teleconsultation
+                        </Link>
+                      )}
+                    </>
+                  )}
+
+                  <Link
+                    to="/referrals"
+                    className="w-full py-2 px-4 text-slate-600 hover:text-slate-900 text-xs font-medium text-center block transition-colors"
+                  >
+                    View Closed-Loop Referrals &rarr;
+                  </Link>
+                </div>
+
+                {syncNotice && (
+                  <div className="text-[11px] text-teal-700 bg-teal-50 p-2 rounded-lg border border-teal-200 flex items-center gap-1.5">
+                    <CheckCircle2 className="w-3.5 h-3.5" />
+                    {syncNotice}
+                  </div>
+                )}
+              </div>
+            ) : (
+              <div className="bg-white rounded-2xl p-8 shadow-sm border border-slate-200 text-center space-y-4">
+                <div className="w-14 h-14 rounded-2xl bg-teal-50 text-teal-600 flex items-center justify-center mx-auto border border-teal-100">
+                  <Activity className="w-7 h-7" />
+                </div>
+                <div>
+                  <h3 className="text-base font-bold text-slate-900">Awaiting Triage Assessment</h3>
+                  <p className="text-xs text-slate-500 mt-1 max-w-xs mx-auto">
+                    Select a clinical presentation or input patient symptoms, duration, and vitals on the left to evaluate severity.
+                  </p>
+                </div>
+                <div className="border-t border-slate-100 pt-4 text-left space-y-2">
+                  <div className="text-[11px] font-bold text-slate-400 uppercase tracking-wider">5 Clinical Tiers</div>
+                  <div className="flex items-center gap-2 text-xs text-slate-600">
+                    <span className="w-2.5 h-2.5 rounded-full bg-rose-500" />
+                    <span>Tier 5: Emergency (Hotline 1066 / 0h)</span>
+                  </div>
+                  <div className="flex items-center gap-2 text-xs text-slate-600">
+                    <span className="w-2.5 h-2.5 rounded-full bg-amber-500" />
+                    <span>Tier 4: Urgent Care (2-4 hours)</span>
+                  </div>
+                  <div className="flex items-center gap-2 text-xs text-slate-600">
+                    <span className="w-2.5 h-2.5 rounded-full bg-blue-500" />
+                    <span>Tier 3: Priority Consultation (24-48 hours)</span>
+                  </div>
+                  <div className="flex items-center gap-2 text-xs text-slate-600">
+                    <span className="w-2.5 h-2.5 rounded-full bg-teal-500" />
+                    <span>Tier 2: Routine Outpatient (3-7 days)</span>
+                  </div>
+                  <div className="flex items-center gap-2 text-xs text-slate-600">
+                    <span className="w-2.5 h-2.5 rounded-full bg-emerald-500" />
+                    <span>Tier 1: Low Priority / Self-Care</span>
                   </div>
                 </div>
               </div>
             )}
+
+            {/* Quick Facility Delay Widget */}
+            <div className="bg-white rounded-2xl p-6 shadow-sm border border-slate-200 space-y-3">
+              <div className="flex items-center justify-between">
+                <span className="text-xs font-bold text-slate-500 uppercase tracking-wider">Central OPD Wait Status</span>
+                <span className="text-[11px] text-teal-700 bg-teal-50 px-2 py-0.5 rounded font-medium">Live Demo</span>
+              </div>
+              <div className="text-sm font-bold text-slate-900">CareBridge Apex Hospital</div>
+              <div className="grid grid-cols-2 gap-3 pt-1 text-center">
+                <div className="bg-slate-50 p-2.5 rounded-xl border border-slate-100">
+                  <div className="text-lg font-extrabold text-teal-700">18 min</div>
+                  <div className="text-[10px] text-slate-500 uppercase font-medium">Avg OPD Wait</div>
+                </div>
+                <div className="bg-slate-50 p-2.5 rounded-xl border border-slate-100">
+                  <div className="text-lg font-extrabold text-blue-700">28</div>
+                  <div className="text-[10px] text-slate-500 uppercase font-medium">Current Queue</div>
+                </div>
+              </div>
+              <Link
+                to="/facility-operations"
+                className="text-xs text-teal-600 hover:text-teal-700 font-semibold block text-center pt-1"
+              >
+                View Full Operational Dashboard &rarr;
+              </Link>
+            </div>
+
           </div>
+
         </div>
-      )}
+      </div>
     </div>
   );
 };

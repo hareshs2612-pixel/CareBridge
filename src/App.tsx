@@ -25,6 +25,10 @@ import { FacilityFinderPage } from './pages/facilities/FacilityFinderPage';
 import { AdminAuditPage } from './pages/admin/AdminAuditPage';
 import { LoginPage } from './pages/auth/LoginPage';
 import { RegisterPage } from './pages/auth/RegisterPage';
+import { ReferralManagementPage } from './pages/referrals/ReferralManagementPage';
+import { DiagnosticCoordinationPage } from './pages/diagnostics/DiagnosticCoordinationPage';
+import { HealthWorkerDashboard } from './pages/worker/HealthWorkerDashboard';
+import { FacilityOperationsPage } from './pages/facilities/FacilityOperationsPage';
 import { ProtectedRoute } from './components/auth/ProtectedRoute';
 import { 
   HeartHandshake, 
@@ -61,7 +65,21 @@ export const App: React.FC = () => {
             <Route path="/prescriptions" element={<PrescriptionViewPage />} />
             <Route path="/prescriptions/:id" element={<PrescriptionViewPage />} />
             <Route path="/navigator" element={<GuidedCareNavigator />} />
+            <Route path="/triage" element={<GuidedCareNavigator />} />
             <Route path="/emergency" element={<EmergencyPortalPage />} />
+
+            {/* Care Continuity & Operations Pathways */}
+            <Route path="/referrals" element={<ReferralManagementPage />} />
+            <Route path="/diagnostics" element={<DiagnosticCoordinationPage />} />
+            <Route path="/care-plans" element={<CareContinuityPage />} />
+            <Route path="/facility-operations" element={<FacilityOperationsPage />} />
+
+            {/* Frontline Health Worker Console */}
+            <Route path="/worker" element={
+              <ProtectedRoute allowedRoles={['healthcare_worker', 'frontline_worker', 'doctor', 'admin']}>
+                <HealthWorkerDashboard />
+              </ProtectedRoute>
+            } />
             
             {/* Appointments Management */}
             <Route path="/appointments" element={<AppointmentDashboardPage />} />
@@ -95,7 +113,7 @@ export const App: React.FC = () => {
 
             {/* Coordination Routes */}
             <Route path="/coordination" element={
-              <ProtectedRoute allowedRoles={['frontline_worker', 'doctor', 'patient']}>
+              <ProtectedRoute allowedRoles={['healthcare_worker', 'frontline_worker', 'doctor', 'patient']}>
                 <CareCoordinationPage />
               </ProtectedRoute>
             } />

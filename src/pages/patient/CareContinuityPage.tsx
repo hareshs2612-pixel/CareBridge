@@ -1,11 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { dataStore } from '../../services/dataStore';
+import { api } from '../../services/api';
 import { 
   UserProfile, 
   PatientProfile, 
+  CarePlan, 
+  CarePlanTask,
+  CarePlanStatus,
   MedicationReminder, 
   CareAppointment, 
-  ReferralRecord, 
   PatientCheckIn 
 } from '../../types';
 import { Link } from 'react-router-dom';
@@ -22,51 +25,102 @@ import {
   ArrowRight, 
   ChevronRight, 
   ShieldCheck, 
-  Sparkles, 
-  UserCheck, 
-  Compass, 
-  RefreshCw,
-  PhoneCall
+  PhoneCall,
+  Flame,
+  Check,
+  Stethoscope,
+  Send
 } from 'lucide-react';
 
 export const CareContinuityPage: React.FC = () => {
   const [currentUser, setCurrentUser] = useState<UserProfile>(dataStore.getCurrentUser());
   const [patient, setPatient] = useState<PatientProfile | undefined>(dataStore.getPatientById(currentUser.uid));
+  const [carePlans, setCarePlans] = useState<CarePlan[]>([]);
+  const [selectedCarePlan, setSelectedCarePlan] = useState<CarePlan | null>(null);
   const [medications, setMedications] = useState<MedicationReminder[]>([]);
   const [appointments, setAppointments] = useState<CareAppointment[]>([]);
-  const [referrals, setReferrals] = useState<ReferralRecord[]>([]);
   const [checkIns, setCheckIns] = useState<PatientCheckIn[]>([]);
-  
+  const [loading, setLoading] = useState<boolean>(true);
+
   // Daily check-in state
   const [checkInStatus, setCheckInStatus] = useState<'better' | 'same' | 'worse'>('same');
   const [symptomNote, setSymptomNote] = useState('');
   const [checkInSubmitted, setCheckInSubmitted] = useState(false);
   const [latestCheckIn, setLatestCheckIn] = useState<PatientCheckIn | null>(null);
 
-  const loadData = () => {
+  // Escalation state
+  const [escalating, setEscalating] = useState<boolean>(false);
+  const [escalationReason, setEscalationReason] = useState<string>('');
+  const [showEscalateModal, setShowEscalateModal] = useState<boolean>(false);
+
+  useEffect(() => {
+    loadData();
+  }, []);
+
+  const loadData = async () => {
+    setLoading(true);
     const user = dataStore.getCurrentUser();
     setCurrentUser(user);
     const p = dataStore.getPatientById(user.uid);
     setPatient(p);
+
+    try {
+      const plans = await api.getCarePlans({ patientId: user.uid });
+      setCarePlans(plans);
+      if (plans.length > 0) {
+        setSelectedCarePlan(plans[0]);
+      }
+    } catch (err) {
+      console.error('Failed to load care plans:', err);
+    }
+
     if (p) {
       setMedications(dataStore.getMedicationReminders(p.id));
       setAppointments(dataStore.getAppointments(p.id));
-      setReferrals(dataStore.getReferrals(p.id));
       const chks = dataStore.getCheckIns(p.id);
       setCheckIns(chks);
       if (chks.length > 0) {
         setLatestCheckIn(chks[0]);
       }
     }
+    setLoading(false);
   };
 
-  useEffect(() => {
-    loadData();
-    return dataStore.subscribe(loadData);
-  }, []);
+  const handleToggleTask = async (carePlanId: string, task: CarePlanTask) => {
+    try {
+      const updated = await api.updateCarePlanTask(carePlanId, task.id, {
+        completed: !task.completed
+      });
+      setCarePlans(carePlans.map(cp => cp.id === carePlanId ? updated : cp));
+      setSelectedCarePlan(updated);
+    } catch (err) {
+      console.error('Failed to toggle task:', err);
+    }
+  };
+
+  const handleEscalateCarePlan = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!selectedCarePlan || !escalationReason) return;
+    setEscalating(true);
+    try {
+      const updated = await api.escalateCarePlan(selectedCarePlan.id, {
+        reason: escalationReason,
+        doctorId: selectedCarePlan.doctorId
+      });
+      setCarePlans(carePlans.map(cp => cp.id === selectedCarePlan.id ? updated : cp));
+      setSelectedCarePlan(updated);
+      setShowEscalateModal(false);
+      setEscalationReason('');
+    } catch (err) {
+      console.error('Failed to escalate care plan:', err);
+    } finally {
+      setEscalating(false);
+    }
+  };
 
   const handleMarkMedication = (id: string, status: 'taken' | 'due' | 'missed') => {
     dataStore.updateMedicationStatus(id, status);
+    if (patient) setMedications(dataStore.getMedicationReminders(patient.id));
   };
 
   const handleSubmitCheckIn = (e: React.FormEvent) => {
@@ -77,385 +131,329 @@ export const CareContinuityPage: React.FC = () => {
     setCheckInSubmitted(true);
   };
 
-  if (!patient) {
-    return (
-      <div className="max-w-xl mx-auto my-12 p-6 text-center bg-white rounded-2xl border border-slate-200">
-        <p className="text-slate-600 text-sm">Please switch to a patient persona to view care continuity.</p>
-      </div>
-    );
-  }
+  const getStatusBadge = (status: CarePlanStatus) => {
+    switch (status) {
+      case 'on_track':
+        return 'bg-emerald-50 text-emerald-700 border-emerald-200';
+      case 'due_soon':
+        return 'bg-amber-50 text-amber-700 border-amber-200';
+      case 'overdue':
+        return 'bg-rose-50 text-rose-700 border-rose-200';
+      case 'escalated':
+        return 'bg-rose-600 text-white border-rose-600 animate-pulse';
+      case 'completed':
+        return 'bg-slate-100 text-slate-700 border-slate-200';
+      default:
+        return 'bg-slate-100 text-slate-700 border-slate-200';
+    }
+  };
 
-  const takenCount = medications.filter(m => m.status === 'taken').length;
-  const adherenceRate = medications.length > 0 ? Math.round((takenCount / medications.length) * 100) : 100;
+  const getRiskBadge = (risk: string) => {
+    switch (risk) {
+      case 'high':
+      case 'critical':
+        return 'bg-rose-100 text-rose-800';
+      case 'moderate':
+        return 'bg-amber-100 text-amber-800';
+      case 'low':
+      default:
+        return 'bg-teal-100 text-teal-800';
+    }
+  };
 
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-8">
-      {/* Header Banner */}
-      <div className="bg-gradient-to-r from-teal-800 via-teal-900 to-slate-900 text-white rounded-3xl p-6 sm:p-8 shadow-xl">
-        <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
-          <div className="space-y-2">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-teal-500/20 border border-teal-400/30 text-teal-300 text-xs font-semibold">
-              <HeartHandshake className="w-3.5 h-3.5" />
-              <span>Step 5, 6 & 7: Care Continuity & Follow-Up</span>
+    <div className="min-h-screen bg-slate-50 py-8 px-4 sm:px-6 lg:px-8">
+      <div className="max-w-7xl mx-auto space-y-8">
+        
+        {/* Header */}
+        <div className="bg-white rounded-2xl p-6 sm:p-8 shadow-sm border border-slate-200 flex flex-col md:flex-row md:items-center justify-between gap-6">
+          <div>
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-teal-50 border border-teal-200 text-teal-800 text-xs font-semibold tracking-wide uppercase mb-3">
+              <HeartHandshake className="w-3.5 h-3.5 text-teal-600" />
+              Comprehensive Care Continuity
             </div>
-            <h1 className="text-2xl sm:text-3xl font-black tracking-tight">
-              Care Continuity & Treatment Adherence
+            <h1 className="text-2xl sm:text-3xl font-bold text-slate-900 tracking-tight">
+              Care Plans & High-Risk Follow-Up
             </h1>
-            <p className="text-xs sm:text-sm text-teal-100 max-w-2xl leading-relaxed">
-              Care doesn't end when you leave the clinic. CareBridge coordinates your daily generic medicines, 
-              scheduled visits with Dr. Anita Sharma, and proactive check-ins with your village ASHA worker Rekha Devi.
+            <p className="text-slate-600 mt-2 text-sm sm:text-base max-w-2xl">
+              Proactive disease management for chronic conditions, post-discharge tracking, diagnostic reminders, and instant escalation to attending physicians.
             </p>
           </div>
-
-          <div className="flex flex-col items-center justify-center p-4 bg-white/10 rounded-2xl border border-white/15 text-center min-w-[160px]">
-            <span className="text-[11px] font-semibold text-teal-200 uppercase tracking-wider">Today's Adherence</span>
-            <div className="text-3xl font-black text-white mt-0.5">{adherenceRate}%</div>
-            <span className="text-[10px] text-teal-200/80 mt-0.5">{takenCount} of {medications.length} doses taken</span>
+          <div className="flex items-center gap-3">
+            <Link
+              to="/triage"
+              className="inline-flex items-center justify-center gap-2 px-4 py-2.5 bg-slate-100 hover:bg-slate-200 text-slate-800 text-sm font-semibold rounded-xl border border-slate-200 transition-colors"
+            >
+              Assess Symptoms
+            </Link>
+            <Link
+              to="/referrals"
+              className="inline-flex items-center justify-center gap-2 px-4 py-2.5 bg-teal-600 hover:bg-teal-700 text-white text-sm font-semibold rounded-xl shadow-sm transition-colors"
+            >
+              View Referrals
+            </Link>
           </div>
         </div>
-      </div>
 
-      {/* Escalation Alert Banner if latest check-in was 'worse' */}
-      {latestCheckIn && latestCheckIn.escalated && (
-        <div className="bg-rose-50 border-2 border-rose-400 rounded-2xl p-5 shadow-md animate-in slide-in-from-top duration-300 space-y-3">
-          <div className="flex items-start justify-between gap-3">
-            <div className="flex items-start gap-3">
-              <div className="p-2.5 bg-rose-600 text-white rounded-xl">
-                <AlertTriangle className="w-6 h-6" />
-              </div>
-              <div>
-                <div className="flex items-center gap-2">
-                  <h3 className="font-extrabold text-rose-950 text-sm sm:text-base">
-                    Proactive Care Escalation Active
-                  </h3>
-                  <span className="text-[10px] bg-rose-200 text-rose-900 font-bold px-2 py-0.5 rounded-full uppercase">
-                    High Priority
-                  </span>
-                </div>
-                <p className="text-xs text-rose-800 mt-1">
-                  You reported feeling <strong>WORSE</strong> on your latest daily check-in: <em>"{latestCheckIn.symptomNote || 'Dizziness/Unwell'}"</em>.
-                </p>
-                <div className="mt-2 text-xs bg-white/90 p-3 rounded-xl border border-rose-200 text-rose-900 space-y-1.5">
-                  <div className="flex items-center gap-1.5 font-bold text-rose-900">
-                    <BellRing className="w-4 h-4 text-rose-600 animate-pulse" />
-                    <span>Automatic Care Bridge Dispatch Actions:</span>
-                  </div>
-                  <ul className="list-disc list-inside space-y-1 text-slate-700 text-[11px]">
-                    <li>ASHA Worker <strong>Rekha Devi (+91 94150 55432)</strong> has been notified for a priority home check.</li>
-                    <li>Primary Caregiver <strong>Suresh Kumar (Brother)</strong> received an automated missed-dose/escalation SMS alert.</li>
-                    <li>Community Health Centre Rampur OPD was alerted with your Emergency Minimum Dataset.</li>
-                  </ul>
-                </div>
-              </div>
-            </div>
-
-            <div className="flex flex-col gap-2 flex-shrink-0">
-              <Link
-                to="/emergency"
-                className="bg-rose-700 hover:bg-rose-800 text-white font-bold text-xs px-4 py-2 rounded-xl transition text-center shadow-sm"
-              >
-                Emergency SOS
-              </Link>
-              <a
-                href="tel:108"
-                className="bg-white border border-rose-300 text-rose-800 font-bold text-xs px-4 py-2 rounded-xl transition text-center hover:bg-rose-100"
-              >
-                Call 108 Ambulance
-              </a>
-            </div>
-          </div>
-        </div>
-      )}
-
-      {/* Grid: Medications & Daily Check-in */}
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-        {/* Left 2 Cols: Today's Medication Schedule */}
-        <div className="lg:col-span-2 bg-white rounded-2xl border border-slate-200 p-6 shadow-sm space-y-5">
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-slate-100 pb-4">
-            <div className="flex items-center gap-2">
-              <div className="p-2 bg-teal-50 text-teal-700 rounded-xl">
-                <Pill className="w-5 h-5" />
-              </div>
-              <div>
-                <h2 className="text-base font-bold text-slate-900">Today's Prescribed Medications</h2>
-                <p className="text-xs text-slate-500">Jan Aushadhi generic regimen prescribed by Dr. Anita Sharma</p>
-              </div>
-            </div>
-
-            <span className="text-[11px] font-bold text-slate-400 bg-slate-50 px-2.5 py-1 rounded-lg border border-slate-100">
-              {new Date().toLocaleDateString('en-IN', { weekday: 'long', month: 'short', day: 'numeric' })}
-            </span>
-          </div>
-
-          <div className="space-y-3">
-            {medications.map((med) => {
-              const isTaken = med.status === 'taken';
-              const isMissed = med.status === 'missed';
-              const isDue = med.status === 'due';
-
-              return (
-                <div
-                  key={med.id}
-                  className={`p-4 rounded-xl border transition flex flex-col sm:flex-row sm:items-center justify-between gap-3 ${
-                    isTaken
-                      ? 'border-emerald-200 bg-emerald-50/40'
-                      : isMissed
-                        ? 'border-rose-200 bg-rose-50/40'
-                        : 'border-slate-200 bg-slate-50/50'
-                  }`}
-                >
-                  <div className="space-y-1">
+        {/* Active Care Plans Grid */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
+          
+          {/* Left Column: Care Plans & Task Checklist */}
+          <div className="lg:col-span-8 space-y-6">
+            
+            {/* Active Care Plan Card */}
+            {selectedCarePlan ? (
+              <div className="bg-white rounded-2xl p-6 sm:p-8 shadow-sm border border-slate-200 space-y-6">
+                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-100 pb-4">
+                  <div>
                     <div className="flex items-center gap-2">
-                      <span className="font-bold text-slate-900 text-sm">{med.medicineName}</span>
-                      <span className="text-[10px] bg-teal-100 text-teal-800 font-semibold px-1.5 py-0.5 rounded">
-                        GENERIC
+                      <span className={`px-2.5 py-0.5 rounded text-[10px] font-bold uppercase tracking-wide ${getRiskBadge(selectedCarePlan.riskTier)}`}>
+                        {selectedCarePlan.riskTier} Risk
+                      </span>
+                      <span className={`px-2.5 py-0.5 rounded-full text-xs font-bold border ${getStatusBadge(selectedCarePlan.status)}`}>
+                        {selectedCarePlan.status.replace(/_/g, ' ')}
                       </span>
                     </div>
-                    <div className="text-xs text-slate-600 flex flex-wrap items-center gap-x-3 gap-y-1">
-                      <span><strong>Dosage:</strong> {med.dosage}</span>
-                      <span>• <strong>Timing:</strong> {med.scheduledTime} ({med.mealTiming.replace('_', ' ')})</span>
-                      <span>• <strong>Period:</strong> {med.timeOfDay.toUpperCase()}</span>
+                    <h2 className="text-xl font-bold text-slate-900 mt-2">{selectedCarePlan.primaryCondition}</h2>
+                    <div className="text-xs text-slate-500 mt-0.5">
+                      Attending Clinician: <strong>{selectedCarePlan.doctorName}</strong> • Review Target: {selectedCarePlan.targetReviewDate}
                     </div>
-                    {isTaken && med.takenAt && (
-                      <div className="text-[11px] text-emerald-700 font-medium flex items-center gap-1">
-                        <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600" />
-                        <span>Confirmed taken at {med.takenAt}</span>
-                      </div>
-                    )}
-                    {isMissed && (
-                      <div className="text-[11px] text-rose-700 font-medium flex items-center gap-1">
-                        <AlertCircle className="w-3.5 h-3.5 text-rose-600" />
-                        <span>Marked missed — Caregiver alert dispatched</span>
-                      </div>
-                    )}
                   </div>
 
-                  {/* Actions */}
-                  <div className="flex items-center gap-2 self-end sm:self-center">
-                    <button
-                      onClick={() => handleMarkMedication(med.id, 'taken')}
-                      className={`text-xs font-bold px-3 py-1.5 rounded-xl transition flex items-center gap-1 shadow-2xs ${
-                        isTaken
-                          ? 'bg-emerald-600 text-white'
-                          : 'bg-white hover:bg-emerald-50 text-emerald-700 border border-emerald-300'
-                      }`}
-                    >
-                      <CheckCircle2 className="w-3.5 h-3.5" />
-                      {isTaken ? 'Taken' : 'Mark Taken'}
-                    </button>
-                    <button
-                      onClick={() => handleMarkMedication(med.id, 'missed')}
-                      className={`text-xs font-bold px-3 py-1.5 rounded-xl transition flex items-center gap-1 ${
-                        isMissed
-                          ? 'bg-rose-600 text-white'
-                          : 'bg-white hover:bg-rose-50 text-rose-700 border border-rose-300'
-                      }`}
-                    >
-                      <AlertCircle className="w-3.5 h-3.5" />
-                      Missed
-                    </button>
+                  <button
+                    onClick={() => setShowEscalateModal(true)}
+                    className="inline-flex items-center gap-1.5 px-3.5 py-2 bg-rose-50 hover:bg-rose-100 text-rose-700 text-xs font-bold rounded-xl border border-rose-200 transition-colors whitespace-nowrap"
+                  >
+                    <AlertTriangle className="w-4 h-4 text-rose-600" />
+                    Escalate to Clinician
+                  </button>
+                </div>
+
+                {/* Tasks List */}
+                <div className="space-y-3">
+                  <div className="flex items-center justify-between">
+                    <span className="text-xs font-bold text-slate-700 uppercase tracking-wider">
+                      Care Protocol Tasks ({selectedCarePlan.tasks.filter(t => t.completed).length}/{selectedCarePlan.tasks.length} Completed)
+                    </span>
+                    <span className="text-[11px] text-slate-500">Tap checkbox to update</span>
+                  </div>
+
+                  <div className="space-y-2.5">
+                    {selectedCarePlan.tasks.map(task => (
+                      <div
+                        key={task.id}
+                        onClick={() => handleToggleTask(selectedCarePlan.id, task)}
+                        className={`p-4 rounded-xl border transition-all cursor-pointer flex items-start gap-3.5 ${
+                          task.completed
+                            ? 'bg-emerald-50/40 border-emerald-200 text-slate-700'
+                            : 'bg-white border-slate-200 hover:border-teal-400 text-slate-900 shadow-xs'
+                        }`}
+                      >
+                        <div className={`w-5 h-5 rounded-md flex items-center justify-center flex-shrink-0 mt-0.5 transition-colors ${
+                          task.completed ? 'bg-emerald-600 text-white' : 'border-2 border-slate-300'
+                        }`}>
+                          {task.completed && <Check className="w-3.5 h-3.5 stroke-[3]" />}
+                        </div>
+                        <div className="flex-1 min-w-0">
+                          <div className={`text-sm font-semibold ${task.completed ? 'line-through text-slate-500' : 'text-slate-900'}`}>
+                            {task.title}
+                          </div>
+                          <p className="text-xs text-slate-500 mt-0.5 leading-relaxed">{task.description}</p>
+                          <div className="flex items-center gap-3 text-[11px] text-slate-400 mt-2">
+                            <span className="font-medium text-slate-600">Due: {task.dueDate}</span>
+                            <span>•</span>
+                            <span className="capitalize">{task.type.replace(/_/g, ' ')}</span>
+                          </div>
+                        </div>
+                      </div>
+                    ))}
                   </div>
                 </div>
-              );
-            })}
-          </div>
 
-          <div className="p-3 bg-teal-50/70 border border-teal-200 rounded-xl text-xs text-teal-950 flex items-start gap-2">
-            <Sparkles className="w-4 h-4 text-teal-600 flex-shrink-0 mt-0.5" />
-            <div>
-              <strong>Jan Aushadhi Generic Subsidy: </strong>
-              <span>
-                Both Metformin 500mg and Telmisartan 40mg are provided under the Pradhan Mantri Jan Aushadhi 
-                scheme at Rampur Kendra for ₹12/strip (85% savings compared to branded alternatives).
-              </span>
-            </div>
-          </div>
-        </div>
-
-        {/* Right Col: Daily Wellness Check-In */}
-        <div className="bg-white rounded-2xl border border-slate-200 p-6 shadow-sm space-y-5">
-          <div className="flex items-center gap-2 border-b border-slate-100 pb-4">
-            <div className="p-2 bg-purple-50 text-purple-700 rounded-xl">
-              <Activity className="w-5 h-5" />
-            </div>
-            <div>
-              <h3 className="text-base font-bold text-slate-900">Daily Health Check-In</h3>
-              <p className="text-xs text-slate-500">Proactive status reporting for frontline care</p>
-            </div>
-          </div>
-
-          <form onSubmit={handleSubmitCheckIn} className="space-y-4">
-            <label className="text-xs font-bold uppercase tracking-wider text-slate-600 block">
-              How are you feeling today compared to yesterday?
-            </label>
-
-            <div className="grid grid-cols-3 gap-2">
-              <button
-                type="button"
-                onClick={() => setCheckInStatus('better')}
-                className={`p-3 rounded-xl border text-center transition flex flex-col items-center gap-1 ${
-                  checkInStatus === 'better'
-                    ? 'border-emerald-500 bg-emerald-50 text-emerald-900 font-bold'
-                    : 'border-slate-200 hover:border-slate-300 text-slate-700'
-                }`}
-              >
-                <span className="text-lg">😊</span>
-                <span className="text-xs">Better</span>
-              </button>
-
-              <button
-                type="button"
-                onClick={() => setCheckInStatus('same')}
-                className={`p-3 rounded-xl border text-center transition flex flex-col items-center gap-1 ${
-                  checkInStatus === 'same'
-                    ? 'border-blue-500 bg-blue-50 text-blue-900 font-bold'
-                    : 'border-slate-200 hover:border-slate-300 text-slate-700'
-                }`}
-              >
-                <span className="text-lg">😐</span>
-                <span className="text-xs">Same</span>
-              </button>
-
-              <button
-                type="button"
-                onClick={() => setCheckInStatus('worse')}
-                className={`p-3 rounded-xl border text-center transition flex flex-col items-center gap-1 ${
-                  checkInStatus === 'worse'
-                    ? 'border-rose-500 bg-rose-50 text-rose-900 font-bold ring-2 ring-rose-400'
-                    : 'border-slate-200 hover:border-slate-300 text-slate-700'
-                }`}
-              >
-                <span className="text-lg">😟</span>
-                <span className="text-xs">Worse</span>
-              </button>
-            </div>
-
-            <div className="space-y-1">
-              <label className="text-xs font-bold text-slate-700 block">
-                Any symptoms or notes to share?
-              </label>
-              <textarea
-                rows={2}
-                placeholder="e.g. Mild headache after morning walk, took medicine on time..."
-                value={symptomNote}
-                onChange={(e) => setSymptomNote(e.target.value)}
-                className="w-full text-xs p-2.5 rounded-xl border border-slate-300 focus:ring-2 focus:ring-purple-500 focus:outline-none"
-              />
-            </div>
-
-            {checkInStatus === 'worse' && (
-              <div className="p-3 bg-rose-50 border border-rose-300 rounded-xl text-xs text-rose-900 space-y-1">
-                <strong>Notice: </strong>
-                Selecting "Worse" will immediately trigger an escalation notification to your ASHA worker Rekha Devi and family emergency contact.
+                {/* Plan Notes */}
+                {selectedCarePlan.notes && (
+                  <div className="bg-slate-50 p-4 rounded-xl border border-slate-200 text-xs text-slate-600 space-y-1">
+                    <strong className="text-slate-800">Physician Directives: </strong>
+                    <p className="leading-relaxed">{selectedCarePlan.notes}</p>
+                  </div>
+                )}
+              </div>
+            ) : (
+              <div className="bg-white rounded-2xl p-12 text-center border border-slate-200 text-slate-400 text-sm">
+                No active care plan assigned.
               </div>
             )}
 
-            <button
-              type="submit"
-              className="w-full bg-purple-700 hover:bg-purple-800 text-white font-bold py-2.5 rounded-xl text-xs transition shadow-sm"
-            >
-              Submit Today's Check-In
-            </button>
-          </form>
-
-          {checkInSubmitted && (
-            <div className="p-3 bg-emerald-50 border border-emerald-200 rounded-xl text-xs text-emerald-900 flex items-center gap-2">
-              <CheckCircle2 className="w-4 h-4 text-emerald-600 flex-shrink-0" />
-              <span>Check-in logged! Thank you for staying active in your care plan.</span>
-            </div>
-          )}
-        </div>
-      </div>
-
-      {/* Upcoming Appointments & Consultations */}
-      <div className="bg-white rounded-2xl border border-slate-200 p-6 shadow-sm space-y-4">
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-slate-100 pb-4">
-          <div className="flex items-center gap-2">
-            <div className="p-2 bg-blue-50 text-blue-700 rounded-xl">
-              <Calendar className="w-5 h-5" />
-            </div>
-            <div>
-              <h3 className="text-base font-bold text-slate-900">Upcoming Consultations & Care Appointments</h3>
-              <p className="text-xs text-slate-500">Doctor follow-ups and frontline health visits</p>
-            </div>
-          </div>
-
-          <Link
-            to="/facilities"
-            className="text-xs text-teal-700 hover:text-teal-800 font-bold flex items-center gap-1 self-start sm:self-center"
-          >
-            Find Facility
-            <ChevronRight className="w-4 h-4" />
-          </Link>
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          {appointments.map((apt) => (
-            <div key={apt.id} className="p-4 rounded-xl bg-slate-50 border border-slate-200 text-xs space-y-2">
-              <div className="flex items-center justify-between">
-                <span className="font-bold text-slate-900 text-sm">{apt.doctorName}</span>
-                <span className="text-[10px] font-bold uppercase bg-blue-100 text-blue-800 px-2 py-0.5 rounded-full">
-                  {apt.type.replace('_', ' ')}
-                </span>
+            {/* Prescribed Daily Medications Section */}
+            <div className="bg-white rounded-2xl p-6 shadow-sm border border-slate-200 space-y-4">
+              <div className="flex items-center justify-between border-b border-slate-100 pb-3">
+                <div className="flex items-center gap-2">
+                  <Pill className="w-5 h-5 text-teal-600" />
+                  <h3 className="text-base font-bold text-slate-900">Today's Prescribed Generic Regimen</h3>
+                </div>
+                <Link to="/pharmacy" className="text-xs font-semibold text-teal-600 hover:text-teal-700">
+                  Pharmacy Inventory &rarr;
+                </Link>
               </div>
-              <div className="text-slate-600 space-y-0.5">
-                <div><strong>Facility:</strong> {apt.facilityName}</div>
-                <div><strong>Specialty:</strong> {apt.specialty}</div>
-                <div><strong>Schedule:</strong> {apt.date} at {apt.time}</div>
-                {apt.notes && <p className="text-slate-500 italic mt-1">{apt.notes}</p>}
-              </div>
-            </div>
-          ))}
-        </div>
-      </div>
 
-      {/* Active Referrals Pipeline Preview */}
-      {referrals.length > 0 && (
-        <div className="bg-white rounded-2xl border border-slate-200 p-6 shadow-sm space-y-4">
-          <div className="flex items-center justify-between border-b border-slate-100 pb-4">
-            <div className="flex items-center gap-2">
-              <div className="p-2 bg-amber-50 text-amber-700 rounded-xl">
-                <Compass className="w-5 h-5" />
-              </div>
-              <div>
-                <h3 className="text-base font-bold text-slate-900">Active Digital Referrals</h3>
-                <p className="text-xs text-slate-500">Track care handoffs across the rural referral network</p>
-              </div>
-            </div>
-
-            <Link
-              to="/navigator"
-              className="text-xs text-teal-700 hover:text-teal-800 font-bold flex items-center gap-1"
-            >
-              Start New Triage
-              <ArrowRight className="w-4 h-4" />
-            </Link>
-          </div>
-
-          <div className="space-y-3">
-            {referrals.map((ref) => (
-              <div key={ref.id} className="p-4 rounded-xl border border-amber-200 bg-amber-50/40 text-xs space-y-2">
-                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
-                  <div>
-                    <span className="font-bold text-slate-900 text-sm">To: {ref.destinationFacilityName}</span>
-                    <span className="text-slate-500 block text-[11px]">Specialty: {ref.specialtyNeeded}</span>
+              <div className="space-y-3">
+                {medications.map(med => (
+                  <div key={med.id} className="p-3.5 rounded-xl border border-slate-200 flex items-center justify-between gap-3 text-xs">
+                    <div>
+                      <div className="font-bold text-slate-900 text-sm">{med.medicineName}</div>
+                      <div className="text-slate-500">{med.dosage} • {med.frequency || `${med.timeOfDay} (${med.mealTiming.replace('_', ' ')})`}</div>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <button
+                        onClick={() => handleMarkMedication(med.id, 'taken')}
+                        className={`px-3 py-1.5 rounded-lg font-semibold transition-colors ${
+                          med.status === 'taken'
+                            ? 'bg-emerald-600 text-white'
+                            : 'bg-slate-100 hover:bg-slate-200 text-slate-700'
+                        }`}
+                      >
+                        {med.status === 'taken' ? '✓ Taken' : 'Mark Taken'}
+                      </button>
+                    </div>
                   </div>
-                  <span className="text-[10px] font-bold uppercase bg-amber-200 text-amber-900 px-2.5 py-0.5 rounded-full self-start">
-                    Status: {ref.status.toUpperCase().replace('_', ' ')}
-                  </span>
-                </div>
-                <div className="bg-white p-2.5 rounded-lg border border-amber-200 text-slate-700">
-                  <strong>Reason:</strong> {ref.reasonForReferral}
-                </div>
-                <div className="text-[11px] text-slate-500 flex items-center justify-between">
-                  <span>Referred by: {ref.referringProviderName}</span>
-                  <span>Initiated: {new Date(ref.createdAt).toLocaleDateString('en-IN')}</span>
-                </div>
+                ))}
               </div>
-            ))}
+            </div>
+
+          </div>
+
+          {/* Right Column: Daily Check-In & Contacts */}
+          <div className="lg:col-span-4 space-y-6">
+            
+            {/* Daily Wellness Check-In */}
+            <div className="bg-white rounded-2xl p-6 shadow-sm border border-slate-200 space-y-4">
+              <div className="flex items-center gap-2 border-b border-slate-100 pb-3">
+                <Activity className="w-5 h-5 text-teal-600" />
+                <h3 className="text-base font-bold text-slate-900">Daily Health Check-In</h3>
+              </div>
+
+              {checkInSubmitted ? (
+                <div className="bg-teal-50 p-4 rounded-xl border border-teal-200 text-xs text-teal-900 space-y-1 text-center">
+                  <CheckCircle2 className="w-6 h-6 text-teal-600 mx-auto mb-1" />
+                  <div className="font-bold">Today's Check-In Logged</div>
+                  <p className="text-teal-700 text-[11px]">Recorded into your clinical timeline.</p>
+                </div>
+              ) : (
+                <form onSubmit={handleSubmitCheckIn} className="space-y-4 text-xs">
+                  <div>
+                    <label className="block font-semibold text-slate-700 mb-2">How do you feel today?</label>
+                    <div className="grid grid-cols-3 gap-2 text-center">
+                      {(['better', 'same', 'worse'] as const).map(st => (
+                        <button
+                          key={st}
+                          type="button"
+                          onClick={() => setCheckInStatus(st)}
+                          className={`py-2 rounded-xl font-bold uppercase tracking-wider text-[10px] transition-colors ${
+                            checkInStatus === st
+                              ? (st === 'worse' ? 'bg-rose-600 text-white' : 'bg-teal-600 text-white')
+                              : 'bg-slate-100 text-slate-700 hover:bg-slate-200'
+                          }`}
+                        >
+                          {st}
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+
+                  <div>
+                    <label className="block font-semibold text-slate-700 mb-1">Optional Symptoms / Notes</label>
+                    <textarea
+                      rows={2}
+                      value={symptomNote}
+                      onChange={(e) => setSymptomNote(e.target.value)}
+                      placeholder="Any unusual tiredness, dizziness, or pain?"
+                      className="w-full p-2.5 border border-slate-300 rounded-xl text-xs focus:ring-2 focus:ring-teal-500"
+                    />
+                  </div>
+
+                  <button
+                    type="submit"
+                    className="w-full py-2.5 bg-slate-900 hover:bg-slate-800 text-white font-semibold text-xs rounded-xl transition-colors"
+                  >
+                    Submit Daily Log
+                  </button>
+                </form>
+              )}
+            </div>
+
+            {/* Emergency Hotline Assistance */}
+            <div className="bg-rose-50 border border-rose-200 rounded-2xl p-6 space-y-3">
+              <div className="flex items-center gap-2 text-rose-800 font-bold text-sm">
+                <PhoneCall className="w-4 h-4 text-rose-600" />
+                Emergency Escalation
+              </div>
+              <p className="text-xs text-rose-700 leading-relaxed">
+                If acute chest tightness, breathlessness, or collapse occurs, do not wait for routine follow-up. Dial immediate ambulance dispatch:
+              </p>
+              <a
+                href="tel:1066"
+                className="w-full py-2.5 bg-rose-600 hover:bg-rose-700 text-white font-bold text-xs rounded-xl flex items-center justify-center gap-2 transition-colors shadow-sm"
+              >
+                <PhoneCall className="w-4 h-4" />
+                Call 1066 (24x7 Trauma)
+              </a>
+            </div>
+
+          </div>
+
+        </div>
+      </div>
+
+      {/* Clinician Escalation Modal */}
+      {showEscalateModal && (
+        <div className="fixed inset-0 z-50 bg-slate-900/50 backdrop-blur-xs flex items-center justify-center p-4">
+          <div className="bg-white rounded-2xl max-w-md w-full p-6 shadow-2xl border border-slate-200 space-y-4">
+            <div className="flex items-center justify-between border-b border-slate-100 pb-3">
+              <h3 className="text-base font-bold text-slate-900 flex items-center gap-2">
+                <AlertTriangle className="w-4 h-4 text-rose-600" />
+                Trigger Clinician Escalation
+              </h3>
+            </div>
+
+            <form onSubmit={handleEscalateCarePlan} className="space-y-4 text-xs">
+              <p className="text-slate-600 leading-relaxed">
+                This triggers a high-priority alert to <strong>Dr. Anita Sharma</strong> for patient <strong>{selectedCarePlan?.patientName}</strong>.
+              </p>
+
+              <div>
+                <label className="block font-semibold text-slate-700 mb-1">Clinical Escalation Reason</label>
+                <textarea
+                  rows={3}
+                  value={escalationReason}
+                  onChange={(e) => setEscalationReason(e.target.value)}
+                  placeholder="e.g. Blood pressure elevated at 165/105 for 2 days despite Telmisartan adherence. Patient reporting lightheadedness."
+                  className="w-full p-2.5 border border-slate-300 rounded-xl text-xs focus:ring-2 focus:ring-teal-500"
+                  required
+                />
+              </div>
+
+              <div className="flex items-center justify-end gap-3 pt-2">
+                <button
+                  type="button"
+                  onClick={() => setShowEscalateModal(false)}
+                  className="px-4 py-2 text-slate-600 hover:text-slate-800 font-medium"
+                >
+                  Cancel
+                </button>
+                <button
+                  type="submit"
+                  disabled={escalating || !escalationReason}
+                  className="px-4 py-2 bg-rose-600 hover:bg-rose-700 text-white font-bold rounded-xl flex items-center gap-1.5 shadow-sm disabled:opacity-50"
+                >
+                  <Send className="w-3.5 h-3.5" />
+                  {escalating ? 'Escalating...' : 'Dispatch Alert'}
+                </button>
+              </div>
+            </form>
           </div>
         </div>
       )}
+
     </div>
   );
 };

@@ -50,7 +50,9 @@ class DatabaseAdapter {
     const collections = [
       'users', 'records', 'accessRequests', 'authorizations', 
       'otpChallenges', 'sessions', 'auditEvents', 'documents', 
-      'selfReports', 'securityAlerts'
+      'selfReports', 'securityAlerts',
+      'triageAssessments', 'diagnosticTests', 'diagnosticOrders', 
+      'referrals', 'carePlans', 'facilityMetrics'
     ];
     for (const col of collections) {
       if (!db[col]) {

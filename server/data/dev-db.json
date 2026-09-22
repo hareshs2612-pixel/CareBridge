@@ -44,8 +44,8 @@
     },
     {
       "uid": "asha-rekha",
-      "role": "frontline_worker",
-      "fullName": "Rekha Devi (ASHA)",
+      "role": "healthcare_worker",
+      "fullName": "Rekha Devi (ASHA / Health Worker)",
       "email": "rekha.devi@asha-sitapur.gov.in",
       "phone": "+919415055432",
       "createdAt": "2024-08-10T09:00:00Z"
@@ -1327,6 +1327,36 @@
       "userId": "doc-verma",
       "role": "doctor",
       "expiresAt": 1792593880446
+    },
+    {
+      "token": "f225b052fc724b13e6dc60b4a2606194465077c841278b1796e930e694e3ca0a",
+      "userId": "doc-verma",
+      "role": "doctor",
+      "expiresAt": 1792598337353
+    },
+    {
+      "token": "f1a06e51f356ffe29981dcb87d6e9e1197bfb73e3ab07b1989a94d8c555b5886",
+      "userId": "doc-verma",
+      "role": "doctor",
+      "expiresAt": 1792678112852
+    },
+    {
+      "token": "8e0d170dda88731dd83470e65a46e8a6c83e654d54b691f86983df42c6230e4c",
+      "userId": "doc-verma",
+      "role": "doctor",
+      "expiresAt": 1792678234623
+    },
+    {
+      "token": "9a836366d610f2e65c793e918f05fddfec7b4fc36e823774b08310480aa70bbd",
+      "userId": "doc-verma",
+      "role": "doctor",
+      "expiresAt": 1792678310128
+    },
+    {
+      "token": "89e579ac5f172f07c167ffd23e177e6518bdbe5942eb7dea21d407730080ec4c",
+      "userId": "doc-verma",
+      "role": "doctor",
+      "expiresAt": 1792679421592
     }
   ],
   "auditEvents": [
@@ -4513,52 +4543,6 @@
   ],
   "appointments": [
     {
-      "patientId": "pat-856237",
-      "patientName": "Ananya Deshmukh",
-      "patientPhone": "+919966047323",
-      "patientAge": 45,
-      "patientGender": "Male",
-      "doctorId": "doc-verma",
-      "doctorName": "Dr. Rajesh Verma",
-      "doctorSpecialty": "Orthopedics & Joint Care",
-      "doctorAvatarUrl": "https://images.unsplash.com/photo-1622253692010-333f2da6031d?w=400&auto=format&fit=crop&q=80",
-      "hospitalId": "hosp-05",
-      "hospitalName": "CareBridge Metro Multi-Specialty Hospital",
-      "hospitalAddress": "CareBridge Metro Multi-Specialty Hospital, English",
-      "date": "2026-12-15",
-      "timeSlot": "02:00 PM",
-      "type": "in_person",
-      "status": "confirmed",
-      "fee": 900,
-      "paymentStatus": "paid",
-      "id": "apt_10feb981a999",
-      "bookingReference": "CB-2026-87920",
-      "createdAt": "2026-09-21T14:44:26.106Z"
-    },
-    {
-      "patientId": "pat-776464",
-      "patientName": "Ananya Deshmukh",
-      "patientPhone": "+919801320818",
-      "patientAge": 45,
-      "patientGender": "Male",
-      "doctorId": "doc-verma",
-      "doctorName": "Dr. Rajesh Verma",
-      "doctorSpecialty": "Orthopedics & Joint Care",
-      "doctorAvatarUrl": "https://images.unsplash.com/photo-1622253692010-333f2da6031d?w=400&auto=format&fit=crop&q=80",
-      "hospitalId": "hosp-05",
-      "hospitalName": "CareBridge Metro Multi-Specialty Hospital",
-      "hospitalAddress": "CareBridge Metro Multi-Specialty Hospital, English",
-      "date": "2026-12-14",
-      "timeSlot": "02:00 PM",
-      "type": "in_person",
-      "status": "confirmed",
-      "fee": 900,
-      "paymentStatus": "paid",
-      "id": "apt_1ac3428fb68f",
-      "bookingReference": "CB-2026-99078",
-      "createdAt": "2026-09-21T14:43:06.735Z"
-    },
-    {
       "patientId": "pat-ramesh",
       "patientName": "Ramesh Kumar",
       "patientPhone": "+91 94150 12345",
@@ -4934,6 +4918,568 @@
       "read": true,
       "actionUrl": "/patient/consents",
       "createdAt": "2026-08-15T11:30:00Z"
+    }
+  ],
+  "triageAssessments": [],
+  "diagnosticTests": [
+    {
+      "id": "test-cbc",
+      "code": "58410-2",
+      "name": "Complete Blood Count (CBC) with Differential",
+      "category": "pathology",
+      "turnaroundHours": 4,
+      "sampleType": "Whole Blood (EDTA)",
+      "preparationInstructions": "No fasting required. Maintain normal hydration.",
+      "costInr": 350,
+      "isAvailable": true
+    },
+    {
+      "id": "test-fbg",
+      "code": "1558-6",
+      "name": "Fasting Blood Glucose (FBG)",
+      "category": "biochemistry",
+      "turnaroundHours": 2,
+      "sampleType": "Fluoride Plasma",
+      "preparationInstructions": "Mandatory 8-10 hours overnight fasting required. Water permitted.",
+      "costInr": 120,
+      "isAvailable": true
+    },
+    {
+      "id": "test-hba1c",
+      "code": "4548-4",
+      "name": "Glycated Hemoglobin (HbA1c) HPLC Assay",
+      "category": "biochemistry",
+      "turnaroundHours": 4,
+      "sampleType": "Whole Blood (EDTA)",
+      "preparationInstructions": "No fasting required.",
+      "costInr": 480,
+      "isAvailable": true
+    },
+    {
+      "id": "test-lipid",
+      "code": "5736-2",
+      "name": "Lipid Profile Comprehensive (Cholesterol, HDL, LDL, Triglycerides)",
+      "category": "biochemistry",
+      "turnaroundHours": 6,
+      "sampleType": "Serum",
+      "preparationInstructions": "10-12 hours overnight fasting required.",
+      "costInr": 750,
+      "isAvailable": true
+    },
+    {
+      "id": "test-xray-chest",
+      "code": "36572-6",
+      "name": "Digital Chest X-Ray PA View",
+      "category": "radiology",
+      "turnaroundHours": 2,
+      "sampleType": "Radiological Imaging",
+      "preparationInstructions": "Remove metallic items and jewelry from chest and neck area.",
+      "costInr": 450,
+      "isAvailable": true
+    },
+    {
+      "id": "test-usg-abdomen",
+      "code": "24627-2",
+      "name": "Abdominal & Pelvic Ultrasound (USG)",
+      "category": "radiology",
+      "turnaroundHours": 3,
+      "sampleType": "Ultrasound Imaging",
+      "preparationInstructions": "Full bladder required for pelvic scan; 4 hours fasting for upper abdomen.",
+      "costInr": 1200,
+      "isAvailable": true
+    },
+    {
+      "id": "test-ecg",
+      "code": "11524-6",
+      "name": "12-Lead Resting Electrocardiogram (ECG)",
+      "category": "cardiology",
+      "turnaroundHours": 1,
+      "sampleType": "Electrophysiological Trace",
+      "preparationInstructions": "Rest comfortably for 5 minutes prior to recording.",
+      "costInr": 250,
+      "isAvailable": true
+    }
+  ],
+  "diagnosticOrders": [
+    {
+      "id": "diag-ord-101",
+      "patientId": "pat-ramesh",
+      "patientName": "Ramesh Kumar",
+      "patientPhone": "+919415012345",
+      "doctorId": "doc-sharma",
+      "doctorName": "Dr. Anita Sharma",
+      "facilityId": "hosp-apex",
+      "facilityName": "CareBridge Apex Hospital & Heart Centre",
+      "tests": [
+        {
+          "id": "test-fbg",
+          "code": "1558-6",
+          "name": "Fasting Blood Glucose (FBG)",
+          "category": "biochemistry",
+          "turnaroundHours": 2,
+          "costInr": 120,
+          "isAvailable": true
+        },
+        {
+          "id": "test-hba1c",
+          "code": "4548-4",
+          "name": "Glycated Hemoglobin (HbA1c) HPLC Assay",
+          "category": "biochemistry",
+          "turnaroundHours": 4,
+          "costInr": 480,
+          "isAvailable": true
+        },
+        {
+          "id": "test-lipid",
+          "code": "5736-2",
+          "name": "Lipid Profile Comprehensive",
+          "category": "biochemistry",
+          "turnaroundHours": 6,
+          "costInr": 750,
+          "isAvailable": true
+        }
+      ],
+      "clinicalIndication": "Routine quarterly surveillance for Type 2 Diabetes Mellitus with Stage 1 Essential Hypertension.",
+      "status": "RESULT_AVAILABLE",
+      "scheduledSlot": "2026-09-22T08:30:00Z",
+      "scheduledFacilityId": "hosp-apex",
+      "sampleCollectedAt": "2026-09-22T08:45:00Z",
+      "results": [
+        {
+          "parameterName": "Fasting Plasma Glucose",
+          "value": "142",
+          "unit": "mg/dL",
+          "referenceRange": "70 - 99 mg/dL",
+          "isAbnormal": true,
+          "criticalFlag": false
+        },
+        {
+          "parameterName": "HbA1c (Glycated Hemoglobin)",
+          "value": "7.4",
+          "unit": "%",
+          "referenceRange": "< 5.7 % (Normal), 5.7 - 6.4 % (Prediabetes)",
+          "isAbnormal": true,
+          "criticalFlag": false
+        },
+        {
+          "parameterName": "Total Cholesterol",
+          "value": "215",
+          "unit": "mg/dL",
+          "referenceRange": "< 200 mg/dL",
+          "isAbnormal": true,
+          "criticalFlag": false
+        },
+        {
+          "parameterName": "HDL (Good) Cholesterol",
+          "value": "44",
+          "unit": "mg/dL",
+          "referenceRange": "> 40 mg/dL",
+          "isAbnormal": false,
+          "criticalFlag": false
+        },
+        {
+          "parameterName": "LDL (Calculated)",
+          "value": "138",
+          "unit": "mg/dL",
+          "referenceRange": "< 100 mg/dL",
+          "isAbnormal": true,
+          "criticalFlag": false
+        },
+        {
+          "parameterName": "Serum Triglycerides",
+          "value": "165",
+          "unit": "mg/dL",
+          "referenceRange": "< 150 mg/dL",
+          "isAbnormal": true,
+          "criticalFlag": false
+        }
+      ],
+      "reportSummary": "Sub-optimal glycemic control (HbA1c 7.4%) with borderline atherogenic dyslipidemia. Fasting glucose elevated at 142 mg/dL.",
+      "abnormalFlagCount": 4,
+      "criticalFlagCount": 0,
+      "doctorReviewNotes": "",
+      "reviewedByDoctorId": "",
+      "reviewedAt": "",
+      "linkedRecordId": "rec-ramesh-1",
+      "createdAt": "2026-09-21T07:30:00Z",
+      "updatedAt": "2026-09-21T11:15:00Z",
+      "demoNotice": "Demo laboratory report generated for clinical evaluation."
+    },
+    {
+      "id": "diag-ord-102",
+      "patientId": "pat-sunita",
+      "patientName": "Sunita Devi",
+      "patientPhone": "+919415067890",
+      "doctorId": "doc-sharma",
+      "doctorName": "Dr. Anita Sharma",
+      "facilityId": "hosp-chc-rampur",
+      "facilityName": "Community Health Centre (CHC) Rampur",
+      "tests": [
+        {
+          "id": "test-cbc",
+          "code": "58410-2",
+          "name": "Complete Blood Count (CBC)",
+          "category": "pathology",
+          "turnaroundHours": 4,
+          "costInr": 350,
+          "isAvailable": true
+        },
+        {
+          "id": "test-ecg",
+          "code": "11524-6",
+          "name": "12-Lead Resting Electrocardiogram",
+          "category": "cardiology",
+          "turnaroundHours": 1,
+          "costInr": 250,
+          "isAvailable": true
+        }
+      ],
+      "clinicalIndication": "Antenatal wellness review and evaluation for transient lightheadedness.",
+      "status": "REVIEWED",
+      "scheduledSlot": "2026-09-18T10:00:00Z",
+      "scheduledFacilityId": "hosp-chc-rampur",
+      "sampleCollectedAt": "2026-09-18T10:15:00Z",
+      "results": [
+        {
+          "parameterName": "Hemoglobin",
+          "value": "10.8",
+          "unit": "g/dL",
+          "referenceRange": "12.0 - 15.5 g/dL",
+          "isAbnormal": true,
+          "criticalFlag": false
+        },
+        {
+          "parameterName": "Total Leukocyte Count (TLC)",
+          "value": "7,800",
+          "unit": "/cumm",
+          "referenceRange": "4,000 - 11,000 /cumm",
+          "isAbnormal": false,
+          "criticalFlag": false
+        },
+        {
+          "parameterName": "Platelet Count",
+          "value": "2.4",
+          "unit": "Lakhs/cumm",
+          "referenceRange": "1.5 - 4.5 Lakhs/cumm",
+          "isAbnormal": false,
+          "criticalFlag": false
+        },
+        {
+          "parameterName": "Resting Rhythm (ECG)",
+          "value": "Normal Sinus Rhythm (HR 76 bpm)",
+          "unit": "Trace",
+          "referenceRange": "Normal sinus rhythm",
+          "isAbnormal": false,
+          "criticalFlag": false
+        }
+      ],
+      "reportSummary": "Mild microcytic hypochromic anemia (Hb 10.8 g/dL) consistent with second trimester pregnancy hemodilution. ECG unremarkable.",
+      "abnormalFlagCount": 1,
+      "criticalFlagCount": 0,
+      "doctorReviewNotes": "Reviewed in OPD. Mild gestational anemia noted. Prescribed Ferrous Ascorbate 100mg with Folic Acid once daily after dinner.",
+      "reviewedByDoctorId": "doc-sharma",
+      "reviewedAt": "2026-09-18T14:30:00Z",
+      "linkedRecordId": "rec-sunita-1",
+      "createdAt": "2026-09-17T09:00:00Z",
+      "updatedAt": "2026-09-18T14:30:00Z",
+      "demoNotice": "Demo laboratory report generated for clinical evaluation."
+    }
+  ],
+  "referrals": [
+    {
+      "id": "ref-2026-01",
+      "patientId": "pat-ramesh",
+      "patientName": "Ramesh Kumar",
+      "patientPhone": "+919415012345",
+      "patientAge": 53,
+      "patientGender": "male",
+      "referringDoctorId": "doc-sharma",
+      "referringDoctorName": "Dr. Anita Sharma",
+      "referringFacilityId": "hosp-chc-rampur",
+      "referringFacilityName": "Community Health Centre (CHC) Rampur",
+      "destinationFacilityId": "hosp-apex",
+      "destinationFacilityName": "CareBridge Apex Hospital & Heart Centre",
+      "specialtyRequired": "Cardiology & Preventative Nephrology",
+      "priority": "priority",
+      "clinicalReason": "Uncontrolled Type 2 Diabetes (HbA1c 7.4%) with stage 1 hypertension. Specialist workup for early diabetic nephropathy and cardiovascular risk stratification.",
+      "provisionalDiagnosis": "Type 2 Diabetes Mellitus with Essential Hypertension",
+      "attachedRecordIds": [
+        "rec-ramesh-1",
+        "rec-ramesh-2"
+      ],
+      "status": "ACCEPTED",
+      "timeline": [
+        {
+          "id": "rtl-1",
+          "status": "DRAFT",
+          "timestamp": "2026-09-20T10:00:00Z",
+          "actorId": "doc-sharma",
+          "actorName": "Dr. Anita Sharma",
+          "actorRole": "doctor",
+          "notes": "Referral draft prepared following review of recent fasting plasma glucose levels."
+        },
+        {
+          "id": "rtl-2",
+          "status": "SENT",
+          "timestamp": "2026-09-20T10:15:00Z",
+          "actorId": "doc-sharma",
+          "actorName": "Dr. Anita Sharma",
+          "actorRole": "doctor",
+          "notes": "Dispatched securely to CareBridge Apex Hospital Central Triage desk."
+        },
+        {
+          "id": "rtl-3",
+          "status": "RECEIVED",
+          "timestamp": "2026-09-20T11:00:00Z",
+          "actorId": "admin-sunil",
+          "actorName": "Triage Desk Apex",
+          "actorRole": "admin",
+          "notes": "Referral intake acknowledged. Clinical record documents attached."
+        },
+        {
+          "id": "rtl-4",
+          "status": "ACCEPTED",
+          "timestamp": "2026-09-20T14:30:00Z",
+          "actorId": "doc-verma",
+          "actorName": "Dr. Rajesh Verma",
+          "actorRole": "doctor",
+          "notes": "Accepted for Cardiology / Chronic Care OPD. Scheduling consultation slot."
+        }
+      ],
+      "scheduledAppointmentId": "apt-corporate-01",
+      "scheduledDate": "2026-09-24T10:30:00Z",
+      "destinationDoctorId": "doc-verma",
+      "destinationDoctorName": "Dr. Rajesh Verma",
+      "feedbackReport": "",
+      "createdAt": "2026-09-20T10:00:00Z",
+      "updatedAt": "2026-09-20T14:30:00Z"
+    },
+    {
+      "id": "ref-2026-02",
+      "patientId": "pat-sunita",
+      "patientName": "Sunita Devi",
+      "patientPhone": "+919415067890",
+      "patientAge": 29,
+      "patientGender": "female",
+      "referringDoctorId": "doc-sharma",
+      "referringDoctorName": "Dr. Anita Sharma",
+      "referringFacilityId": "hosp-chc-rampur",
+      "referringFacilityName": "Community Health Centre (CHC) Rampur",
+      "destinationFacilityId": "hosp-dist-sitapur",
+      "destinationFacilityName": "District Hospital Sitapur",
+      "specialtyRequired": "Obstetrics & High-Risk Pregnancy",
+      "priority": "urgent",
+      "clinicalReason": "Third trimester antenatal consultation; anomaly scan and maternal hemoglobin monitoring.",
+      "provisionalDiagnosis": "Gestational Care with Mild Microcytic Anemia",
+      "attachedRecordIds": [
+        "rec-sunita-1"
+      ],
+      "status": "APPOINTMENT_SCHEDULED",
+      "timeline": [
+        {
+          "id": "rtl-10",
+          "status": "SENT",
+          "timestamp": "2026-09-18T15:00:00Z",
+          "actorId": "doc-sharma",
+          "actorName": "Dr. Anita Sharma",
+          "actorRole": "doctor",
+          "notes": "Dispatched to District Hospital Antenatal Unit."
+        },
+        {
+          "id": "rtl-11",
+          "status": "ACCEPTED",
+          "timestamp": "2026-09-18T16:00:00Z",
+          "actorId": "doc-verma",
+          "actorName": "Dr. Rajesh Verma",
+          "actorRole": "doctor",
+          "notes": "Accepted for OB/GYN Special Clinic."
+        },
+        {
+          "id": "rtl-12",
+          "status": "APPOINTMENT_SCHEDULED",
+          "timestamp": "2026-09-19T09:00:00Z",
+          "actorId": "admin-sunil",
+          "actorName": "OPD Scheduling",
+          "actorRole": "admin",
+          "notes": "Appointment confirmed for Sep 28 at 10:00 AM."
+        }
+      ],
+      "scheduledAppointmentId": "apt-sunita-dist",
+      "scheduledDate": "2026-09-28T10:00:00Z",
+      "destinationDoctorId": "doc-verma",
+      "destinationDoctorName": "Dr. Rajesh Verma",
+      "feedbackReport": "",
+      "createdAt": "2026-09-18T15:00:00Z",
+      "updatedAt": "2026-09-19T09:00:00Z"
+    }
+  ],
+  "carePlans": [
+    {
+      "id": "cp-ramesh-1",
+      "patientId": "pat-ramesh",
+      "patientName": "Ramesh Kumar",
+      "doctorId": "doc-sharma",
+      "doctorName": "Dr. Anita Sharma",
+      "primaryCondition": "Type 2 Diabetes Mellitus & Essential Hypertension",
+      "riskTier": "high",
+      "status": "due_soon",
+      "startDate": "2026-08-15",
+      "targetReviewDate": "2026-11-15",
+      "tasks": [
+        {
+          "id": "cpt-1",
+          "title": "Morning Telma 40mg Adherence",
+          "description": "Take 1 tablet Telmisartan 40mg every morning after breakfast with water.",
+          "type": "medication_adherence",
+          "dueDate": "Daily (Ongoing)",
+          "completed": true,
+          "completedAt": "2026-09-21T08:00:00Z",
+          "notes": "Patient reports steady compliance."
+        },
+        {
+          "id": "cpt-2",
+          "title": "Glycomet 500 SR Twice Daily",
+          "description": "Take 1 tablet Metformin 500mg with breakfast and 1 with dinner.",
+          "type": "medication_adherence",
+          "dueDate": "Daily (Ongoing)",
+          "completed": true,
+          "completedAt": "2026-09-21T08:00:00Z",
+          "notes": "No gastric distress reported."
+        },
+        {
+          "id": "cpt-3",
+          "title": "Fasting Plasma Glucose & HbA1c Lab Panel",
+          "description": "Quarterly venous blood sample at CareBridge Apex Pathology Lab.",
+          "type": "diagnostic_test",
+          "dueDate": "2026-09-22",
+          "completed": true,
+          "completedAt": "2026-09-22T08:45:00Z",
+          "notes": "Sample processed; results indicate HbA1c 7.4%."
+        },
+        {
+          "id": "cpt-4",
+          "title": "Specialist Cardiology Consultation (In-Person)",
+          "description": "In-person review at CareBridge Apex Hospital with Dr. Anita Sharma.",
+          "type": "doctor_visit",
+          "dueDate": "2026-09-24",
+          "completed": false,
+          "notes": "Token CB-14 confirmed."
+        },
+        {
+          "id": "cpt-5",
+          "title": "Bi-weekly Home Blood Pressure Log",
+          "description": "Record sitting BP reading before breakfast twice weekly.",
+          "type": "vitals_log",
+          "dueDate": "2026-09-25",
+          "completed": false,
+          "notes": "Target BP < 130/80 mmHg."
+        }
+      ],
+      "medicationReviewStatus": "current",
+      "diagnosticDue": "Lipid repeat in 3 months",
+      "nextAppointmentDue": "2026-09-24T10:30:00Z",
+      "lastClinicianContact": "2026-09-20T10:00:00Z",
+      "escalationCount": 0,
+      "notes": "Patient shows high compliance with morning antihypertensive but requires active dietary sodium reinforcement.",
+      "createdAt": "2026-08-15T11:45:00Z",
+      "updatedAt": "2026-09-21T08:00:00Z"
+    },
+    {
+      "id": "cp-sunita-1",
+      "patientId": "pat-sunita",
+      "patientName": "Sunita Devi",
+      "doctorId": "doc-sharma",
+      "doctorName": "Dr. Anita Sharma",
+      "primaryCondition": "Antenatal Gestational Care & Maternal Anemia Management",
+      "riskTier": "moderate",
+      "status": "on_track",
+      "startDate": "2026-09-01",
+      "targetReviewDate": "2026-10-15",
+      "tasks": [
+        {
+          "id": "cpt-10",
+          "title": "Ferrous Ascorbate & Folic Acid Daily",
+          "description": "Take 1 tablet every evening after food with citrus juice/water.",
+          "type": "medication_adherence",
+          "dueDate": "Daily (Ongoing)",
+          "completed": true,
+          "completedAt": "2026-09-20T20:00:00Z",
+          "notes": "Adhering well."
+        },
+        {
+          "id": "cpt-11",
+          "title": "District Hospital Anomaly Ultrasound",
+          "description": "Targeted ultrasound scan for fetal anatomy and growth parameters.",
+          "type": "diagnostic_test",
+          "dueDate": "2026-09-28",
+          "completed": false,
+          "notes": "Scheduled for Sep 28 at District Hospital."
+        },
+        {
+          "id": "cpt-12",
+          "title": "Frontline Worker Antenatal Home Check",
+          "description": "Vitals and maternal wellness check by Rekha Devi (ASHA).",
+          "type": "vitals_log",
+          "dueDate": "2026-09-26",
+          "completed": false,
+          "notes": "ASHA home visit scheduled."
+        }
+      ],
+      "medicationReviewStatus": "current",
+      "diagnosticDue": "Repeat CBC for Hemoglobin in 4 weeks",
+      "nextAppointmentDue": "2026-09-28T10:00:00Z",
+      "lastClinicianContact": "2026-09-18T14:30:00Z",
+      "escalationCount": 0,
+      "notes": "Fetal growth steady. Hemoglobin to be tracked every month.",
+      "createdAt": "2026-09-01T10:00:00Z",
+      "updatedAt": "2026-09-20T20:00:00Z"
+    }
+  ],
+  "facilityMetrics": [
+    {
+      "facilityId": "hosp-apex",
+      "facilityName": "CareBridge Apex Hospital & Heart Centre",
+      "opdQueueCount": 28,
+      "averageConsultationWaitMinutes": 18,
+      "pendingReferralsCount": 4,
+      "completedReferralsRatePercent": 94.2,
+      "diagnosticTurnaroundAverageHours": 3.2,
+      "pharmacyFulfillmentRatePercent": 98.6,
+      "overdueFollowUpsCount": 2,
+      "criticalCareBedsOccupied": 15,
+      "criticalCareBedsTotal": 20,
+      "lastUpdated": "2026-09-21T14:00:00Z",
+      "demoNotice": "Demo operational quality metrics. Refreshed continuously."
+    },
+    {
+      "facilityId": "hosp-chc-rampur",
+      "facilityName": "Community Health Centre (CHC) Rampur",
+      "opdQueueCount": 14,
+      "averageConsultationWaitMinutes": 12,
+      "pendingReferralsCount": 2,
+      "completedReferralsRatePercent": 88.5,
+      "diagnosticTurnaroundAverageHours": 4.8,
+      "pharmacyFulfillmentRatePercent": 91.2,
+      "overdueFollowUpsCount": 5,
+      "criticalCareBedsOccupied": 2,
+      "criticalCareBedsTotal": 4,
+      "lastUpdated": "2026-09-21T14:00:00Z",
+      "demoNotice": "Demo operational quality metrics. Refreshed continuously."
+    },
+    {
+      "facilityId": "hosp-dist-sitapur",
+      "facilityName": "District Hospital Sitapur",
+      "opdQueueCount": 46,
+      "averageConsultationWaitMinutes": 34,
+      "pendingReferralsCount": 7,
+      "completedReferralsRatePercent": 82,
+      "diagnosticTurnaroundAverageHours": 5.6,
+      "pharmacyFulfillmentRatePercent": 89.4,
+      "overdueFollowUpsCount": 8,
+      "criticalCareBedsOccupied": 11,
+      "criticalCareBedsTotal": 12,
+      "lastUpdated": "2026-09-21T14:00:00Z",
+      "demoNotice": "Demo operational quality metrics. Refreshed continuously."
     }
   ]
 }

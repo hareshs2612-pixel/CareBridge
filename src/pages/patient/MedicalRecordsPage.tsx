@@ -4,7 +4,8 @@ import { dataStore } from '../../services/dataStore';
 import { HealthRecord, PatientProfile, UserProfile } from '../../types';
 import { LongitudinalTimeline } from '../../components/records/LongitudinalTimeline';
 import { MedicalTermExplainerModal } from '../../components/ai/MedicalTermExplainerModal';
-import { PlusCircle, FileText, X, AlertCircle } from 'lucide-react';
+import { PlusCircle, FileText, X, AlertCircle, Download, FlaskConical, HeartHandshake } from 'lucide-react';
+import { exportPatientAsFhir, downloadFhirBundle } from '../../services/fhirExporter';
 
 export const MedicalRecordsPage: React.FC = () => {
   const [currentUser, setCurrentUser] = useState<UserProfile>(dataStore.getCurrentUser());
@@ -13,6 +14,7 @@ export const MedicalRecordsPage: React.FC = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [explainerOpen, setExplainerOpen] = useState(false);
   const [explainerTerm, setExplainerTerm] = useState('');
+  const [isExportingFhir, setIsExportingFhir] = useState(false);
 
   // Manual entry form state
   const [title, setTitle] = useState('');
@@ -38,6 +40,19 @@ export const MedicalRecordsPage: React.FC = () => {
     loadData();
     return dataStore.subscribe(loadData);
   }, []);
+
+  const handleExportFhir = async () => {
+    if (!patient) return;
+    setIsExportingFhir(true);
+    try {
+      const bundle = await exportPatientAsFhir(patient.id);
+      downloadFhirBundle(bundle, `fhir-r4-${patient.id}-${new Date().toISOString().split('T')[0]}.json`);
+    } catch (err) {
+      console.error('Failed to export FHIR bundle', err);
+    } finally {
+      setIsExportingFhir(false);
+    }
+  };
 
   const handleAddManualRecord = (e: React.FormEvent) => {
     e.preventDefault();
@@ -117,10 +132,37 @@ export const MedicalRecordsPage: React.FC = () => {
           </p>
         </div>
 
-        <div className="flex items-center gap-2">
+        <div className="flex flex-wrap items-center gap-2">
+          <button
+            onClick={handleExportFhir}
+            disabled={isExportingFhir}
+            id="fhir-export-button"
+            className="bg-emerald-50 hover:bg-emerald-100 border border-emerald-300 text-emerald-800 font-bold px-3.5 py-2.5 rounded-xl text-xs flex items-center gap-1.5 transition shadow-xs cursor-pointer disabled:opacity-50"
+            title="Download full medical history as HL7 FHIR R4 compliant JSON Bundle"
+          >
+            <Download className="w-4 h-4 text-emerald-600" />
+            <span>{isExportingFhir ? 'Exporting...' : 'Export FHIR R4 (JSON)'}</span>
+          </button>
+
+          <Link
+            to="/diagnostics"
+            className="bg-white hover:bg-slate-50 border border-slate-200 text-slate-700 font-bold px-3.5 py-2.5 rounded-xl text-xs flex items-center gap-1.5 transition shadow-xs"
+          >
+            <FlaskConical className="w-4 h-4 text-indigo-600" />
+            <span>Diagnostics</span>
+          </Link>
+
+          <Link
+            to="/care-plans"
+            className="bg-white hover:bg-slate-50 border border-slate-200 text-slate-700 font-bold px-3.5 py-2.5 rounded-xl text-xs flex items-center gap-1.5 transition shadow-xs"
+          >
+            <HeartHandshake className="w-4 h-4 text-teal-600" />
+            <span>Care Plans</span>
+          </Link>
+
           <Link
             to="/prescriptions"
-            className="bg-white hover:bg-slate-50 border border-slate-200 text-slate-700 font-bold px-4 py-2.5 rounded-xl text-xs flex items-center gap-1.5 transition shadow-xs"
+            className="bg-white hover:bg-slate-50 border border-slate-200 text-slate-700 font-bold px-3.5 py-2.5 rounded-xl text-xs flex items-center gap-1.5 transition shadow-xs"
           >
             <FileText className="w-4 h-4 text-cb-blue" />
             <span>Digital Prescriptions</span>
@@ -128,7 +170,7 @@ export const MedicalRecordsPage: React.FC = () => {
 
           <button
             onClick={() => setIsModalOpen(true)}
-            className="bg-cb-blue hover:bg-blue-700 text-white font-bold px-4 py-2.5 rounded-xl text-xs flex items-center gap-1.5 transition shadow-xs"
+            className="bg-cb-blue hover:bg-blue-700 text-white font-bold px-4 py-2.5 rounded-xl text-xs flex items-center gap-1.5 transition shadow-xs cursor-pointer"
           >
             <PlusCircle className="w-4 h-4" />
             <span>Log Health Note</span>

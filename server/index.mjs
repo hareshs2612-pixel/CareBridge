@@ -13,7 +13,12 @@ import {
   SEED_INVENTORY,
   SEED_APPOINTMENTS,
   SEED_PRESCRIPTIONS,
-  SEED_NOTIFICATIONS
+  SEED_NOTIFICATIONS,
+  SEED_DIAGNOSTIC_TESTS,
+  SEED_DIAGNOSTIC_ORDERS,
+  SEED_REFERRALS,
+  SEED_CARE_PLANS,
+  SEED_FACILITY_METRICS
 } from './corporateSeed.mjs';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
@@ -321,7 +326,13 @@ const SEED_DATA = {
   medicineInventory: SEED_INVENTORY,
   appointments: SEED_APPOINTMENTS,
   prescriptions: SEED_PRESCRIPTIONS,
-  notifications: SEED_NOTIFICATIONS
+  notifications: SEED_NOTIFICATIONS,
+  triageAssessments: [],
+  diagnosticTests: SEED_DIAGNOSTIC_TESTS,
+  diagnosticOrders: SEED_DIAGNOSTIC_ORDERS,
+  referrals: SEED_REFERRALS,
+  carePlans: SEED_CARE_PLANS,
+  facilityMetrics: SEED_FACILITY_METRICS
 };
 
 function readDb() {
@@ -1745,6 +1756,906 @@ const server = http.createServer(async (req, res) => {
         writeDb(db);
       }
       return json(res, 200, { success: true });
+    }
+
+    // ----------------------------------------------------
+    // 8. Care Continuity: Digital Triage (5 Tiers)
+    // ----------------------------------------------------
+    if (req.method === 'POST' && url.pathname === '/api/triage') {
+      const data = await body(req);
+      const {
+        patientId,
+        patientName,
+        symptoms = [],
+        duration = '1-2 days',
+        severityFlags = [],
+        vitals = {},
+        assessedByRole = 'patient',
+        assessedById,
+        nearestFacilityRecommended = 'CareBridge Apex Hospital'
+      } = data;
+
+      // Deterministic 5-tier triage classification
+      const symptomsLower = symptoms.map(s => String(s).toLowerCase());
+      const isRedFlag = severityFlags.some(f => ['chest_pain_severe', 'dyspnea_severe', 'unconscious', 'severe_trauma', 'stroke_signs', 'emergency'].includes(f)) ||
+        symptomsLower.some(s => s.includes('chest pain') || s.includes('breathing') || s.includes('unconscious') || s.includes('stroke') || s.includes('bleeding heavily')) ||
+        (vitals.spo2 && vitals.spo2 < 90) ||
+        (vitals.pulseBpm && (vitals.pulseBpm > 140 || vitals.pulseBpm < 40));
+
+      const isUrgent = !isRedFlag && (
+        severityFlags.some(f => ['high_fever', 'severe_abdominal_pain', 'vomiting_intractable', 'urgent'].includes(f)) ||
+        symptomsLower.some(s => s.includes('high fever') || s.includes('severe stomach') || s.includes('vomiting')) ||
+        (vitals.temperatureF && vitals.temperatureF >= 103) ||
+        (vitals.spo2 && vitals.spo2 >= 90 && vitals.spo2 <= 94)
+      );
+
+      const isPriority = !isRedFlag && !isUrgent && (
+        severityFlags.some(f => ['chronic_flare', 'persistent_fever', 'hypertension_symptom', 'priority'].includes(f)) ||
+        symptomsLower.some(s => s.includes('headache') || s.includes('joint') || s.includes('fever') || s.includes('sugar') || s.includes('pressure')) ||
+        (vitals.temperatureF && vitals.temperatureF >= 100.4)
+      );
+
+      const isRoutine = !isRedFlag && !isUrgent && !isPriority && (
+        symptomsLower.some(s => s.includes('cough') || s.includes('cold') || s.includes('skin') || s.includes('rash') || s.includes('backache') || s.includes('fatigue')) ||
+        symptoms.length > 0
+      );
+
+      let tier = 'low_priority';
+      let recommendedCarePath = 'Self-Care & Pharmacy Guidance';
+      let clinicalGuidance = 'Rest, maintain oral hydration, and consult a community pharmacist or local dispensary for non-prescription supportive relief.';
+      let followUpWindowHours = 168; // 7 days
+      let teleconsultRecommended = false;
+
+      if (isRedFlag) {
+        tier = 'emergency';
+        recommendedCarePath = 'Immediate Emergency Department / Hotline 1066';
+        clinicalGuidance = 'CRITICAL RED FLAG: Do not wait. Immediately call Emergency Hotline 1066 or report to the nearest 24x7 trauma care facility.';
+        followUpWindowHours = 0;
+      } else if (isUrgent) {
+        tier = 'urgent';
+        recommendedCarePath = 'Urgent Care / Fast-Track OPD within 2-4 Hours';
+        clinicalGuidance = 'Significant acute symptoms identified. Visit an urgent care centre or emergency triage for in-person medical evaluation today.';
+        followUpWindowHours = 4;
+        teleconsultRecommended = true;
+      } else if (isPriority) {
+        tier = 'priority_consultation';
+        recommendedCarePath = 'Specialist Consultation within 24-48 Hours';
+        clinicalGuidance = 'Clinical indicators warrant timely physician evaluation. Schedule an expedited OPD consultation or assisted teleconsultation.';
+        followUpWindowHours = 24;
+        teleconsultRecommended = true;
+      } else if (isRoutine) {
+        tier = 'routine_consultation';
+        recommendedCarePath = 'Routine Outpatient Clinic / Teleconsultation';
+        clinicalGuidance = 'Non-emergency symptoms. Book a scheduled consultation with a primary care physician or appropriate specialist.';
+        followUpWindowHours = 72;
+        teleconsultRecommended = true;
+      }
+
+      const db = readDb();
+      if (!db.triageAssessments) db.triageAssessments = [];
+
+      const assessment = {
+        id: id('tri'),
+        patientId: patientId || 'guest-patient',
+        patientName: patientName || 'Patient Assessment',
+        assessedAt: new Date().toISOString(),
+        symptoms,
+        duration,
+        severityFlags,
+        vitals,
+        tier,
+        recommendedCarePath,
+        clinicalGuidance,
+        nearestFacilityRecommended,
+        teleconsultRecommended,
+        emergencyHotlineCalled: tier === 'emergency',
+        followUpWindowHours,
+        assessedByRole,
+        assessedById: assessedById || 'self',
+        status: 'active'
+      };
+
+      db.triageAssessments.push(assessment);
+
+      if (patientId && patientId !== 'guest-patient') {
+        db.notifications = db.notifications || [];
+        db.notifications.push({
+          id: id('notif'),
+          userId: patientId,
+          title: `Triage Completed: ${tier.replace(/_/g, ' ').toUpperCase()}`,
+          message: `Recommended care pathway: ${recommendedCarePath}. ${clinicalGuidance.slice(0, 100)}...`,
+          category: tier === 'emergency' ? 'security' : 'appointment',
+          read: false,
+          actionUrl: '/triage',
+          createdAt: new Date().toISOString()
+        });
+
+        audit('DIGITAL_TRIAGE_ASSESSMENT', `Triage performed: Tier=${tier}, Path=${recommendedCarePath}`, assessedById || patientId, patientName || 'Patient', assessedByRole, patientId);
+      }
+
+      writeDb(db);
+      return json(res, 201, { success: true, assessment });
+    }
+
+    if (req.method === 'GET' && url.pathname === '/api/triage') {
+      const db = readDb();
+      let assessments = db.triageAssessments || [];
+      const patientId = url.searchParams.get('patientId');
+      if (patientId) assessments = assessments.filter(a => a.patientId === patientId);
+      return json(res, 200, { success: true, assessments });
+    }
+
+    // ----------------------------------------------------
+    // 9. Care Continuity: Closed-Loop Referral Management
+    // ----------------------------------------------------
+    if (req.method === 'GET' && url.pathname === '/api/referrals') {
+      const db = readDb();
+      let referrals = db.referrals || [];
+      const patientId = url.searchParams.get('patientId');
+      const doctorId = url.searchParams.get('doctorId');
+      const facilityId = url.searchParams.get('facilityId');
+      const status = url.searchParams.get('status');
+
+      if (patientId) referrals = referrals.filter(r => r.patientId === patientId);
+      if (doctorId) referrals = referrals.filter(r => r.referringDoctorId === doctorId || r.destinationDoctorId === doctorId);
+      if (facilityId) referrals = referrals.filter(r => r.referringFacilityId === facilityId || r.destinationFacilityId === facilityId);
+      if (status) referrals = referrals.filter(r => r.status.toUpperCase() === status.toUpperCase());
+
+      return json(res, 200, { success: true, referrals });
+    }
+
+    if (req.method === 'POST' && url.pathname === '/api/referrals') {
+      const data = await body(req);
+      const {
+        patientId,
+        patientName,
+        patientPhone = '',
+        patientAge,
+        patientGender,
+        referringDoctorId,
+        referringDoctorName,
+        referringFacilityId,
+        referringFacilityName,
+        destinationFacilityId,
+        destinationFacilityName,
+        specialtyRequired,
+        priority = 'routine',
+        clinicalReason,
+        provisionalDiagnosis = '',
+        attachedRecordIds = []
+      } = data;
+
+      if (!patientId || !referringFacilityId || !destinationFacilityId) {
+        return json(res, 400, { error: 'patientId, referringFacilityId, and destinationFacilityId are required.' });
+      }
+
+      const db = readDb();
+      if (!db.referrals) db.referrals = [];
+
+      const newReferral = {
+        id: id('ref'),
+        patientId,
+        patientName: patientName || 'Patient',
+        patientPhone,
+        patientAge,
+        patientGender,
+        referringDoctorId: referringDoctorId || 'doc-general',
+        referringDoctorName: referringDoctorName || 'Referring Clinician',
+        referringFacilityId,
+        referringFacilityName: referringFacilityName || 'Care Facility',
+        destinationFacilityId,
+        destinationFacilityName: destinationFacilityName || 'Destination Hospital',
+        specialtyRequired: specialtyRequired || 'General Medicine',
+        priority,
+        clinicalReason: clinicalReason || 'Specialist escalation requested',
+        provisionalDiagnosis,
+        attachedRecordIds,
+        status: 'SENT',
+        timeline: [
+          {
+            id: id('rtl'),
+            status: 'SENT',
+            timestamp: new Date().toISOString(),
+            actorId: referringDoctorId || 'doc-general',
+            actorName: referringDoctorName || 'Referring Clinician',
+            actorRole: 'doctor',
+            notes: `Referral initiated with ${priority.toUpperCase()} priority.`
+          }
+        ],
+        createdAt: new Date().toISOString(),
+        updatedAt: new Date().toISOString()
+      };
+
+      db.referrals.unshift(newReferral);
+
+      // Notify patient
+      db.notifications = db.notifications || [];
+      db.notifications.push({
+        id: id('notif'),
+        userId: patientId,
+        title: 'Referral Initiated',
+        message: `Dr. ${referringDoctorName || 'Clinician'} has referred your care to ${destinationFacilityName || 'specialist facility'} for ${specialtyRequired}.`,
+        category: 'appointment',
+        read: false,
+        actionUrl: '/referrals',
+        createdAt: new Date().toISOString()
+      });
+
+      audit('CREATE_REFERRAL', `Referral created for ${patientName} to ${destinationFacilityName}`, referringDoctorId || 'doc-general', referringDoctorName || 'Doctor', 'doctor', patientId);
+
+      writeDb(db);
+      return json(res, 201, { success: true, referral: newReferral });
+    }
+
+    const refStatusMatch = url.pathname.match(/^\/api\/referrals\/([a-zA-Z0-9_-]+)\/status$/);
+    if (req.method === 'PATCH' && refStatusMatch) {
+      const referralId = refStatusMatch[1];
+      const data = await body(req);
+      const {
+        status,
+        notes = '',
+        actorId = 'system',
+        actorName = 'System Clinician',
+        actorRole = 'doctor',
+        scheduledAppointmentId,
+        scheduledDate,
+        destinationDoctorId,
+        destinationDoctorName,
+        feedbackReport
+      } = data;
+
+      const db = readDb();
+      const referral = (db.referrals || []).find(r => r.id === referralId);
+      if (!referral) {
+        return json(res, 404, { error: 'Referral not found' });
+      }
+
+      if (status) referral.status = status;
+      if (scheduledAppointmentId) referral.scheduledAppointmentId = scheduledAppointmentId;
+      if (scheduledDate) referral.scheduledDate = scheduledDate;
+      if (destinationDoctorId) referral.destinationDoctorId = destinationDoctorId;
+      if (destinationDoctorName) referral.destinationDoctorName = destinationDoctorName;
+      if (feedbackReport !== undefined) referral.feedbackReport = feedbackReport;
+      if (status === 'COMPLETED' || status === 'CLOSED') referral.closedAt = new Date().toISOString();
+      referral.updatedAt = new Date().toISOString();
+
+      referral.timeline.push({
+        id: id('rtl'),
+        status: referral.status,
+        timestamp: new Date().toISOString(),
+        actorId,
+        actorName,
+        actorRole,
+        notes: notes || `Referral transitioned to ${referral.status}`
+      });
+
+      // Notify patient and referring doctor
+      db.notifications = db.notifications || [];
+      db.notifications.push({
+        id: id('notif'),
+        userId: referral.patientId,
+        title: `Referral Updated: ${referral.status.replace(/_/g, ' ')}`,
+        message: `Your referral to ${referral.destinationFacilityName} is now ${referral.status.replace(/_/g, ' ')}. ${notes}`,
+        category: 'appointment',
+        read: false,
+        actionUrl: '/referrals',
+        createdAt: new Date().toISOString()
+      });
+
+      audit('UPDATE_REFERRAL_STATUS', `Referral ${referralId} status changed to ${referral.status}`, actorId, actorName, actorRole, referral.patientId);
+
+      writeDb(db);
+      return json(res, 200, { success: true, referral });
+    }
+
+    // ----------------------------------------------------
+    // 10. Care Continuity: Diagnostic Coordination
+    // ----------------------------------------------------
+    if (req.method === 'GET' && url.pathname === '/api/diagnostics/catalog') {
+      const db = readDb();
+      const tests = db.diagnosticTests || SEED_DIAGNOSTIC_TESTS;
+      return json(res, 200, { success: true, tests });
+    }
+
+    if (req.method === 'GET' && url.pathname === '/api/diagnostics/orders') {
+      const db = readDb();
+      let orders = db.diagnosticOrders || [];
+      const patientId = url.searchParams.get('patientId');
+      const doctorId = url.searchParams.get('doctorId');
+      const facilityId = url.searchParams.get('facilityId');
+      const status = url.searchParams.get('status');
+
+      if (patientId) orders = orders.filter(o => o.patientId === patientId);
+      if (doctorId) orders = orders.filter(o => o.doctorId === doctorId || o.reviewedByDoctorId === doctorId);
+      if (facilityId) orders = orders.filter(o => o.facilityId === facilityId || o.scheduledFacilityId === facilityId);
+      if (status) orders = orders.filter(o => o.status.toUpperCase() === status.toUpperCase());
+
+      return json(res, 200, { success: true, orders });
+    }
+
+    if (req.method === 'POST' && url.pathname === '/api/diagnostics/orders') {
+      const data = await body(req);
+      const {
+        patientId,
+        patientName,
+        patientPhone = '',
+        doctorId,
+        doctorName,
+        facilityId,
+        facilityName,
+        tests = [],
+        clinicalIndication = 'Diagnostic evaluation'
+      } = data;
+
+      if (!patientId || !doctorId || tests.length === 0) {
+        return json(res, 400, { error: 'patientId, doctorId, and at least one test are required.' });
+      }
+
+      const db = readDb();
+      if (!db.diagnosticOrders) db.diagnosticOrders = [];
+
+      const newOrder = {
+        id: id('diag-ord'),
+        patientId,
+        patientName: patientName || 'Patient',
+        patientPhone,
+        doctorId,
+        doctorName: doctorName || 'Physician',
+        facilityId: facilityId || 'hosp-apex',
+        facilityName: facilityName || 'CareBridge Diagnostic Centre',
+        tests,
+        clinicalIndication,
+        status: 'ORDERED',
+        abnormalFlagCount: 0,
+        criticalFlagCount: 0,
+        createdAt: new Date().toISOString(),
+        updatedAt: new Date().toISOString(),
+        demoNotice: 'Demo laboratory test order.'
+      };
+
+      db.diagnosticOrders.unshift(newOrder);
+
+      // Patient notification
+      db.notifications = db.notifications || [];
+      db.notifications.push({
+        id: id('notif'),
+        userId: patientId,
+        title: 'New Diagnostic Order Issued',
+        message: `Dr. ${doctorName} has ordered ${tests.map(t => t.name).join(', ')}. Schedule your sample collection slot.`,
+        category: 'appointment',
+        read: false,
+        actionUrl: '/diagnostics',
+        createdAt: new Date().toISOString()
+      });
+
+      audit('CREATE_DIAGNOSTIC_ORDER', `Ordered ${tests.length} tests for ${patientName}`, doctorId, doctorName, 'doctor', patientId);
+
+      writeDb(db);
+      return json(res, 201, { success: true, order: newOrder });
+    }
+
+    const diagScheduleMatch = url.pathname.match(/^\/api\/diagnostics\/orders\/([a-zA-Z0-9_-]+)\/schedule$/);
+    if (req.method === 'POST' && diagScheduleMatch) {
+      const orderId = diagScheduleMatch[1];
+      const data = await body(req);
+      const { scheduledSlot, scheduledFacilityId } = data;
+
+      const db = readDb();
+      const order = (db.diagnosticOrders || []).find(o => o.id === orderId);
+      if (!order) return json(res, 404, { error: 'Diagnostic order not found' });
+
+      order.status = 'SCHEDULED';
+      order.scheduledSlot = scheduledSlot || new Date(Date.now() + 86400000).toISOString();
+      if (scheduledFacilityId) order.scheduledFacilityId = scheduledFacilityId;
+      order.updatedAt = new Date().toISOString();
+
+      writeDb(db);
+      return json(res, 200, { success: true, order });
+    }
+
+    const diagResultMatch = url.pathname.match(/^\/api\/diagnostics\/orders\/([a-zA-Z0-9_-]+)\/result$/);
+    if (req.method === 'POST' && diagResultMatch) {
+      const orderId = diagResultMatch[1];
+      const data = await body(req);
+      const { results = [], reportSummary = '', abnormalFlagCount = 0, criticalFlagCount = 0 } = data;
+
+      const db = readDb();
+      const order = (db.diagnosticOrders || []).find(o => o.id === orderId);
+      if (!order) return json(res, 404, { error: 'Diagnostic order not found' });
+
+      order.status = 'RESULT_AVAILABLE';
+      order.results = results;
+      order.reportSummary = reportSummary;
+      order.abnormalFlagCount = abnormalFlagCount || results.filter(r => r.isAbnormal).length;
+      order.criticalFlagCount = criticalFlagCount || results.filter(r => r.criticalFlag).length;
+      order.updatedAt = new Date().toISOString();
+
+      // Notify ordering clinician
+      db.notifications = db.notifications || [];
+      db.notifications.push({
+        id: id('notif'),
+        userId: order.doctorId,
+        title: 'Diagnostic Results Ready for Review',
+        message: `Lab results for ${order.patientName} (${order.tests.map(t => t.name).join(', ')}) are available. Abnormal flags: ${order.abnormalFlagCount}.`,
+        category: 'appointment',
+        read: false,
+        actionUrl: '/diagnostics',
+        createdAt: new Date().toISOString()
+      });
+
+      writeDb(db);
+      return json(res, 200, { success: true, order });
+    }
+
+    const diagReviewMatch = url.pathname.match(/^\/api\/diagnostics\/orders\/([a-zA-Z0-9_-]+)\/review$/);
+    if (req.method === 'PATCH' && diagReviewMatch) {
+      const orderId = diagReviewMatch[1];
+      const data = await body(req);
+      const { reviewedByDoctorId, doctorReviewNotes = '' } = data;
+
+      const db = readDb();
+      const order = (db.diagnosticOrders || []).find(o => o.id === orderId);
+      if (!order) return json(res, 404, { error: 'Diagnostic order not found' });
+
+      order.status = 'REVIEWED';
+      order.reviewedByDoctorId = reviewedByDoctorId || order.doctorId;
+      order.doctorReviewNotes = doctorReviewNotes;
+      order.reviewedAt = new Date().toISOString();
+      order.updatedAt = new Date().toISOString();
+
+      // Automatically attach a verified lab report record to patient's longitudinal EHR
+      const newRecordId = id('rec');
+      db.records = db.records || [];
+      db.records.push({
+        id: newRecordId,
+        patientId: order.patientId,
+        patientName: order.patientName,
+        category: 'lab_report',
+        title: `Diagnostic Report: ${order.tests.map(t => t.name).join(', ')}`,
+        date: new Date().toISOString().split('T')[0],
+        doctorName: order.doctorName,
+        hospitalName: order.facilityName,
+        provenance: 'doctor_verified',
+        content: `Clinical Indication: ${order.clinicalIndication}\nResults Summary: ${order.reportSummary}\nDoctor Review Notes: ${doctorReviewNotes}`,
+        abnormalCount: order.abnormalFlagCount,
+        criticalCount: order.criticalFlagCount,
+        verifiedBy: order.reviewedByDoctorId,
+        verifiedAt: order.reviewedAt
+      });
+      order.linkedRecordId = newRecordId;
+
+      // Patient notification
+      db.notifications = db.notifications || [];
+      db.notifications.push({
+        id: id('notif'),
+        userId: order.patientId,
+        title: 'Diagnostic Report Reviewed by Doctor',
+        message: `Dr. ${order.doctorName} has reviewed your lab report: "${doctorReviewNotes.slice(0, 80)}..."`,
+        category: 'appointment',
+        read: false,
+        actionUrl: `/patient/records`,
+        createdAt: new Date().toISOString()
+      });
+
+      audit('REVIEW_DIAGNOSTIC_REPORT', `Reviewed diagnostic order ${orderId}`, order.reviewedByDoctorId, order.doctorName, 'doctor', order.patientId);
+
+      writeDb(db);
+      return json(res, 200, { success: true, order });
+    }
+
+    // ----------------------------------------------------
+    // 11. Care Continuity: High-Risk Follow-Up & Care Plans
+    // ----------------------------------------------------
+    if (req.method === 'GET' && url.pathname === '/api/care-plans') {
+      const db = readDb();
+      let carePlans = db.carePlans || [];
+      const patientId = url.searchParams.get('patientId');
+      const doctorId = url.searchParams.get('doctorId');
+      const riskTier = url.searchParams.get('riskTier');
+      const status = url.searchParams.get('status');
+
+      if (patientId) carePlans = carePlans.filter(cp => cp.patientId === patientId);
+      if (doctorId) carePlans = carePlans.filter(cp => cp.doctorId === doctorId);
+      if (riskTier) carePlans = carePlans.filter(cp => cp.riskTier === riskTier);
+      if (status) carePlans = carePlans.filter(cp => cp.status === status);
+
+      return json(res, 200, { success: true, carePlans });
+    }
+
+    if (req.method === 'POST' && url.pathname === '/api/care-plans') {
+      const data = await body(req);
+      const {
+        patientId,
+        patientName,
+        doctorId,
+        doctorName,
+        primaryCondition,
+        riskTier = 'moderate',
+        targetReviewDate,
+        tasks = [],
+        notes = ''
+      } = data;
+
+      if (!patientId || !doctorId || !primaryCondition) {
+        return json(res, 400, { error: 'patientId, doctorId, and primaryCondition are required.' });
+      }
+
+      const db = readDb();
+      if (!db.carePlans) db.carePlans = [];
+
+      const newCarePlan = {
+        id: id('cp'),
+        patientId,
+        patientName: patientName || 'Patient',
+        doctorId,
+        doctorName: doctorName || 'Physician',
+        primaryCondition,
+        riskTier,
+        status: 'on_track',
+        startDate: new Date().toISOString().split('T')[0],
+        targetReviewDate: targetReviewDate || new Date(Date.now() + 90 * 86400000).toISOString().split('T')[0],
+        tasks,
+        medicationReviewStatus: 'current',
+        escalationCount: 0,
+        notes,
+        createdAt: new Date().toISOString(),
+        updatedAt: new Date().toISOString()
+      };
+
+      db.carePlans.unshift(newCarePlan);
+
+      writeDb(db);
+      return json(res, 201, { success: true, carePlan: newCarePlan });
+    }
+
+    const carePlanTaskMatch = url.pathname.match(/^\/api\/care-plans\/([a-zA-Z0-9_-]+)\/tasks\/([a-zA-Z0-9_-]+)$/);
+    if (req.method === 'PATCH' && carePlanTaskMatch) {
+      const carePlanId = carePlanTaskMatch[1];
+      const taskId = carePlanTaskMatch[2];
+      const data = await body(req);
+      const { completed, notes } = data;
+
+      const db = readDb();
+      const carePlan = (db.carePlans || []).find(cp => cp.id === carePlanId);
+      if (!carePlan) return json(res, 404, { error: 'Care plan not found' });
+
+      const task = carePlan.tasks.find(t => t.id === taskId);
+      if (!task) return json(res, 404, { error: 'Task not found in care plan' });
+
+      if (completed !== undefined) {
+        task.completed = completed;
+        task.completedAt = completed ? new Date().toISOString() : undefined;
+      }
+      if (notes !== undefined) task.notes = notes;
+      carePlan.updatedAt = new Date().toISOString();
+
+      // Dynamic status assessment
+      const incompleteCount = carePlan.tasks.filter(t => !t.completed).length;
+      if (incompleteCount === 0) {
+        carePlan.status = 'on_track';
+      }
+
+      writeDb(db);
+      return json(res, 200, { success: true, carePlan });
+    }
+
+    const carePlanEscalateMatch = url.pathname.match(/^\/api\/care-plans\/([a-zA-Z0-9_-]+)\/escalate$/);
+    if (req.method === 'POST' && carePlanEscalateMatch) {
+      const carePlanId = carePlanEscalateMatch[1];
+      const data = await body(req);
+      const { reason = 'Missed high-priority task or clinical deterioration', doctorId } = data;
+
+      const db = readDb();
+      const carePlan = (db.carePlans || []).find(cp => cp.id === carePlanId);
+      if (!carePlan) return json(res, 404, { error: 'Care plan not found' });
+
+      carePlan.status = 'escalated';
+      carePlan.escalationCount = (carePlan.escalationCount || 0) + 1;
+      carePlan.escalationReason = reason;
+      carePlan.escalatedToDoctorId = doctorId || carePlan.doctorId;
+      carePlan.updatedAt = new Date().toISOString();
+
+      // Create high-priority clinical notification to the doctor
+      db.notifications = db.notifications || [];
+      db.notifications.push({
+        id: id('notif'),
+        userId: carePlan.escalatedToDoctorId,
+        title: `URGENT: Care Plan Escalation for ${carePlan.patientName}`,
+        message: `Care plan for ${carePlan.primaryCondition} escalated. Reason: ${reason}`,
+        category: 'security',
+        read: false,
+        actionUrl: '/care-plans',
+        createdAt: new Date().toISOString()
+      });
+
+      audit('ESCALATE_CARE_PLAN', `Care plan ${carePlanId} escalated for ${carePlan.patientName}. Reason: ${reason}`, 'healthcare_worker', 'Health Worker', 'healthcare_worker', carePlan.patientId);
+
+      writeDb(db);
+      return json(res, 200, { success: true, carePlan });
+    }
+
+    // ----------------------------------------------------
+    // 12. Care Continuity: Frontline Healthcare Worker Portal
+    // ----------------------------------------------------
+    if (req.method === 'GET' && url.pathname === '/api/worker/patients') {
+      const db = readDb();
+      const patientsMap = db.patients || {};
+      const users = db.users || [];
+      const carePlans = db.carePlans || [];
+      const referrals = db.referrals || [];
+      const triageList = db.triageAssessments || [];
+
+      const communityPatients = Object.keys(patientsMap).map(pid => {
+        const pProfile = patientsMap[pid];
+        const uProfile = users.find(u => u.uid === pid) || {};
+        const activeCarePlan = carePlans.find(cp => cp.patientId === pid);
+        const activeReferral = referrals.find(r => r.patientId === pid && r.status !== 'CLOSED');
+        const latestTriage = triageList.filter(t => t.patientId === pid).slice(-1)[0];
+
+        return {
+          id: pid,
+          fullName: uProfile.fullName || 'Patient',
+          phone: uProfile.phone || '',
+          gender: pProfile.gender,
+          dob: pProfile.dob,
+          bloodGroup: pProfile.bloodGroup,
+          address: pProfile.address,
+          emergencyMinimumDataset: pProfile.emergencyMinimumDataset,
+          chronicConditions: pProfile.chronicConditions || [],
+          activeCarePlan: activeCarePlan ? {
+            id: activeCarePlan.id,
+            status: activeCarePlan.status,
+            riskTier: activeCarePlan.riskTier,
+            primaryCondition: activeCarePlan.primaryCondition
+          } : null,
+          activeReferral: activeReferral ? {
+            id: activeReferral.id,
+            status: activeReferral.status,
+            destinationFacilityName: activeReferral.destinationFacilityName
+          } : null,
+          latestTriageTier: latestTriage?.tier || null
+        };
+      });
+
+      return json(res, 200, { success: true, patients: communityPatients });
+    }
+
+    if (req.method === 'POST' && url.pathname === '/api/worker/patients') {
+      const data = await body(req);
+      const {
+        fullName,
+        phone,
+        gender = 'other',
+        dob = '1980-01-01',
+        bloodGroup = 'Unknown',
+        villageOrTown = '',
+        district = '',
+        state = 'Uttar Pradesh',
+        pincode = '',
+        initialVitals = {}
+      } = data;
+
+      if (!fullName || !phone) {
+        return json(res, 400, { error: 'Full name and phone are required.' });
+      }
+
+      const db = readDb();
+      const cleanPhone = normalizePhone(phone);
+      const existing = db.users.find(u => u.phone === cleanPhone);
+      if (existing) {
+        return json(res, 409, { error: 'A patient profile with this phone number already exists.' });
+      }
+
+      const newUid = id('pat');
+      const randomAbha = `91-${Math.floor(1000 + Math.random() * 9000)}-${Math.floor(1000 + Math.random() * 9000)}-${Math.floor(1000 + Math.random() * 9000)}`;
+
+      const newUser = {
+        uid: newUid,
+        role: 'patient',
+        fullName,
+        email: `${fullName.toLowerCase().replace(/\s+/g, '.')}.${cleanPhone.slice(-4)}@communitycare.in`,
+        phone: cleanPhone,
+        abhaId: randomAbha,
+        createdAt: new Date().toISOString()
+      };
+      db.users.push(newUser);
+
+      db.patients = db.patients || {};
+      db.patients[newUid] = {
+        id: newUid,
+        dob,
+        gender,
+        bloodGroup,
+        address: {
+          villageOrTown,
+          block: villageOrTown,
+          district,
+          state,
+          pincode
+        },
+        emergencyContacts: [],
+        chronicConditions: [],
+        allergies: [],
+        emergencyMinimumDataset: {
+          bloodGroup,
+          criticalAllergies: [],
+          criticalConditions: [],
+          criticalMedications: [],
+          emergencyContactsSummary: []
+        }
+      };
+
+      if (initialVitals.pulseBpm || initialVitals.bloodPressure || initialVitals.temperatureF) {
+        db.records = db.records || [];
+        db.records.push({
+          id: id('rec'),
+          patientId: newUid,
+          patientName: fullName,
+          category: 'clinical_note',
+          title: 'Initial Frontline Health Worker Intake Assessment',
+          date: new Date().toISOString().split('T')[0],
+          doctorName: 'Frontline Health Worker',
+          hospitalName: villageOrTown ? `Sub-Centre / PHC ${villageOrTown}` : 'Community Health Post',
+          provenance: 'doctor_verified',
+          content: `Community Intake: Pulse ${initialVitals.pulseBpm || '--'} bpm, BP ${initialVitals.bloodPressure || '--'}, SpO2 ${initialVitals.spo2 || '--'}%, Temp ${initialVitals.temperatureF || '--'}°F.`
+        });
+      }
+
+      audit('REGISTER_COMMUNITY_PATIENT', `Registered patient ${fullName} (${cleanPhone}) with ABHA ${randomAbha}`, 'healthcare_worker', 'Health Worker', 'healthcare_worker', newUid);
+
+      writeDb(db);
+      return json(res, 201, { success: true, user: newUser, patient: db.patients[newUid] });
+    }
+
+    // ----------------------------------------------------
+    // 13. Care Continuity: Facility Operations & Delays
+    // ----------------------------------------------------
+    const facOpsMatch = url.pathname.match(/^\/api\/facilities\/([a-zA-Z0-9_-]+)\/operations$/);
+    if (req.method === 'GET' && facOpsMatch) {
+      const facilityId = facOpsMatch[1];
+      const db = readDb();
+      const metricsList = db.facilityMetrics || SEED_FACILITY_METRICS;
+      const found = metricsList.find(m => m.facilityId === facilityId);
+
+      const metrics = found || {
+        facilityId,
+        facilityName: (db.hospitals || []).find(h => h.id === facilityId)?.name || 'Care Facility',
+        opdQueueCount: 16,
+        averageConsultationWaitMinutes: 20,
+        pendingReferralsCount: 3,
+        completedReferralsRatePercent: 91.0,
+        diagnosticTurnaroundAverageHours: 4.0,
+        pharmacyFulfillmentRatePercent: 95.0,
+        overdueFollowUpsCount: 3,
+        criticalCareBedsOccupied: 4,
+        criticalCareBedsTotal: 8,
+        lastUpdated: new Date().toISOString(),
+        demoNotice: 'Demo operational metrics calculated from live clinical flow queue.'
+      };
+
+      return json(res, 200, { success: true, metrics });
+    }
+
+    // ----------------------------------------------------
+    // 14. Interoperability: FHIR R4 Bundle Export
+    // ----------------------------------------------------
+    const fhirPatientMatch = url.pathname.match(/^\/api\/fhir\/patients\/([a-zA-Z0-9_-]+)$/);
+    if (req.method === 'GET' && fhirPatientMatch) {
+      const patientId = fhirPatientMatch[1];
+      const db = readDb();
+      const user = (db.users || []).find(u => u.uid === patientId);
+      const patient = (db.patients || {})[patientId];
+
+      if (!user) return json(res, 404, { error: 'Patient not found' });
+
+      const records = (db.records || []).filter(r => r.patientId === patientId);
+      const prescriptions = (db.prescriptions || []).filter(p => p.patientId === patientId);
+      const diagOrders = (db.diagnosticOrders || []).filter(o => o.patientId === patientId);
+      const carePlans = (db.carePlans || []).filter(cp => cp.patientId === patientId);
+
+      const fhirBundle = {
+        resourceType: 'Bundle',
+        id: `bundle-patient-${patientId}`,
+        meta: {
+          lastUpdated: new Date().toISOString(),
+          profile: ['http://hl7.org/fhir/StructureDefinition/document']
+        },
+        type: 'document',
+        timestamp: new Date().toISOString(),
+        entry: [
+          // 1. Patient Resource
+          {
+            fullUrl: `urn:uuid:patient-${patientId}`,
+            resource: {
+              resourceType: 'Patient',
+              id: patientId,
+              identifier: [
+                {
+                  system: 'https://healthid.ndhm.gov.in',
+                  value: user.abhaId || '91-0000-0000-0000'
+                }
+              ],
+              active: true,
+              name: [{ text: user.fullName }],
+              telecom: [{ system: 'phone', value: user.phone, use: 'mobile' }],
+              gender: patient?.gender || 'unknown',
+              birthDate: patient?.dob || '1970-01-01',
+              address: patient?.address ? [{
+                line: [patient.address.villageOrTown],
+                city: patient.address.district,
+                state: patient.address.state,
+                postalCode: patient.address.pincode,
+                country: 'IND'
+              }] : []
+            }
+          },
+          // 2. Conditions
+          ...(patient?.chronicConditions || []).map(c => ({
+            fullUrl: `urn:uuid:${c.id}`,
+            resource: {
+              resourceType: 'Condition',
+              id: c.id,
+              clinicalStatus: { coding: [{ system: 'http://terminology.hl7.org/CodeSystem/condition-clinical', code: c.status }] },
+              verificationStatus: { coding: [{ system: 'http://terminology.hl7.org/CodeSystem/condition-ver-status', code: 'confirmed' }] },
+              code: { text: c.name },
+              subject: { reference: `urn:uuid:patient-${patientId}` },
+              onsetDateTime: c.diagnosedYear ? `${c.diagnosedYear}-01-01` : undefined
+            }
+          })),
+          // 3. Medication Requests (Prescriptions)
+          ...prescriptions.flatMap(p => (p.medicines || []).map(m => ({
+            fullUrl: `urn:uuid:${m.id}`,
+            resource: {
+              resourceType: 'MedicationRequest',
+              id: m.id,
+              status: 'active',
+              intent: 'order',
+              medicationCodeableConcept: { text: m.medicineName },
+              subject: { reference: `urn:uuid:patient-${patientId}` },
+              authoredOn: p.createdAt || new Date().toISOString(),
+              requester: { display: p.doctorName },
+              dosageInstruction: [{ text: `${m.dosage} - ${m.frequency} for ${m.duration}. ${m.instructions || ''}` }]
+            }
+          }))),
+          // 4. Diagnostic Reports
+          ...diagOrders.map(d => ({
+            fullUrl: `urn:uuid:${d.id}`,
+            resource: {
+              resourceType: 'DiagnosticReport',
+              id: d.id,
+              status: d.status === 'REVIEWED' ? 'final' : 'preliminary',
+              code: { text: d.tests.map(t => t.name).join(', ') },
+              subject: { reference: `urn:uuid:patient-${patientId}` },
+              effectiveDateTime: d.sampleCollectedAt || d.createdAt,
+              performer: [{ display: d.facilityName }],
+              conclusion: d.reportSummary || d.doctorReviewNotes
+            }
+          })),
+          // 5. Care Plans
+          ...carePlans.map(cp => ({
+            fullUrl: `urn:uuid:${cp.id}`,
+            resource: {
+              resourceType: 'CarePlan',
+              id: cp.id,
+              status: cp.status === 'on_track' ? 'active' : 'on-hold',
+              intent: 'plan',
+              title: cp.primaryCondition,
+              description: cp.notes,
+              subject: { reference: `urn:uuid:patient-${patientId}` },
+              period: { start: cp.startDate, end: cp.targetReviewDate },
+              activity: (cp.tasks || []).map(t => ({
+                detail: {
+                  kind: 'Task',
+                  description: t.title,
+                  status: t.completed ? 'completed' : 'in-progress'
+                }
+              }))
+            }
+          }))
+        ]
+      };
+
+      return json(res, 200, fhirBundle);
     }
 
     // 404 for unknown endpoints

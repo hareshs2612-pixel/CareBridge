@@ -6,7 +6,7 @@ export type DataProvenance =
   | 'device_data'
   | 'ai_extracted';
 
-export type UserRole = 'patient' | 'doctor' | 'admin' | 'emergency_responder' | 'frontline_worker';
+export type UserRole = 'patient' | 'doctor' | 'admin' | 'emergency_responder' | 'frontline_worker' | 'healthcare_worker';
 
 export interface UserProfile {
   uid: string;
@@ -373,7 +373,7 @@ export interface HealthcareFacility {
 
 export type TriageSeverity = 'emergency' | 'consult_soon' | 'self_care';
 
-export interface TriageAssessment {
+export interface LegacyTriageAssessment {
   id: string;
   patientId: string;
   symptoms: string[];
@@ -420,6 +420,7 @@ export interface MedicationReminder {
   medicineName: string;
   genericName?: string;
   dosage: string;
+  frequency?: string;
   timeOfDay: 'morning' | 'afternoon' | 'night';
   mealTiming: 'before_meal' | 'after_meal' | 'anytime';
   status: 'taken' | 'due' | 'missed';
@@ -686,6 +687,220 @@ export interface CityLocation {
     lng: number;
   };
   isDefault?: boolean;
+}
+
+// ----------------------------------------------------
+// CareBridge Phase 2: Complete Care Continuity Types
+// ----------------------------------------------------
+
+export type TriageTier = 
+  | 'low_priority' 
+  | 'routine_consultation' 
+  | 'priority_consultation' 
+  | 'urgent' 
+  | 'emergency';
+
+export interface TriageAssessment {
+  id: string;
+  patientId: string;
+  patientName?: string;
+  assessedAt: string;
+  symptoms: string[];
+  duration: string;
+  severityFlags: string[];
+  vitals?: {
+    temperatureF?: number;
+    pulseBpm?: number;
+    spo2?: number;
+    bloodPressure?: string;
+  };
+  tier: TriageTier;
+  recommendedCarePath: string;
+  clinicalGuidance: string;
+  nearestFacilityRecommended?: string;
+  teleconsultRecommended?: boolean;
+  emergencyHotlineCalled?: boolean;
+  followUpWindowHours: number;
+  assessedByRole: 'patient' | 'healthcare_worker' | 'doctor';
+  assessedById?: string;
+  status: 'active' | 'resolved' | 'escalated';
+}
+
+export type ReferralStatus = 
+  | 'DRAFT' 
+  | 'SENT' 
+  | 'RECEIVED' 
+  | 'ACCEPTED' 
+  | 'APPOINTMENT_SCHEDULED' 
+  | 'COMPLETED' 
+  | 'CLOSED' 
+  | 'REJECTED' 
+  | 'CANCELLED' 
+  | 'EXPIRED';
+
+export type ReferralPriority = 'routine' | 'priority' | 'urgent' | 'emergency';
+
+export interface ReferralTimelineEvent {
+  id: string;
+  status: ReferralStatus;
+  timestamp: string;
+  actorId: string;
+  actorName: string;
+  actorRole: string;
+  notes?: string;
+}
+
+export interface Referral {
+  id: string;
+  patientId: string;
+  patientName: string;
+  patientPhone: string;
+  patientAge?: number;
+  patientGender?: string;
+  referringDoctorId: string;
+  referringDoctorName: string;
+  referringFacilityId: string;
+  referringFacilityName: string;
+  destinationFacilityId: string;
+  destinationFacilityName: string;
+  specialtyRequired: string;
+  priority: ReferralPriority;
+  clinicalReason: string;
+  provisionalDiagnosis: string;
+  attachedRecordIds: string[];
+  status: ReferralStatus;
+  timeline: ReferralTimelineEvent[];
+  scheduledAppointmentId?: string;
+  scheduledDate?: string;
+  destinationDoctorId?: string;
+  destinationDoctorName?: string;
+  feedbackReport?: string;
+  closedAt?: string;
+  createdAt: string;
+  updatedAt: string;
+}
+
+export type DiagnosticOrderStatus = 
+  | 'ORDERED' 
+  | 'SCHEDULED' 
+  | 'SAMPLE_COLLECTED' 
+  | 'PROCESSING' 
+  | 'RESULT_AVAILABLE' 
+  | 'REVIEWED' 
+  | 'CLOSED';
+
+export interface DiagnosticTest {
+  id: string;
+  code: string;
+  name: string;
+  category: 'pathology' | 'radiology' | 'cardiology' | 'biochemistry';
+  turnaroundHours: number;
+  sampleType?: string;
+  preparationInstructions?: string;
+  costInr: number;
+  isAvailable: boolean;
+}
+
+export interface DiagnosticParameterResult {
+  parameterName: string;
+  value: string;
+  unit: string;
+  referenceRange: string;
+  isAbnormal: boolean;
+  criticalFlag?: boolean;
+}
+
+export interface DiagnosticOrder {
+  id: string;
+  patientId: string;
+  patientName: string;
+  patientPhone?: string;
+  doctorId: string;
+  doctorName: string;
+  facilityId: string;
+  facilityName: string;
+  tests: DiagnosticTest[];
+  clinicalIndication: string;
+  status: DiagnosticOrderStatus;
+  scheduledSlot?: string;
+  scheduledFacilityId?: string;
+  sampleCollectedAt?: string;
+  results?: DiagnosticParameterResult[];
+  reportSummary?: string;
+  abnormalFlagCount: number;
+  criticalFlagCount: number;
+  doctorReviewNotes?: string;
+  reviewedByDoctorId?: string;
+  reviewedAt?: string;
+  linkedRecordId?: string;
+  createdAt: string;
+  updatedAt: string;
+  demoNotice?: string;
+}
+
+export type CarePlanStatus = 'on_track' | 'due_soon' | 'overdue' | 'escalated' | 'completed';
+
+export interface CarePlanTask {
+  id: string;
+  title: string;
+  description: string;
+  type: 'medication_adherence' | 'diagnostic_test' | 'doctor_visit' | 'vitals_log' | 'lifestyle';
+  dueDate: string;
+  completed: boolean;
+  completedAt?: string;
+  notes?: string;
+}
+
+export interface CarePlan {
+  id: string;
+  patientId: string;
+  patientName: string;
+  doctorId: string;
+  doctorName: string;
+  primaryCondition: string;
+  riskTier: 'low' | 'moderate' | 'high' | 'critical';
+  status: CarePlanStatus;
+  startDate: string;
+  targetReviewDate: string;
+  tasks: CarePlanTask[];
+  medicationReviewStatus: 'current' | 'pending_refill' | 'adverse_event';
+  diagnosticDue?: string;
+  nextAppointmentDue?: string;
+  lastClinicianContact?: string;
+  escalationCount: number;
+  escalationReason?: string;
+  escalatedToDoctorId?: string;
+  notes: string;
+  createdAt: string;
+  updatedAt: string;
+}
+
+export interface FacilityOperationsMetrics {
+  facilityId: string;
+  facilityName: string;
+  opdQueueCount: number;
+  averageConsultationWaitMinutes: number;
+  pendingReferralsCount: number;
+  completedReferralsRatePercent: number;
+  diagnosticTurnaroundAverageHours: number;
+  pharmacyFulfillmentRatePercent: number;
+  overdueFollowUpsCount: number;
+  criticalCareBedsOccupied: number;
+  criticalCareBedsTotal: number;
+  lastUpdated: string;
+  demoNotice: string;
+}
+
+export type SyncStatus = 'draft' | 'pending' | 'synced' | 'failed';
+
+export interface SyncQueueItem {
+  id: string;
+  action: 'create_triage' | 'create_referral' | 'update_referral' | 'order_diagnostic' | 'update_care_task';
+  payload: any;
+  createdAt: string;
+  retryCount: number;
+  status: SyncStatus;
+  error?: string;
 }
 
 
