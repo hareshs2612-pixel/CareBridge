@@ -162,25 +162,7 @@ export const LandingPage: React.FC = () => {
             </form>
           </div>
 
-          {/* Trust Metrics Strip */}
-          <div className="pt-4 grid grid-cols-2 sm:grid-cols-4 gap-4 max-w-4xl mx-auto text-left">
-            <div className="bg-white/5 border border-white/10 rounded-xl p-3 backdrop-blur-sm">
-              <div className="text-xl sm:text-2xl font-black text-white">500+</div>
-              <div className="text-xs text-slate-300">Verified Specialists</div>
-            </div>
-            <div className="bg-white/5 border border-white/10 rounded-xl p-3 backdrop-blur-sm">
-              <div className="text-xl sm:text-2xl font-black text-white">25+</div>
-              <div className="text-xs text-slate-300">NABH Accredited Hospitals</div>
-            </div>
-            <div className="bg-white/5 border border-white/10 rounded-xl p-3 backdrop-blur-sm">
-              <div className="text-xl sm:text-2xl font-black text-white">100k+</div>
-              <div className="text-xs text-slate-300">Safe Consultations</div>
-            </div>
-            <div className="bg-white/5 border border-white/10 rounded-xl p-3 backdrop-blur-sm">
-              <div className="text-xl sm:text-2xl font-black text-white">24/7</div>
-              <div className="text-xs text-slate-300">Emergency & Ambulance</div>
-            </div>
-          </div>
+          
         </div>
       </section>
 
